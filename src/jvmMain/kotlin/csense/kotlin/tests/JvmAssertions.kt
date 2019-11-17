@@ -1,8 +1,8 @@
 @file:Suppress("MissingTestFunction")
 
-package csense.kotlin.test
+package csense.kotlin.tests
 
-import csense.kotlin.test.assertions.*
+import csense.kotlin.tests.assertions.*
 
 /**
  * Asserts the receiver and arguments are the same class Type instance

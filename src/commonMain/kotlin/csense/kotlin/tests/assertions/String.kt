@@ -1,6 +1,6 @@
 @file:Suppress("unused", "NOTHING_TO_INLINE", "MissingTestFunction")
 
-package csense.kotlin.test.assertions
+package csense.kotlin.tests.assertions
 
 import kotlin.test.*
 

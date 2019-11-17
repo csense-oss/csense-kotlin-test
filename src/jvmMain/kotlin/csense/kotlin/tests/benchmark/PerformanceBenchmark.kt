@@ -1,7 +1,7 @@
 @file:Suppress("unused", "NOTHING_TO_INLINE", "MissingTestClass", "MissingTestFunction")
-package csense.kotlin.test.benchmark
+package csense.kotlin.tests.benchmark
 
-import csense.kotlin.test.assertions.*
+import csense.kotlin.tests.assertions.*
 import java.lang.System.*
 import java.util.concurrent.*
 import kotlin.system.*

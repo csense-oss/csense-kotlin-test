@@ -1,6 +1,6 @@
 @file:Suppress("unused", "NOTHING_TO_INLINE", "MissingTestFunction")
 
-package csense.kotlin.test.assertions
+package csense.kotlin.tests.assertions
 
 import kotlin.test.*
 
@@ -75,7 +75,7 @@ inline fun <reified T : Throwable> assertThrows(
  * Asserts that the given action calls the callback function "times" times otherwise fails with the given message
  * @param message String the error message if it fails (times the callback called != times)
  * @param times Int the number of times we expected the callback to be called
- * @param action Function1<[@kotlin.ParameterName] Function0<Unit>, Unit> the action, getting the callback function
+ * @param action the action, getting the callback function
  */
 fun assertCalled(
         message: String = GeneralStrings.assertCalledMessage,
@@ -90,7 +90,7 @@ fun assertCalled(
 /**
  * Asserts that the given action calls the callback function 1 times otherwise fails with the given message
  * @param message String the error message if it fails (times the callback called != 1)
- * @param action Function1<[@kotlin.ParameterName] Function0<Unit>, Unit> the action, getting the callback function
+ * @param action the action, getting the callback function
  */
 fun assertCalled(
         message: String = GeneralStrings.assertCalledMessage,
@@ -100,7 +100,7 @@ fun assertCalled(
 /**
  * Asserts that the given action calls the callback function 0 times / not gets called otherwise fails with the given message
  * @param message String
- * @param action Function1<[@kotlin.ParameterName] Function0<Unit>, Unit>
+ * @param action
  */
 fun assertNotCalled(
         message: String = GeneralStrings.assertNotCalledMessage,

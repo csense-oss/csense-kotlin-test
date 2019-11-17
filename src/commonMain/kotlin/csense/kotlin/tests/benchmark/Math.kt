@@ -1,5 +1,5 @@
 @file:Suppress("unused", "NOTHING_TO_INLINE", "MissingTestFunction")
-package csense.kotlin.test.benchmark
+package csense.kotlin.tests.benchmark
 
 import kotlin.math.*
 

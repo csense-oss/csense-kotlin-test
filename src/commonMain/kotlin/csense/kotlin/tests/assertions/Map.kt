@@ -1,6 +1,6 @@
 @file:Suppress("unused", "NOTHING_TO_INLINE", "MissingTestFunction")
 
-package csense.kotlin.test.assertions
+package csense.kotlin.tests.assertions
 
 /**
  * Assert that this map have the given size.

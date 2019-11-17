@@ -1,6 +1,6 @@
 @file:Suppress("MissingTestFunction")
 
-package csense.kotlin.test.assertions
+package csense.kotlin.tests.assertions
 
 import kotlin.math.*
 import kotlin.test.*

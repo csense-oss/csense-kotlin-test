@@ -1,6 +1,6 @@
 @file:Suppress("NOTHING_TO_INLINE", "MissingTestFunction")
 
-package csense.kotlin.test.assertions
+package csense.kotlin.tests.assertions
 
 inline fun IntArray.assertSize(size: Int, message: String = "") = this.size.assert(size, message)
 

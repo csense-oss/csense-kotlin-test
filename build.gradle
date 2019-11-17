@@ -6,19 +6,19 @@ buildscript {
 
 
     //versions & naming
-    ext.csenseVersionName = "0.0.24"
+    ext.csenseVersionName = "0.0.25"
     ext.csenseGroupId = "csense.kotlin"
-    ext.csenseArtifactId = "csense-kotlin-test"
+    ext.csenseArtifactId = "csense-kotlin-tests"
 
     //repo settings
     ext.csenseUserOrg = "csense-oss"
     ext.csenseRepoName = "maven"
 
-    ext.csenseGithub = "csense-oss/csense-kotlin-test"
+    ext.csenseGithub = "csense-oss/csense-kotlin-tests"
     ext.csenseLicense = "MIT"
     ext.readme = "readme.md"
-    ext.csenseWebsite = "https://github.com/csense-oss/csense-kotlin-test"
-    ext.csenseGit = "https://github.com/csense-oss/csense-kotlin-test.git"
+    ext.csenseWebsite = "https://github.com/csense-oss/csense-kotlin-tests"
+    ext.csenseGit = "https://github.com/csense-oss/csense-kotlin-tests.git"
     ext.csenseArtifactDescription = ""
     ext.csenseVersionDescription = "initial version"
 
@@ -64,7 +64,6 @@ kotlin {
                 implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
                 api "org.jetbrains.kotlin:kotlin-test-junit5:$kotlin_version"
                 api "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
-//                api "org.jetbrains.kotlin:kotlin-test-annotations-common:$kotlin_version"
                 implementation kotlin('stdlib-jdk8')
             }
         }
@@ -88,7 +87,7 @@ dokka {
     multiplatform {
         global {
             perPackageOption {
-                prefix = "csense.kotlin.test"
+                prefix = "csense.kotlin.tests"
                 suppress = true
             }
         }
@@ -117,5 +116,29 @@ bintray {
         vcsUrl = project.csenseGit
         licenses = project.csenseLicense
         name = project.csenseArtifactId
+    }
+}
+
+
+task uploadProd(dependsOn: ["assemble", "allTests", "dokka", "javadocJar", "bintrayUpload"])
+
+
+
+task dokkaJavadoc(type: org.jetbrains.dokka.gradle.DokkaTask) {
+    outputFormat = "javadoc"
+    outputDirectory = "$buildDir/dokkaJavadoc"
+}
+
+final def javaDocJarTask = task("javadocJar", type: Jar, dependsOn: "dokkaJavadoc") {
+    archiveClassifier.set('javadoc')
+    from "${project.buildDir}/dokkaJavadoc"
+}
+
+
+publishing {
+    publications {
+        jvm {
+            artifact(javaDocJarTask)
+        }
     }
 }
