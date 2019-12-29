@@ -1,3 +1,6 @@
+# 0.0.26
+- more test functions 
+
 # 0.0.25
 - match csense kotlin version.
 

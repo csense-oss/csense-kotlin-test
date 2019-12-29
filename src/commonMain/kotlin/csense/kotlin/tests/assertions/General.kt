@@ -4,7 +4,19 @@ package csense.kotlin.tests.assertions
 
 import kotlin.test.*
 
+/**
+ * As the name suggest, calling this means failure.
+ * @return Nothing
+ */
+fun shouldNotBeCalled(): Nothing {
+    fail("Should not be called")
+}
 
+/**
+ * fails the test with the given message
+ * @param message String
+ * @return Nothing
+ */
 fun failTest(message: String = ""): Nothing {
     fail(message)
 }
@@ -36,9 +48,10 @@ fun <T> T?.assertNotNullAndEquals(other: T?, message: String = "value was $this,
 }
 
 inline fun <reified T : Throwable, reified Inner : Throwable> assertThrowsCause(
-        message: String = "should throw",
-        messageWrongException: String = "wrong exception type",
-        crossinline action: () -> Unit) = assertThrows<T>(message, messageWrongException, action, {
+    message: String = "should throw",
+    messageWrongException: String = "wrong exception type",
+    crossinline action: () -> Unit
+) = assertThrows<T>(message, messageWrongException, action, {
     val cause = it.cause
     val isInner = cause is Inner
     if (!isInner && cause != null) {
@@ -47,24 +60,28 @@ inline fun <reified T : Throwable, reified Inner : Throwable> assertThrowsCause(
 })
 
 inline fun <reified T : Throwable> assertThrows(
-        message: String = "should throw",
-        messageWrongException: String = "wrong exception type",
-        crossinline action: () -> Unit) = assertThrows<T>(message, messageWrongException, action, {})
+    message: String = "should throw",
+    messageWrongException: String = "wrong exception type",
+    crossinline action: () -> Unit
+) = assertThrows<T>(message, messageWrongException, action, {})
 
 inline fun <reified T : Throwable> assertThrows(
-        message: String = "should throw",
-        messageWrongException: String = "wrong exception type",
-        crossinline action: () -> Unit,
-        validateThrows: (T) -> Unit) {
+    message: String = "should throw",
+    messageWrongException: String = "wrong exception type",
+    crossinline action: () -> Unit,
+    validateThrows: (T) -> Unit
+) {
 
     try {
         action()
         failTest("Expected an exception of type ${T::class} but got no exceptions\n$message")
     } catch (exception: Throwable) {
         if (exception !is T) {
-            failTest("Expected an exception of type \"${T::class}\" " +
-                    "but got exception of type \"${exception::class}\" instead." +
-                    "\n$messageWrongException")
+            failTest(
+                "Expected an exception of type \"${T::class}\" " +
+                        "but got exception of type \"${exception::class}\" instead." +
+                        "\n$messageWrongException"
+            )
         }
         validateThrows(exception)
         //all is good / expected.
@@ -78,9 +95,9 @@ inline fun <reified T : Throwable> assertThrows(
  * @param action the action, getting the callback function
  */
 fun assertCalled(
-        message: String = GeneralStrings.assertCalledMessage,
-        times: Int = 1,
-        action: (callback: () -> Unit) -> Unit
+    message: String = GeneralStrings.assertCalledMessage,
+    times: Int = 1,
+    action: (callback: () -> Unit) -> Unit
 ) {
     var counter = 0
     action { counter += 1 }
@@ -93,8 +110,8 @@ fun assertCalled(
  * @param action the action, getting the callback function
  */
 fun assertCalled(
-        message: String = GeneralStrings.assertCalledMessage,
-        action: (callback: () -> Unit) -> Unit
+    message: String = GeneralStrings.assertCalledMessage,
+    action: (callback: () -> Unit) -> Unit
 ) = assertCalled(message, 1, action)
 
 /**
@@ -103,8 +120,8 @@ fun assertCalled(
  * @param action
  */
 fun assertNotCalled(
-        message: String = GeneralStrings.assertNotCalledMessage,
-        action: (callback: () -> Unit) -> Unit
+    message: String = GeneralStrings.assertNotCalledMessage,
+    action: (callback: () -> Unit) -> Unit
 ) = assertCalled(message, 0, action)
 
 private object GeneralStrings {
