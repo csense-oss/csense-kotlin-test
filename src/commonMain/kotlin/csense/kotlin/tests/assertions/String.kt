@@ -11,9 +11,11 @@ import kotlin.test.*
  * @param ignoreCase Boolean if true, will ignore the casing, false means case sensitive.
  * @param message String the error message.
  */
-fun String.assertContains(value: String,
-                          ignoreCase: Boolean = false,
-                          message: String = "Could not find \"$value\", in  \r\n\"$this\"") {
+fun String.assertContains(
+    value: String,
+    ignoreCase: Boolean = false,
+    message: String = "Could not find \"$value\", in  \r\n\"$this\""
+) {
     assertTrue(this.contains(value, ignoreCase = ignoreCase), message)
 }
 
@@ -24,11 +26,28 @@ fun String.assertContains(value: String,
  * @param ignoreCase Boolean if true, will ignore the casing, false means case sensitive.
  * @param message String the error message.
  */
-fun String.assertContainsNot(value: String,
-                             ignoreCase: Boolean = false,
-                             message: String = "") {
-    assertFalse(this.contains(value, ignoreCase = ignoreCase), "$message \n Reason: Could find \"$value\", in  \r\n\"$this\"")
+fun String.assertContainsNot(
+    value: String,
+    ignoreCase: Boolean = false,
+    message: String = ""
+) {
+    assertFalse(
+        this.contains(value, ignoreCase = ignoreCase),
+        "$message \n Reason: Could find \"$value\", in  \r\n\"$this\""
+    )
 }
+
+/**
+ * Asserts that this string is not empty (length > 0)
+ * @receiver String
+ */
+fun String.assertNotEmpty() = isNotEmpty().assertTrue("Expected string to not be empty but it was")
+
+/**
+ * Asserts that this string is empty (length == 0)
+ * @receiver String
+ */
+fun String.assertEmpty() = isEmpty().assertTrue("Expected string to be empty but was instead \"$this\"")
 
 /**
  * Asserts that the this string is the same as the given string (expected)
@@ -57,16 +76,20 @@ fun String.assertNot(value: String, message: String = "") {
  * @param ignoreCase Boolean if true, will ignore casing, if false, all contains are case sensitive.
  * @param message String the error message
  */
-fun String.assertContainsInOrder(values: List<String>,
-                                 ignoreCase: Boolean,
-                                 message: String = "") {
+fun String.assertContainsInOrder(
+    values: List<String>,
+    ignoreCase: Boolean,
+    message: String = ""
+) {
     var currentIndex = 0
     values.forEach {
         val next = indexOf(it, currentIndex, ignoreCase)
         if (next < 0) {
-            failTest("$message\n\nCould not find \n\t\"$it\" after index $currentIndex in string \n" +
-                    "\"$this\"\n" +
-                    "\tafter index is :\"${this.substring(currentIndex)}\"")
+            failTest(
+                "$message\n\nCould not find \n\t\"$it\" after index $currentIndex in string \n" +
+                        "\"$this\"\n" +
+                        "\tafter index is :\"${this.substring(currentIndex)}\""
+            )
         }
         currentIndex = next + it.length
     }
@@ -79,9 +102,11 @@ fun String.assertContainsInOrder(values: List<String>,
  * @param ignoreCase Boolean if true, will ignore casing, if false, all contains are case sensitive.
  * @param message String the error message
  */
-fun String.assertStartsWith(prefix: String,
-                            ignoreCase: Boolean = false,
-                            message: String = "") {
+fun String.assertStartsWith(
+    prefix: String,
+    ignoreCase: Boolean = false,
+    message: String = ""
+) {
     val textOutput = "$message \n Could not find \"$prefix\", in  \n" +
             "\"$this\""
     assertTrue(this.startsWith(prefix, ignoreCase = ignoreCase), textOutput)

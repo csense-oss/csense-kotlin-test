@@ -27,3 +27,7 @@ fun <T : Comparable<T>> T.assertNotEquals(other: T, message: String = "expected 
     assertNotEquals(other, this, message)
 }
 
+fun <T : Comparable<T>> T.assertEquals(other: T, message: String = "expected to be equal, but $this !== $other") {
+    assertEquals(other, this, message)
+}
+

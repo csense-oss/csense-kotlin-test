@@ -1,12 +1,12 @@
 buildscript {
     //dependencies
-    ext.coroutinesVersion = "1.3.3"
-    ext.junit5Version = "5.5.2"
-    ext.kotlin_version = "1.3.61"
+    ext.coroutinesVersion = "1.3.5"
+    ext.junit5Version = "5.6.2"
+    ext.kotlin_version = "1.3.72"
 
 
     //versions & naming
-    ext.csenseVersionName = "0.0.26"
+    ext.csenseVersionName = "0.0.27"
     ext.csenseGroupId = "csense.kotlin"
     ext.csenseArtifactId = "csense-kotlin-tests"
 
@@ -19,16 +19,16 @@ buildscript {
     ext.readme = "readme.md"
     ext.csenseWebsite = "https://github.com/csense-oss/csense-kotlin-tests"
     ext.csenseGit = "https://github.com/csense-oss/csense-kotlin-tests.git"
-    ext.csenseArtifactDescription = ""
-    ext.csenseVersionDescription = "initial version"
+    ext.csenseArtifactDescription = "A library for writing tests with a focus on simple features (assertions)"
+    ext.csenseVersionDescription = ""
 
 }
 
 plugins {
-    id 'org.jetbrains.kotlin.multiplatform' version "1.3.61"
-    id 'org.jetbrains.dokka' version "0.10.0"
+    id 'org.jetbrains.kotlin.multiplatform' version "1.3.72"
+    id 'org.jetbrains.dokka' version "0.10.1"
     id "maven-publish"
-    id "com.jfrog.bintray" version "1.8.4"
+    id "com.jfrog.bintray" version "1.8.5"
 }
 
 repositories {
@@ -59,7 +59,7 @@ kotlin {
             dependencies {
                 api "org.junit.jupiter:junit-jupiter-api:$junit5Version"
                 api "org.junit.jupiter:junit-jupiter-engine:$junit5Version"
-                api 'junit:junit:4.12'
+                api 'junit:junit:4.13'
                 api "org.junit.vintage:junit-vintage-engine:$junit5Version"
                 implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
                 api "org.jetbrains.kotlin:kotlin-test-junit5:$kotlin_version"

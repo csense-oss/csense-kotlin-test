@@ -1,3 +1,6 @@
+# 0.0.27
+- more assert functions
+
 # 0.0.26
 - more test functions 
 
