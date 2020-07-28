@@ -2,71 +2,156 @@
 
 package csense.kotlin.tests.assertions
 
+import kotlin.contracts.ExperimentalContracts
+import kotlin.contracts.contract
 import kotlin.test.*
 
 /**
  * As the name suggest, calling this means failure.
- * @return Nothing
  */
-fun shouldNotBeCalled(): Nothing {
-    fail("Should not be called")
+inline fun shouldNotBeCalled(): Nothing {
+    fail(GeneralStrings.assertNotCalledMessage)
 }
 
 /**
  * fails the test with the given message
  * @param message String
- * @return Nothing
  */
-fun failTest(message: String = ""): Nothing {
+inline fun failTest(message: String = ""): Nothing {
     fail(message)
 }
 
-fun <T> Any.assertAs(otherValue: T, message: String = "") {
+/**
+ * Assert this is the same as type as [otherValue] and that they are equal
+ * @receiver [Any]
+ * @param otherValue T the value this receiver should be (both type and equals)
+ * @param message [String] if they are different this will be printed (nb if they are different type another message will be printed).
+ */
+@OptIn(ExperimentalContracts::class)
+inline fun <reified T> Any.assertAs(
+    otherValue: T,
+    message: String = "expected type ${T::class}, got ${this::class}"
+) {
+    contract {
+        returns() implies (this@assertAs is T)
+    }
     @Suppress("UNCHECKED_CAST") //this is expected
+    this.assertIs<T>() //make sure that if the type is not the same then we get that error message.
     // we are just making life easier for testing, if it throws, then its "all right" for a test.
     assertEquals(this as? T, otherValue, message)
 }
 
+/**
+ * Assert this is the given type
+ * @receiver [Any] the receiver we are testing is the same type as [T]
+ * @param message [String] the message to print if the receiver is a different type from [T]
+ */
+@OptIn(ExperimentalContracts::class)
+inline fun <reified T> Any.assertIs(
+    message: String = "expected `$this` to be of type `${T::class}`, but it is not"
+) {
+    contract {
+        returns() implies (this@assertIs is T)
+    }
+    assertTrue(this is T, message)
+}
 
-fun Any?.assertNotNull(message: String = "") {
+/**
+ * Asserts this is not null (and if it is not, then kotlin smart casts it to a notnull variable)
+ * @receiver [Any]? the value to assert is not null
+ * @param message [String] the message that gets printed if this is null
+ */
+@OptIn(ExperimentalContracts::class)
+inline fun Any?.assertNotNull(message: String = "") {
+    contract {
+        returns() implies (this@assertNotNull != null)
+    }
     assertNotNull(this, message)
 }
 
-fun Any?.assertNull(message: String = "") {
+/**
+ * Asserts this is null (and if it is null, then kotlin smart casts it to a null variable)
+ * @receiver [Any]?
+ * @param message [String]
+ */
+@OptIn(ExperimentalContracts::class)
+inline fun Any?.assertNull(message: String = "") {
+    contract {
+        returns() implies (this@assertNull == null)
+    }
     assertNull(this, message)
 }
 
-
-fun <T> T?.assertNotNullApply(message: String = "", action: T.() -> Unit) {
+/**
+ * Asserts this is not null and if not then applies the given [action] on it
+ * @receiver T? the nullable element
+ * @param message [String] the message to display if the receiver is null
+ * @param action Function1<T, Unit> the receiver action  to run if the receiver is not null
+ */
+@OptIn(ExperimentalContracts::class)
+inline fun <T> T?.assertNotNullApply(message: String = "", action: T.() -> Unit) {
+    contract {
+        returns() implies (this@assertNotNullApply != null)
+    }
     this.assertNotNull(message)
-    this?.let(action)
+    this.let(action)
 }
 
-fun <T> T?.assertNotNullAndEquals(other: T?, message: String = "value was $this, expected $other") {
-    this.assertNotNull(message)
+/**
+ * Asserts this is not null and equals the [other] object
+ * @receiver T? the object to make sure is not null and equals [other]
+ * @param other T? the value it should be (the expected)
+ * @param message [String] the message to display if the receiver does not match the expected.
+ */
+@OptIn(ExperimentalContracts::class)
+inline fun <T> T?.assertNotNullAndEquals(other: T?, message: String = "value was $this, expected $other") {
+    contract {
+        returns() implies (this@assertNotNullAndEquals != null)
+    }
+    this.assertNotNull()
     assertEquals(other, this, message)
 }
 
+/**
+ * Asserts the given [action] throws the given exception type.
+ * @param messageIfNoException [String] the message to show if either no exception or a different type of exception gets thrown
+ * @param messageWrongException [String]
+ * @param action Function0<[Unit]>
+ */
 inline fun <reified T : Throwable, reified Inner : Throwable> assertThrowsCause(
-    message: String = "should throw",
+    messageIfNoException: String = "should throw exception",
     messageWrongException: String = "wrong exception type",
     crossinline action: () -> Unit
-) = assertThrows<T>(message, messageWrongException, action, {
+): Unit = assertThrows<T>(messageIfNoException, messageWrongException, action) {
     val cause = it.cause
     val isInner = cause is Inner
     if (!isInner && cause != null) {
         failTest("Cause is not the right type; expected \"${Inner::class}\" but got \"${cause::class}\" instead")
     }
-})
+}
 
+/**
+ * Asserts that the given [action] throws an exception of the given type [T]
+ * @param message [String] the message to print if [action] does not throw
+ * @param messageWrongException [String] the message if the exception is not same instance as [T]
+ * @param action Function0<[Unit]> the action which should throw
+ */
 inline fun <reified T : Throwable> assertThrows(
     message: String = "should throw",
     messageWrongException: String = "wrong exception type",
     crossinline action: () -> Unit
-) = assertThrows<T>(message, messageWrongException, action, {})
+): Unit = assertThrows<T>(message, messageWrongException, action, {})
 
+/**
+ * Asserts the given [action] throws an exception of Type [T] and afterwards validates the exception.
+ * Useful if you want to inspect the exception (in [validateThrows])
+ * @param messageIfNoException [String] the message to show if no exception gets thrown
+ * @param messageWrongException [String] the message to show if the thrown exception differes from [T]
+ * @param action Function0<Unit> the action that should throw an exception of type [T]
+ * @param validateThrows Function1<T, Unit> validates that [T] is in an expected state.
+ */
 inline fun <reified T : Throwable> assertThrows(
-    message: String = "should throw",
+    messageIfNoException: String = "should throw",
     messageWrongException: String = "wrong exception type",
     crossinline action: () -> Unit,
     validateThrows: (T) -> Unit
@@ -74,7 +159,7 @@ inline fun <reified T : Throwable> assertThrows(
 
     try {
         action()
-        failTest("Expected an exception of type ${T::class} but got no exceptions\n$message")
+        failTest("Expected an exception of type ${T::class} but got no exceptions\n$messageIfNoException")
     } catch (exception: Throwable) {
         if (exception !is T) {
             failTest(
@@ -89,12 +174,12 @@ inline fun <reified T : Throwable> assertThrows(
 }
 
 /**
- * Asserts that the given action calls the callback function "times" times otherwise fails with the given message
- * @param message String the error message if it fails (times the callback called != times)
- * @param times Int the number of times we expected the callback to be called
+ * Asserts that the given [action] calls the callback function [times] times otherwise fails with the given [message]
+ * @param message [String] the error message if it fails (times the callback called != times)
+ * @param times [Int] the number of times we expected the callback to be called
  * @param action the action, getting the callback function
  */
-fun assertCalled(
+inline fun assertCalled(
     message: String = GeneralStrings.assertCalledMessage,
     times: Int = 1,
     action: (callback: () -> Unit) -> Unit
@@ -105,26 +190,27 @@ fun assertCalled(
 }
 
 /**
- * Asserts that the given action calls the callback function 1 times otherwise fails with the given message
- * @param message String the error message if it fails (times the callback called != 1)
+ * Asserts that the given [action] calls the callback function 1 times otherwise fails with the given [message]
+ * @param message [String] the error message if it fails (times the callback called != 1)
  * @param action the action, getting the callback function
  */
-fun assertCalled(
+inline fun assertCalled(
     message: String = GeneralStrings.assertCalledMessage,
     action: (callback: () -> Unit) -> Unit
-) = assertCalled(message, 1, action)
+): Unit = assertCalled(message, 1, action)
 
 /**
- * Asserts that the given action calls the callback function 0 times / not gets called otherwise fails with the given message
- * @param message String
- * @param action
+ * Asserts that the given [action] calls the callback function 0 times / not gets called.
+ * Otherwise fails with the given [message]
+ * @param message [String]  the error message if it gets called
+ * @param action the action that should not be invoked.(assertion)
  */
-fun assertNotCalled(
+inline fun assertNotCalled(
     message: String = GeneralStrings.assertNotCalledMessage,
     action: (callback: () -> Unit) -> Unit
-) = assertCalled(message, 0, action)
+): Unit = assertCalled(message, 0, action)
 
-private object GeneralStrings {
-    const val assertCalledMessage = ""
-    const val assertNotCalledMessage = ""
+object GeneralStrings {
+    const val assertCalledMessage = "Should be called, but did not get called enough times"
+    const val assertNotCalledMessage = "Should not be called but got called anyway"
 }

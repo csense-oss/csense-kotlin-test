@@ -2,16 +2,19 @@
 
 package csense.kotlin.tests.assertions
 
-import kotlin.test.*
+import kotlin.test.assertEquals
+import kotlin.test.assertFalse
+import kotlin.test.assertNotEquals
+import kotlin.test.assertTrue
 
 /**
  * Asserts that the this string contains the given value.
- * @receiver String the string to assert contains the given value
- * @param value String the value that should be in this string
- * @param ignoreCase Boolean if true, will ignore the casing, false means case sensitive.
- * @param message String the error message.
+ * @receiver [String] the string to assert contains the given [value]
+ * @param value [String] the value that should be in this string
+ * @param ignoreCase [Boolean] if true, will ignore the casing, false means case sensitive.
+ * @param message [String] the error message.
  */
-fun String.assertContains(
+inline fun String.assertContains(
     value: String,
     ignoreCase: Boolean = false,
     message: String = "Could not find \"$value\", in  \r\n\"$this\""
@@ -21,62 +24,60 @@ fun String.assertContains(
 
 /**
  * Asserts that the this string does not contain the given value.
- * @receiver String the string to assert not containing the given value
- * @param value String the value that should NOT be in this string
- * @param ignoreCase Boolean if true, will ignore the casing, false means case sensitive.
- * @param message String the error message.
+ * @receiver [String] the string to assert not containing the given [value]
+ * @param value [String] the value that should NOT be in this string
+ * @param ignoreCase [Boolean] if true, will ignore the casing, false means case sensitive.
  */
-fun String.assertContainsNot(
+inline fun String.assertContainsNot(
     value: String,
-    ignoreCase: Boolean = false,
-    message: String = ""
+    ignoreCase: Boolean = false
 ) {
     assertFalse(
         this.contains(value, ignoreCase = ignoreCase),
-        "$message \n Reason: Could find \"$value\", in  \r\n\"$this\""
+        "Could find \"$value\", in \r\n\"$this\""
     )
 }
 
 /**
  * Asserts that this string is not empty (length > 0)
- * @receiver String
+ * @receiver String the string to test for fullness
  */
-fun String.assertNotEmpty() = isNotEmpty().assertTrue("Expected string to not be empty but it was")
+inline fun String.assertNotEmpty() = isNotEmpty().assertTrue("Expected string to not be empty but it was")
 
 /**
  * Asserts that this string is empty (length == 0)
- * @receiver String
+ * @receiver String the string to test for emptiness
  */
-fun String.assertEmpty() = isEmpty().assertTrue("Expected string to be empty but was instead \"$this\"")
+inline fun String.assertEmpty() = isEmpty().assertTrue("Expected string to be empty but was instead \"$this\"")
 
 /**
- * Asserts that the this string is the same as the given string (expected)
- * @receiver String the actual value
- * @param value String the expected value (to assert)
- * @param message String the error message
+ * Asserts that the this string is the same as the given [value] (expected)
+ * @receiver [String] the actual value
+ * @param value [String] the expected value (to assert)
+ * @param message [String] the error message if they differ
  */
-fun String.assert(value: String, message: String = "") {
+inline fun String.assert(value: String, message: String = "") {
     assertEquals(value, this, message)
 }
 
 /**
- * Asserts that the this string is NOT the same as the given string (expected)
- * @receiver String the actual value
- * @param value String the expected value
- * @param message String the error message
+ * Asserts that the this string differs from the given [value] (expected)
+ * @receiver [String] the actual value
+ * @param value [String] the expected value
+ * @param message [String] the error message if they are the same
  */
-fun String.assertNot(value: String, message: String = "") {
+inline fun String.assertNot(value: String, message: String = "") {
     assertNotEquals(value, this, message)
 }
 
 /**
- * asserts that this string contains some substrings in order (increasing), such that you may say "there is some x, followed by y"
- * @receiver String the string to assert contains the values in order
- * @param values List<String> the list of values to be contained in order, eg "x followed by y by z", so y have to come after x. ect.
- * @param ignoreCase Boolean if true, will ignore casing, if false, all contains are case sensitive.
- * @param message String the error message
+ * Asserts that this string contains some substrings in order (increasing), such that you may say "there is some x, followed by y"
+ * @receiver [String] the string to assert contains the values in order
+ * @param values [List]<[String]> the list of values to be contained in order, eg "x followed by y by z", so y have to come after x. ect.
+ * @param ignoreCase [Boolean] if true, will ignore casing, if false, all contains are case sensitive.
+ * @param message [String] the error message
  */
-fun String.assertContainsInOrder(
+inline fun String.assertContainsInOrder(
     values: List<String>,
     ignoreCase: Boolean,
     message: String = ""
@@ -97,12 +98,12 @@ fun String.assertContainsInOrder(
 
 /**
  * Asserts that this string starts with the given string.
- * @receiver String the string to assert starts with the given string
- * @param prefix String the string to be asserted to be started with
- * @param ignoreCase Boolean if true, will ignore casing, if false, all contains are case sensitive.
- * @param message String the error message
+ * @receiver [String] the string to assert starts with the given string
+ * @param prefix [String] the string to be asserted to be started with
+ * @param ignoreCase [Boolean] if true, will ignore casing, if false, all contains are case sensitive.
+ * @param message [String] the error message if the start differs from the given prefix
  */
-fun String.assertStartsWith(
+inline fun String.assertStartsWith(
     prefix: String,
     ignoreCase: Boolean = false,
     message: String = ""
