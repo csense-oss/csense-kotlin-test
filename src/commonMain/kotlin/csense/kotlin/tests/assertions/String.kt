@@ -14,7 +14,7 @@ import kotlin.test.assertTrue
  * @param ignoreCase [Boolean] if true, will ignore the casing, false means case sensitive.
  * @param message [String] the error message.
  */
-inline fun String.assertContains(
+public inline fun String.assertContains(
     value: String,
     ignoreCase: Boolean = false,
     message: String = "Could not find \"$value\", in  \r\n\"$this\""
@@ -28,7 +28,7 @@ inline fun String.assertContains(
  * @param value [String] the value that should NOT be in this string
  * @param ignoreCase [Boolean] if true, will ignore the casing, false means case sensitive.
  */
-inline fun String.assertContainsNot(
+public inline fun String.assertContainsNot(
     value: String,
     ignoreCase: Boolean = false
 ) {
@@ -42,13 +42,13 @@ inline fun String.assertContainsNot(
  * Asserts that this string is not empty (length > 0)
  * @receiver String the string to test for fullness
  */
-inline fun String.assertNotEmpty() = isNotEmpty().assertTrue("Expected string to not be empty but it was")
+public inline fun String.assertNotEmpty(): Unit = isNotEmpty().assertTrue("Expected string to not be empty but it was")
 
 /**
  * Asserts that this string is empty (length == 0)
  * @receiver String the string to test for emptiness
  */
-inline fun String.assertEmpty() = isEmpty().assertTrue("Expected string to be empty but was instead \"$this\"")
+public inline fun String.assertEmpty(): Unit = isEmpty().assertTrue("Expected string to be empty but was instead \"$this\"")
 
 /**
  * Asserts that the this string is the same as the given [value] (expected)
@@ -56,7 +56,7 @@ inline fun String.assertEmpty() = isEmpty().assertTrue("Expected string to be em
  * @param value [String] the expected value (to assert)
  * @param message [String] the error message if they differ
  */
-inline fun String.assert(value: String, message: String = "") {
+public inline fun String.assert(value: String, message: String = "") {
     assertEquals(value, this, message)
 }
 
@@ -66,7 +66,7 @@ inline fun String.assert(value: String, message: String = "") {
  * @param value [String] the expected value
  * @param message [String] the error message if they are the same
  */
-inline fun String.assertNot(value: String, message: String = "") {
+public inline fun String.assertNot(value: String, message: String = "") {
     assertNotEquals(value, this, message)
 }
 
@@ -77,7 +77,7 @@ inline fun String.assertNot(value: String, message: String = "") {
  * @param ignoreCase [Boolean] if true, will ignore casing, if false, all contains are case sensitive.
  * @param message [String] the error message
  */
-inline fun String.assertContainsInOrder(
+public inline fun String.assertContainsInOrder(
     values: List<String>,
     ignoreCase: Boolean,
     message: String = ""
@@ -103,7 +103,7 @@ inline fun String.assertContainsInOrder(
  * @param ignoreCase [Boolean] if true, will ignore casing, if false, all contains are case sensitive.
  * @param message [String] the error message if the start differs from the given prefix
  */
-inline fun String.assertStartsWith(
+public inline fun String.assertStartsWith(
     prefix: String,
     ignoreCase: Boolean = false,
     message: String = ""

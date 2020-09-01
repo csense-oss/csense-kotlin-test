@@ -8,7 +8,7 @@ package csense.kotlin.tests.assertions
  * @param size [Int] the size it should be, if not this will stop the test.
  * @param message [String] the message to print if the assertion fails
  */
-inline fun IntArray.assertSize(size: Int, message: String = "") = this.size.assert(size, message)
+public inline fun IntArray.assertSize(size: Int, message: String = ""): Unit = this.size.assert(size, message)
 
 /**
  * Asserts the size of the given [BooleanArray]
@@ -16,7 +16,7 @@ inline fun IntArray.assertSize(size: Int, message: String = "") = this.size.asse
  * @param size [Int] the size it should be, if not this will stop the test.
  * @param message [String] the message to print if the assertion fails
  */
-inline fun BooleanArray.assertSize(size: Int, message: String = "") = this.size.assert(size, message)
+public inline fun BooleanArray.assertSize(size: Int, message: String = ""): Unit = this.size.assert(size, message)
 
 /**
  * Asserts the size of the given [DoubleArray]
@@ -24,7 +24,7 @@ inline fun BooleanArray.assertSize(size: Int, message: String = "") = this.size.
  * @param size [Int] the size it should be, if not this will stop the test.
  * @param message [String] the message to print if the assertion fails
  */
-inline fun DoubleArray.assertSize(size: Int, message: String = "") = this.size.assert(size, message)
+public inline fun DoubleArray.assertSize(size: Int, message: String = ""): Unit = this.size.assert(size, message)
 
 /**
  * Asserts the size of the given [LongArray]
@@ -32,7 +32,7 @@ inline fun DoubleArray.assertSize(size: Int, message: String = "") = this.size.a
  * @param size [Int] the size it should be, if not this will stop the test.
  * @param message [String] the message to print if the assertion fails
  */
-inline fun LongArray.assertSize(size: Int, message: String = "") = this.size.assert(size, message)
+public inline fun LongArray.assertSize(size: Int, message: String = ""): Unit = this.size.assert(size, message)
 
 /**
  * Asserts the size of the given [ByteArray]
@@ -40,7 +40,7 @@ inline fun LongArray.assertSize(size: Int, message: String = "") = this.size.ass
  * @param size [Int] the size it should be, if not this will stop the test.
  * @param message [String] the message to print if the assertion fails
  */
-inline fun ByteArray.assertSize(size: Int, message: String = "") = this.size.assert(size, message)
+public inline fun ByteArray.assertSize(size: Int, message: String = ""): Unit = this.size.assert(size, message)
 
 /**
  * Asserts the size of the given [ShortArray]
@@ -48,7 +48,7 @@ inline fun ByteArray.assertSize(size: Int, message: String = "") = this.size.ass
  * @param size [Int] the size it should be, if not this will stop the test.
  * @param message [String] the message to print if the assertion fails
  */
-inline fun ShortArray.assertSize(size: Int, message: String = "") = this.size.assert(size, message)
+public inline fun ShortArray.assertSize(size: Int, message: String = ""): Unit = this.size.assert(size, message)
 
 /**
  * Asserts the size of the given [CharArray]
@@ -56,7 +56,7 @@ inline fun ShortArray.assertSize(size: Int, message: String = "") = this.size.as
  * @param size [Int] the size it should be, if not this will stop the test.
  * @param message [String] the message to print if the assertion fails
  */
-inline fun CharArray.assertSize(size: Int, message: String = "") = this.size.assert(size, message)
+public inline fun CharArray.assertSize(size: Int, message: String = ""): Unit = this.size.assert(size, message)
 
 /**
  * Asserts the size of the given [FloatArray]
@@ -64,4 +64,4 @@ inline fun CharArray.assertSize(size: Int, message: String = "") = this.size.ass
  * @param size [Int] the size it should be, if not this will stop the test.
  * @param message [String] the message to print if the assertion fails
  */
-inline fun FloatArray.assertSize(size: Int, message: String = "") = this.size.assert(size, message)
+public inline fun FloatArray.assertSize(size: Int, message: String = ""): Unit = this.size.assert(size, message)

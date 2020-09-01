@@ -10,7 +10,7 @@ import kotlin.test.*
  * @param value [Boolean] the expected value
  * @param message [String] the message to show if the receiver is not the given [value]
  */
-inline fun Boolean.assert(value: Boolean, message: String = "expected $value got $this") {
+public inline fun Boolean.assert(value: Boolean, message: String = "expected $value got $this") {
     assertEquals(value, this, message)
 }
 
@@ -19,7 +19,7 @@ inline fun Boolean.assert(value: Boolean, message: String = "expected $value got
  * @receiver [Boolean] the [Boolean] to test
  * @param message [String] the message to show if the receiver is not false
  */
-inline fun Boolean.assertFalse(message: String = "expected false got true") {
+public inline fun Boolean.assertFalse(message: String = "expected false got true") {
     assert(false, message)
 }
 
@@ -28,6 +28,6 @@ inline fun Boolean.assertFalse(message: String = "expected false got true") {
  * @receiver [Boolean] the [Boolean] to test
  * @param message [String] the message to show if the receiver is not true
  */
-inline fun Boolean.assertTrue(message: String = "expected true, got false") {
+public inline fun Boolean.assertTrue(message: String = "expected true, got false") {
     assert(true, message)
 }

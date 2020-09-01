@@ -1,6 +1,7 @@
-# 0.0.37
-- kotlin 1.4-M3
+# 0.0.40
+- kotlin 1.4.0
 - updated contracts
+- spelling mistakes fixed
  
 # 0.0.36
 - documentation (a lot of improved and added documentation)

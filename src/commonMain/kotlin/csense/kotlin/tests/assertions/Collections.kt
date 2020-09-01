@@ -10,7 +10,7 @@ import kotlin.test.assertEquals
  * @param size [Int]
  * @param message [String]
  */
-inline fun <T> Array<T>.assertSize(size: Int, message: String = "") = this.size.assert(size, message)
+public inline fun <T> Array<T>.assertSize(size: Int, message: String = ""): Unit = this.size.assert(size, message)
 
 /**
  * Asserts that the size of this collection is the given size
@@ -18,14 +18,14 @@ inline fun <T> Array<T>.assertSize(size: Int, message: String = "") = this.size.
  * @param size [Int]
  * @param message [String]
  */
-inline fun <T> Collection<T>.assertSize(size: Int, message: String = "") = this.size.assert(size, message)
+public inline fun <T> Collection<T>.assertSize(size: Int, message: String = ""): Unit = this.size.assert(size, message)
 
 /**
  * Asserts that this collection is empty
  * @receiver [Collection]<T>
  * @param message [String]
  */
-inline fun <T> Collection<T>.assertEmpty(message: String = "") = assertSize(0, message)
+public inline fun <T> Collection<T>.assertEmpty(message: String = ""): Unit = assertSize(0, message)
 
 
 /**
@@ -33,7 +33,7 @@ inline fun <T> Collection<T>.assertEmpty(message: String = "") = assertSize(0, m
  * @receiver [List]<*>
  * @param message [String]
  */
-inline fun List<*>.assertEmpty(message: String = "") = assertSize(0, message)
+public inline fun List<*>.assertEmpty(message: String = ""): Unit = assertSize(0, message)
 
 /**
  * Asserts that this list is the given size.
@@ -41,7 +41,7 @@ inline fun List<*>.assertEmpty(message: String = "") = assertSize(0, message)
  * @param size [Int]
  * @param message [String]
  */
-inline fun List<*>.assertSize(size: Int, message: String = "") = assertEquals(size, this.size, message)
+public inline fun List<*>.assertSize(size: Int, message: String = ""): Unit = assertEquals(size, this.size, message)
 
 /**
  * Asserts that the given list contains the given item
@@ -49,7 +49,7 @@ inline fun List<*>.assertSize(size: Int, message: String = "") = assertEquals(si
  * @param item T
  * @param message [String]
  */
-inline fun <T> Collection<T>.assertContains(
+public inline fun <T> Collection<T>.assertContains(
     item: T,
     message: String = "Should contain $item"
 ) {
@@ -61,9 +61,9 @@ inline fun <T> Collection<T>.assertContains(
  * @receiver [Collection]<T>
  * @param items [Array]<out T>
  */
-inline fun <T> Collection<T>.assertContainsAll(
+public inline fun <T> Collection<T>.assertContainsAll(
     vararg items: T
-) = items.forEach { assertContains(it) }
+): Unit = items.forEach { assertContains(it) }
 
 /**
  * Asserts that the given list does not contain the given item
@@ -71,7 +71,7 @@ inline fun <T> Collection<T>.assertContainsAll(
  * @param item T
  * @param message [String]
  */
-inline fun <T> Collection<T>.assertContainsNot(
+public inline fun <T> Collection<T>.assertContainsNot(
     item: T,
     message: String = "Should not contain $item"
 ) {
@@ -82,6 +82,6 @@ inline fun <T> Collection<T>.assertContainsNot(
  * @receiver [Collection]<T>
  * @param items [Array]<out T>
  */
-inline fun <T> Collection<T>.assertContainsNotAll(
+public inline fun <T> Collection<T>.assertContainsNotAll(
     vararg items: T
-) = items.forEach { assertContainsNot(it) }
+): Unit = items.forEach { assertContainsNot(it) }

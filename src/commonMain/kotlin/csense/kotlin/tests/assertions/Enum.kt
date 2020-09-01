@@ -10,7 +10,7 @@ import kotlin.test.assertEquals
  * @param expected Enum<T> the expected value
  * @param message [String]
  */
-inline fun <T : Enum<T>> Enum<T>.assert(expected: Enum<T>, message: String? = "") {
+public inline fun <T : Enum<T>> Enum<T>.assert(expected: Enum<T>, message: String? = "") {
     assertEquals(expected, this, message)
 }
 
@@ -20,6 +20,6 @@ inline fun <T : Enum<T>> Enum<T>.assert(expected: Enum<T>, message: String? = ""
  * @param different Enum<T> the value we are not expecting
  * @param message [String]
  */
-inline fun <T : Enum<T>> Enum<T>.assertNotEquals(different: Enum<T>, message: String? = "") {
+public inline fun <T : Enum<T>> Enum<T>.assertNotEquals(different: Enum<T>, message: String? = "") {
     assertEquals(different, this, message)
 }

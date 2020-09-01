@@ -9,7 +9,7 @@ package csense.kotlin.tests.assertions
  * @receiver [Iterable]<[T]> the iterable to search though
  * @param items [Array]<out T> The items we are expected to find in the receiver
  */
-inline fun <T> Iterable<T>.assertContainsInOrder(
+public inline fun <T> Iterable<T>.assertContainsInOrder(
     vararg items: T
 ) {
     assertContainsInOrder(items.toList())
@@ -20,13 +20,13 @@ inline fun <T> Iterable<T>.assertContainsInOrder(
  * @receiver [Iterable]<[T]> the iterable to search though
  * @param items [Iterable]<[T]> the items we are expected to find in the receiver
  */
-inline fun <T> Iterable<T>.assertContainsInOrder(
+public inline fun <T> Iterable<T>.assertContainsInOrder(
     items: Iterable<T>
 ) {
     val itemsCount = count()
     val count = this.count()
     if (itemsCount == 0 || count == 0) {
-        failTest("Either the asserted items is empty or the reciver is empty, thus failing not matter what...")
+        failTest("Either the asserted items is empty or the receiver is empty, thus failing not matter what...")
     }
     if (itemsCount > count) {
         failTest("Collection is not big enough to contain the given items in order. this collection is $count, but items size is $itemsCount")
@@ -52,5 +52,5 @@ inline fun <T> Iterable<T>.assertContainsInOrder(
     } else {
         lastFoundElementIndex.toString()
     }
-    failTest("Could not find `$currentItem`, last succesful found item was at index $lastFoundMessage, which is `$lastFoundElement`")
+    failTest("Could not find `$currentItem`, last successful found item was at index $lastFoundMessage, which is `$lastFoundElement`")
 }

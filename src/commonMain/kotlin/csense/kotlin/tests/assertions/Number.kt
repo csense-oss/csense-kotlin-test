@@ -12,7 +12,7 @@ import kotlin.test.*
  * @param delta [Double] the "allowed imprecision" for value to differ from the receiver
  * @param message [String] the message to show if they differ by more than [delta]
  */
-inline fun Double.assert(value: Double, delta: Double = 0.1, message: String = "expected $value within $delta margins, but got $this") {
+public inline fun Double.assert(value: Double, delta: Double = 0.1, message: String = "expected $value within $delta margins, but got $this") {
     val safeDelta = abs(delta)
     assertTrue(this >= value - safeDelta && this <= value + safeDelta, message)
 }
@@ -24,7 +24,7 @@ inline fun Double.assert(value: Double, delta: Double = 0.1, message: String = "
  * @param delta [Float] the "allowed imprecision" for value to differ from the receiver
  * @param message [String] the message to show if they differ by more than [delta]
  */
-inline fun Float.assert(value: Float, delta: Float = 0.1f, message: String = "expected $value within $delta margins, but got $this") {
+public inline fun Float.assert(value: Float, delta: Float = 0.1f, message: String = "expected $value within $delta margins, but got $this") {
     val safeDelta = abs(delta)
     assertTrue(this >= value - safeDelta && this <= value + safeDelta, message)
 }
@@ -35,7 +35,7 @@ inline fun Float.assert(value: Float, delta: Float = 0.1f, message: String = "ex
  * @param value T the expected value
  * @param message [String] the message to show if they differ
  */
-inline fun <T : Number> T.assert(value: T, message: String = "Expected $value but is instead $this") {
+public inline fun <T : Number> T.assert(value: T, message: String = "Expected $value but is instead $this") {
     assertEquals(value, this, message)
 }
 
@@ -45,7 +45,7 @@ inline fun <T : Number> T.assert(value: T, message: String = "Expected $value bu
  * @param value [Char] the expected char
  * @param message [String] the message to show if they differ
  */
-inline fun Char.assert(value: Char, message: String = "Expected $value but is instead $this") {
+public inline fun Char.assert(value: Char, message: String = "Expected $value but is instead $this") {
     assertEquals(value, this, message)
 }
 
@@ -55,7 +55,7 @@ inline fun Char.assert(value: Char, message: String = "Expected $value but is in
  * @param value [Byte] the expected value
  * @param message [String] the message to show if they differ
  */
-inline fun Byte.assert(value: Byte, message: String = "Expected $value but is instead $this") {
+public inline fun Byte.assert(value: Byte, message: String = "Expected $value but is instead $this") {
     assertEquals(value, this, message)
 }
 
@@ -65,6 +65,6 @@ inline fun Byte.assert(value: Byte, message: String = "Expected $value but is in
  * @param otherRange [IntRange] the expected range
  * @param message [String] the message to show if they differ
  */
-inline fun IntRange.assert(otherRange: IntRange, message: String = "Expected $otherRange but is instead $this") {
+public inline fun IntRange.assert(otherRange: IntRange, message: String = "Expected $otherRange but is instead $this") {
     assertEquals(otherRange, this, message)
 }
