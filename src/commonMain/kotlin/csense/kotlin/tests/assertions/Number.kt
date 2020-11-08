@@ -5,6 +5,7 @@ package csense.kotlin.tests.assertions
 import kotlin.math.*
 import kotlin.test.*
 
+//region Double
 /**
  * Asserts that this [Double] is equal to the other double (given the [delta] / margin to account for imprecision)
  * @receiver [Double] the actual value
@@ -12,10 +13,36 @@ import kotlin.test.*
  * @param delta [Double] the "allowed imprecision" for value to differ from the receiver
  * @param message [String] the message to show if they differ by more than [delta]
  */
-public inline fun Double.assert(value: Double, delta: Double = 0.1, message: String = "expected $value within $delta margins, but got $this") {
+public inline fun Double.assert(
+    value: Double,
+    delta: Double = 0.1,
+    message: String = "expected $value within $delta margins, but got $this"
+) {
     val safeDelta = abs(delta)
     assertTrue(this >= value - safeDelta && this <= value + safeDelta, message)
 }
+
+
+/**
+ *
+ * @receiver Double
+ * @param value Double
+ * @param delta Double
+ * @param message String
+ */
+public inline fun Double.assertNot(
+    value: Double,
+    delta: Double = 0.1,
+    message: String = "expected $value to be different from $this within $delta margins, but they are equal"
+) {
+    val safeDelta = abs(delta)
+    assertFalse(this >= value - safeDelta && this <= value + safeDelta, message)
+}
+
+
+//endregion
+
+//region Float
 
 /**
  * Asserts that this [Float] is equal to the other float (given the [delta] / margin to account for imprecision)
@@ -24,21 +51,41 @@ public inline fun Double.assert(value: Double, delta: Double = 0.1, message: Str
  * @param delta [Float] the "allowed imprecision" for value to differ from the receiver
  * @param message [String] the message to show if they differ by more than [delta]
  */
-public inline fun Float.assert(value: Float, delta: Float = 0.1f, message: String = "expected $value within $delta margins, but got $this") {
+public inline fun Float.assert(
+    value: Float,
+    delta: Float = 0.1f,
+    message: String = "expected $value within $delta margins, but got $this"
+) {
     val safeDelta = abs(delta)
     assertTrue(this >= value - safeDelta && this <= value + safeDelta, message)
 }
 
-/**
- * Asserts this number is the same as the given [value]
- * @receiver T the actual value
- * @param value T the expected value
- * @param message [String] the message to show if they differ
- */
-public inline fun <T : Number> T.assert(value: T, message: String = "Expected $value but is instead $this") {
-    assertEquals(value, this, message)
-}
 
+/**
+ *
+ * @receiver Float
+ * @param value Double
+ * @param delta Double
+ * @param message String
+ */
+public inline fun Float.assertNot(
+    value: Float,
+    delta: Float = 0.1F,
+    message: String = "expected $value to be different from $this within $delta margins, but they are equal"
+) {
+    val safeDelta = abs(delta)
+    assertFalse(this >= value - safeDelta && this <= value + safeDelta, message)
+}
+//endregion
+
+//region Number
+public inline fun <T : Number> T.assertNot(
+    value: T,
+    message: String = "Expected $value to be different from $this but they are the same"
+): Unit = assertNotEquals(value, this, message)
+//endregion
+
+//region Char
 /**
  * Asserts this [Char] is the same as the given [value]
  * @receiver [Char] the actual char
@@ -50,21 +97,46 @@ public inline fun Char.assert(value: Char, message: String = "Expected $value bu
 }
 
 /**
+ *
+ * @receiver Char
+ * @param value Char
+ * @param message String
+ */
+public inline fun Char.assertNot(value: Char, message: String) {
+    assertNotEquals(value, this, message)
+}
+//endregion
+
+//region Byte
+/**
  * Asserts this byte is the same as the given [value]
  * @receiver [Byte] the actual value
  * @param value [Byte] the expected value
  * @param message [String] the message to show if they differ
  */
-public inline fun Byte.assert(value: Byte, message: String = "Expected $value but is instead $this") {
+public inline fun Byte.assert(value: Byte, message: String = "Expected $value but is instead $this"): Unit =
     assertEquals(value, this, message)
-}
 
+public inline fun Byte.assertNot(
+    value: Byte,
+    message: String = "Expected $value to be different from $this but they are the same"
+): Unit = assertEquals(value, this, message)
+//endregion
+
+//region IntRange
 /**
  * Asserts this range is the same as [otherRange]
  * @receiver [IntRange] the actual range
  * @param otherRange [IntRange] the expected range
  * @param message [String] the message to show if they differ
  */
-public inline fun IntRange.assert(otherRange: IntRange, message: String = "Expected $otherRange but is instead $this") {
-    assertEquals(otherRange, this, message)
-}
+public inline fun IntRange.assert(
+    otherRange: IntRange,
+    message: String = "Expected $otherRange but is instead $this"
+): Unit = assertEquals(otherRange, this, message)
+
+public inline fun IntRange.assertNot(
+    otherRange: IntRange,
+    message: String = "Expected $this to be different from $otherRange but they are the same"
+): Unit = assertNotEquals(otherRange, this, message)
+//endregion

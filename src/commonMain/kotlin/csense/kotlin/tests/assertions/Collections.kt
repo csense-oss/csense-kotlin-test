@@ -2,15 +2,11 @@
 
 package csense.kotlin.tests.assertions
 
+import kotlin.contracts.ExperimentalContracts
+import kotlin.contracts.InvocationKind
+import kotlin.contracts.contract
 import kotlin.test.assertEquals
 
-/**
- * Asserts that the size of this array is the given size.
- * @receiver [Array]<T>
- * @param size [Int]
- * @param message [String]
- */
-public inline fun <T> Array<T>.assertSize(size: Int, message: String = ""): Unit = this.size.assert(size, message)
 
 /**
  * Asserts that the size of this collection is the given size
@@ -26,22 +22,6 @@ public inline fun <T> Collection<T>.assertSize(size: Int, message: String = ""):
  * @param message [String]
  */
 public inline fun <T> Collection<T>.assertEmpty(message: String = ""): Unit = assertSize(0, message)
-
-
-/**
- * Asserts that this list is empty.
- * @receiver [List]<*>
- * @param message [String]
- */
-public inline fun List<*>.assertEmpty(message: String = ""): Unit = assertSize(0, message)
-
-/**
- * Asserts that this list is the given size.
- * @receiver [List]<*>
- * @param size [Int]
- * @param message [String]
- */
-public inline fun List<*>.assertSize(size: Int, message: String = ""): Unit = assertEquals(size, this.size, message)
 
 /**
  * Asserts that the given list contains the given item
@@ -77,11 +57,36 @@ public inline fun <T> Collection<T>.assertContainsNot(
 ) {
     contains(item).assertFalse(message)
 }
+
 /**
- *
+ * Asserts that this collection's items are different from the given [items] (none are contained)
  * @receiver [Collection]<T>
  * @param items [Array]<out T>
  */
 public inline fun <T> Collection<T>.assertContainsNotAll(
     vararg items: T
 ): Unit = items.forEach { assertContainsNot(it) }
+
+/**
+ * Asserts that there is only 1 element (the given) in this list
+ * @receiver [Collection]<T>
+ * @param item T
+ */
+public inline fun <T> Collection<T>.assertSingle(item: T) {
+    assertSize(1)
+    assertEquals(item, first())
+}
+
+/**
+ * asserts that there is a single item and if so invokes the [callback]
+ * @receiver [Collection]<T>
+ * @param callback (T) -> Unit
+ */
+@OptIn(ExperimentalContracts::class)
+public inline fun <T> Collection<T>.assertSingle(callback: (T) -> Unit) {
+    contract {
+        callsInPlace(callback, kind = InvocationKind.AT_MOST_ONCE)
+    }
+    assertSize(1)
+    callback(first())
+}

@@ -2,6 +2,11 @@
 
 package csense.kotlin.tests.assertions
 
+import kotlin.contracts.ExperimentalContracts
+import kotlin.contracts.InvocationKind
+import kotlin.contracts.contract
+import kotlin.test.assertEquals
+
 /**
  * Assert that this map have the given size.
  * @receiver [Map]<*, *>
@@ -23,3 +28,28 @@ public inline fun Map<*, *>.assertEmpty(
     message: String = "Map should be empty but is not."
 ): Unit =
     this.isEmpty().assertTrue(message)
+
+/**
+ * Asserts this map only contains 1 element (the given [item])
+ * @receiver [Map]<K, V>
+ * @param item [Map.Entry]<K, V>
+ * @param message String
+ */
+public inline fun <K, V> Map<K, V>.assertSingle(item: Map.Entry<K, V>, message: String = "") {
+    assertSize(1)
+    assertEquals(item, entries.first())
+}
+
+/**
+ * Asserts this map only contains 1 element and if so invokes the given [callback]
+ * @receiver [Map]<K, V>
+ * @param callback Function1<[Map.Entry]<K, V>, Unit>
+ */
+@OptIn(ExperimentalContracts::class)
+public inline fun <K, V> Map<K, V>.assertSingle(callback: (Map.Entry<K, V>) -> Unit) {
+    contract {
+        callsInPlace(callback, kind = InvocationKind.AT_MOST_ONCE)
+    }
+    assertSize(1)
+    callback(entries.first())
+}

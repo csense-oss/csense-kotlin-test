@@ -30,11 +30,12 @@ public inline fun String.assertContains(
  */
 public inline fun String.assertContainsNot(
     value: String,
-    ignoreCase: Boolean = false
+    ignoreCase: Boolean = false,
+    message: String = "Could find \"$value\", in \r\n\"$this\""
 ) {
     assertFalse(
         this.contains(value, ignoreCase = ignoreCase),
-        "Could find \"$value\", in \r\n\"$this\""
+        message
     )
 }
 
@@ -48,7 +49,8 @@ public inline fun String.assertNotEmpty(): Unit = isNotEmpty().assertTrue("Expec
  * Asserts that this string is empty (length == 0)
  * @receiver String the string to test for emptiness
  */
-public inline fun String.assertEmpty(): Unit = isEmpty().assertTrue("Expected string to be empty but was instead \"$this\"")
+public inline fun String.assertEmpty(): Unit =
+    isEmpty().assertTrue("Expected string to be empty but was instead \"$this\"")
 
 /**
  * Asserts that the this string is the same as the given [value] (expected)
@@ -77,7 +79,7 @@ public inline fun String.assertNot(value: String, message: String = "") {
  * @param ignoreCase [Boolean] if true, will ignore casing, if false, all contains are case sensitive.
  * @param message [String] the error message
  */
-public inline fun String.assertContainsInOrder(
+public fun String.assertContainsInOrder(
     values: List<String>,
     ignoreCase: Boolean,
     message: String = ""
@@ -86,8 +88,9 @@ public inline fun String.assertContainsInOrder(
     values.forEach {
         val next = indexOf(it, currentIndex, ignoreCase)
         if (next < 0) {
+            val messageWithNewline = message.useIfNotEmptyOrThis(message + "\n\n")
             failTest(
-                "$message\n\nCould not find \n\t\"$it\" after index $currentIndex in string \n" +
+                "{$messageWithNewline}Could not find \n\t\"$it\" after index $currentIndex in string \n" +
                         "\"$this\"\n" +
                         "\tafter index is :\"${this.substring(currentIndex)}\""
             )
@@ -103,13 +106,33 @@ public inline fun String.assertContainsInOrder(
  * @param ignoreCase [Boolean] if true, will ignore casing, if false, all contains are case sensitive.
  * @param message [String] the error message if the start differs from the given prefix
  */
-public inline fun String.assertStartsWith(
+public fun String.assertStartsWith(
     prefix: String,
     ignoreCase: Boolean = false,
     message: String = ""
 ) {
-    val textOutput = "$message \n Could not find \"$prefix\", in  \n" +
+    val messageWithNewline = message.useIfNotEmptyOrThis(message + "\n")
+    val textOutput = "${messageWithNewline}Could not find \"$prefix\", in  \n" +
             "\"$this\""
     assertTrue(this.startsWith(prefix, ignoreCase = ignoreCase), textOutput)
 }
+
+/**
+ * Asserts that this string ends with the given string.
+ * @receiver [String] the string to assert ends with the given string
+ * @param prefix [String] the string to be asserted to be ended with
+ * @param ignoreCase [Boolean] if true, will ignore casing, if false, all contains are case sensitive.
+ * @param message [String] the error message if the end differs from the given prefix
+ */
+public fun String.assertEndsWith(
+    prefix: String,
+    ignoreCase: Boolean = false,
+    message: String = ""
+) {
+    val messageWithNewline = message.useIfNotEmptyOrThis(message + "\n")
+    val textOutput = "${messageWithNewline}Could not find \"$prefix\", in  \n" +
+            "\"$this\""
+    assertTrue(this.endsWith(prefix, ignoreCase = ignoreCase), textOutput)
+}
+
 

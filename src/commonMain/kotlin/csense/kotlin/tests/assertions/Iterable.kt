@@ -17,8 +17,8 @@ public inline fun <T> Iterable<T>.assertContainsInOrder(
 
 /**
  * Asserts that the given [items] are contained in the receiver by the given order (by the iterator)
- * @receiver [Iterable]<[T]> the iterable to search though
- * @param items [Iterable]<[T]> the items we are expected to find in the receiver
+ * @receiver [Iterable]<T> the iterable to search though
+ * @param items [Iterable]<T> the items we are expected to find in the receiver
  */
 public inline fun <T> Iterable<T>.assertContainsInOrder(
     items: Iterable<T>

@@ -10,9 +10,16 @@ import kotlin.test.assertEquals
  * @param expected Enum<T> the expected value
  * @param message [String]
  */
-public inline fun <T : Enum<T>> Enum<T>.assert(expected: Enum<T>, message: String? = "") {
-    assertEquals(expected, this, message)
-}
+public inline fun <T : Enum<T>> Enum<T>.assert(
+    expected: Enum<T>,
+    message: String? = "Expected $expected but got $this"
+): Unit = assertEquals(expected, this, message)
+
+@Deprecated("naming convention", ReplaceWith("assertNot"))
+public inline fun <T : Enum<T>> Enum<T>.assertNotEquals(
+    different: Enum<T>,
+    message: String? = "Expected $this to be different from $different but they are the same"
+): Unit = assertEquals(different, this, message)
 
 /**
  * asserts that this enum is different from [different]
@@ -20,6 +27,7 @@ public inline fun <T : Enum<T>> Enum<T>.assert(expected: Enum<T>, message: Strin
  * @param different Enum<T> the value we are not expecting
  * @param message [String]
  */
-public inline fun <T : Enum<T>> Enum<T>.assertNotEquals(different: Enum<T>, message: String? = "") {
-    assertEquals(different, this, message)
-}
+public inline fun <T : Enum<T>> Enum<T>.assertNot(
+    different: Enum<T>,
+    message: String? = "Expected $this to be different from $different but they are the same"
+): Unit = assertEquals(different, this, message)
