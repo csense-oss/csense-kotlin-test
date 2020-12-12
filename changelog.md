@@ -1,6 +1,7 @@
 # 0.0.42
 - removed enum assert as all enums are comparable ( caused overload resolution ambiguity)
 - fixed multiple bug with assertNot
+- added readme
 
 # 0.0.41
 
