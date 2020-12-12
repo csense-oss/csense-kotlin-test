@@ -120,7 +120,7 @@ public inline fun Byte.assert(value: Byte, message: String = "Expected $value bu
 public inline fun Byte.assertNot(
     value: Byte,
     message: String = "Expected $value to be different from $this but they are the same"
-): Unit = assertEquals(value, this, message)
+): Unit = assertNotEquals(value, this, message)
 //endregion
 
 //region IntRange
