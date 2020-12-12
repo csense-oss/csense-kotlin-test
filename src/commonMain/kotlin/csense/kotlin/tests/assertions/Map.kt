@@ -36,7 +36,7 @@ public inline fun Map<*, *>.assertEmpty(
  * @param message String
  */
 public inline fun <K, V> Map<K, V>.assertSingle(item: Map.Entry<K, V>, message: String = "") {
-    assertSize(1)
+    assertSize(1, "should have single item. $message")
     assertEquals(item, entries.first())
 }
 
