@@ -2,7 +2,9 @@
 
 package csense.kotlin.tests.assertions
 
-import kotlin.test.*
+import kotlin.test.assertEquals
+import kotlin.test.assertNotEquals
+import kotlin.test.assertTrue
 
 /**
  * Asserts the given value is larger or equal to (>=) the asserted value
@@ -85,3 +87,14 @@ public inline fun <T : Comparable<T>> T.assert(
     assertEquals(expected, this, message)
 }
 
+
+/**
+ * Asserts that this comparable is different from [different]
+ * @receiver [Comparable]<T> the receiver / actual
+ * @param different Enum<T> the value we are expecting this to be different from
+ * @param message [String] a message if they are the same
+ */
+public inline fun <T : Comparable<T>> T.assertNot(
+    different: T,
+    message: String? = "Expected $this to be different from $different but they are the same"
+): Unit = assertNotEquals(different, this, message)
