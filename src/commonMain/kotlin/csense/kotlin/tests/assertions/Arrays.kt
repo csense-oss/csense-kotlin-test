@@ -85,7 +85,7 @@ public inline fun <T> Array<T>.assertSize(size: Int, message: String = ""): Unit
  * @receiver [Array]<T>
  * @param message [String]  the message to print if the assertion fails
  */
-public inline fun <T> Array<T>.assertEmpty(message: String = "should be empty"): Unit = assertSize(1, message = message)
+public inline fun <T> Array<T>.assertEmpty(message: String = "should be empty"): Unit = assertSize(0, message = message)
 
 /**
  * Asserts that this array contains the only given item
