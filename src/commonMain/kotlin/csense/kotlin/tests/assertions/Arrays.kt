@@ -105,11 +105,11 @@ public inline fun <T> Array<T>.assertSingle(item: T, message: String = "") {
  * @param message [String]  the message to print if the equality assertion fails
  */
 @OptIn(ExperimentalContracts::class)
-public inline fun <T> Array<T>.assertSingle(callback: (T) -> Unit, message: String = "") {
+public inline fun <T> Array<T>.assertSingle(callback: (T) -> Unit, message: String = "Should have 1 item") {
     contract {
         callsInPlace(callback, kind = InvocationKind.AT_MOST_ONCE)
     }
-    assertSize(1, message = "Should have 1 item")
+    assertSize(1, message = message)
     callback(first())
 }
 //endregion

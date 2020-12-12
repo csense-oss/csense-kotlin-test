@@ -3,7 +3,6 @@
 package csense.kotlin.tests.assertions
 
 
-
 /**
  * Asserts that the given [items] are contained in the receiver by the given order (by the iterator)
  * @receiver [Iterable]<[T]> the iterable to search though

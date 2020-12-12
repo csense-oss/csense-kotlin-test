@@ -1,10 +1,11 @@
 # 0.0.41
-- kotlin 1.4.10
+- kotlin 1.4.21
 - more extensions (arrays & collections)
 - minor code cleanup
 - removed list extensions that were also on collection's
 - naming updated to more "assert" rather than assertEqual (what else should you assert? equals is redundant)
 - removed number.assert as all numbers in kotlin is comparable
+
 
 
 # 0.0.40
