@@ -1,3 +1,6 @@
+# 0.0.44
+- documentation fixed for MPP
+
 # 0.0.43
 - fixed a bug with assertEmpty on arrays
 
