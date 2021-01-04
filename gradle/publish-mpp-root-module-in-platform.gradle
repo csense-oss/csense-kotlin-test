@@ -1,4 +1,3 @@
-//from https://github.com/Kotlin/kotlinx.serialization/blob/master/gradle/publish-mpp-root-module-in-platform.gradle
 /*
  * Copyright 2014-2020 JetBrains s.r.o and contributors. Use of this source code is governed by the Apache 2.0 license.
  */
@@ -39,7 +38,7 @@ project.ext.publishPlatformArtifactsInRootModule = { MavenPublication platformPu
             }
         }
 
-        tasks.matching { it.name == "generatePomFileForKotlinMultiplatformPublication" }.configureEach {
+        tasks.matching { it.name == "generatePomFileForKotlinMultiplatformPublication"}.configureEach {
             dependsOn(tasks["generatePomFileFor${platformPublication.name.capitalize()}Publication"])
         }
     }
