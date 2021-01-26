@@ -1,10 +1,24 @@
+# 0.0.45
+
+- added more extensions for Map
+    - assertContainsKey
+    - assertDoesNotContainsKey
+    - assertContains
+    - updates to assertSingle
+    - assertContainsKeyAnd
+- updated the message for assertAs
+- more deprecations due to naming
+
 # 0.0.44
+
 - documentation fixed for MPP
 
 # 0.0.43
+
 - fixed a bug with assertEmpty on arrays
 
 # 0.0.42
+
 - removed enum assert as all enums are comparable ( caused overload resolution ambiguity)
 - fixed multiple bug with assertNot
 - added readme
