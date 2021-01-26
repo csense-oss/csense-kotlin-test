@@ -53,9 +53,10 @@ public inline fun <U : Comparable<U>> U.assertLargerThan(expected: U, optMessage
  * @param other T the different value, that the actual should not be like
  * @param message [String] a message if the [other] is the same as the receiver
  */
+@Deprecated("naming convention violation", replaceWith = ReplaceWith("assertNot(other, message)"))
 public inline fun <T : Comparable<T>> T.assertNotEquals(
     other: T,
-    message: String = "expected not to be equal, but $this === $other"
+    message: String = "expected not to be equal, but $this == $other"
 ) {
     assertNotEquals(other, this, message)
 }
@@ -66,7 +67,7 @@ public inline fun <T : Comparable<T>> T.assertNotEquals(
  * @param expected T the expected value, that the actual should be
  * @param message [String] a message if the [expected] is different from the receiver
  */
-@Deprecated("naming convention violation", replaceWith = ReplaceWith("assert"), level = DeprecationLevel.WARNING)
+@Deprecated("naming convention violation", replaceWith = ReplaceWith("assert(expected, message)"), level = DeprecationLevel.WARNING)
 public inline fun <T : Comparable<T>> T.assertEquals(
     expected: T,
     message: String = "expected to be equal, but $this !== $expected"

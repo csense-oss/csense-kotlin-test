@@ -30,7 +30,7 @@ public inline fun failTest(message: String = ""): Nothing {
 @OptIn(ExperimentalContracts::class)
 public inline fun <reified T> Any.assertAs(
     otherValue: T,
-    message: String = "expected type ${T::class}, got ${this::class}"
+    message: String = "value of \"$this\" is not the expected \"$otherValue\""
 ) {
     contract {
         returns() implies (this@assertAs is T)
