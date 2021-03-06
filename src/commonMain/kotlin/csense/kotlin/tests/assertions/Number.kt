@@ -2,8 +2,11 @@
 
 package csense.kotlin.tests.assertions
 
-import kotlin.math.*
-import kotlin.test.*
+import kotlin.math.abs
+import kotlin.test.assertEquals
+import kotlin.test.assertFalse
+import kotlin.test.assertNotEquals
+import kotlin.test.assertTrue
 
 //region Double
 /**
