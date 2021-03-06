@@ -145,7 +145,53 @@ class StringTest {
         }
         "test".assertNot("")
 
-        "Test".assertNot("test")
+        assertThrows<Throwable> {
+            "tESt".assertNot("TesT", ignoreCase = true)
+        }
 
+        "tesT".assertNot("test", ignoreCase = false)
+
+        assertThrows<Throwable> {
+            "Test".assertNot("test", ignoreCase = true)
+        }
+        "tesT".assertNot("Test", ignoreCase = false)
+
+
+    }
+
+    @Test
+    fun stringAssertStartsWith() {
+        "".assertStartsWith("")
+        assertThrows<Throwable> {
+            "".assertStartsWith("test")
+        }
+        assertThrows<Throwable> {
+            "a test".assertStartsWith("test")
+        }
+        "test".assertStartsWith("test")
+        "test abc 123".assertStartsWith("test")
+
+        assertThrows<Throwable> {
+            "TeSt".assertStartsWith("tesT", ignoreCase = false)
+        }
+        "TeSt".assertStartsWith("tEsT", ignoreCase = true)
+    }
+
+    @Test
+    fun stringAssertEndsWith() {
+        "".assertEndsWith("")
+        assertThrows<Throwable> {
+            "".assertEndsWith("test")
+        }
+        assertThrows<Throwable> {
+            "test abc 123".assertEndsWith("test")
+        }
+        "a test".assertEndsWith("test")
+        "test".assertEndsWith("test")
+
+        assertThrows<Throwable> {
+            "TeSt".assertEndsWith("tesT", ignoreCase = false)
+        }
+        "TeSt".assertEndsWith("tEsT", ignoreCase = true)
     }
 }

@@ -86,8 +86,15 @@ public inline fun Float.assertNot(
  * @param value [Char] the expected char
  * @param message [String] the message to show if they differ
  */
-public inline fun Char.assert(value: Char, message: String = "Expected $value but is instead $this") {
-    assertEquals(value, this, message)
+public inline fun Char.assert(
+    value: Char,
+    ignoreCase: Boolean = false,
+    message: String = "Expected $value but is instead $this"
+) {
+    val isEqual = this.equals(value, ignoreCase)
+    if (!isEqual) {
+        failTest(message)
+    }
 }
 
 /**
@@ -96,8 +103,16 @@ public inline fun Char.assert(value: Char, message: String = "Expected $value bu
  * @param value Char
  * @param message String
  */
-public inline fun Char.assertNot(value: Char, message: String) {
-    assertNotEquals(value, this, message)
+public inline fun Char.assertNot(
+    value: Char,
+    ignoreCase: Boolean = false,
+    message: String = "Expected '$this' to be different from '$value', but they are the same"
+) {
+    val isEqual = this.equals(value, ignoreCase)
+    if (isEqual) {
+        failTest(message)
+    }
+
 }
 //endregion
 

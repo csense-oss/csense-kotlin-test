@@ -40,7 +40,7 @@ class CollectionsTest {
     }
 
     @Test
-    fun CollectionTAssertEmpty() {
+    fun collectionTAssertEmpty() {
         listOf<Int>().assertEmpty()
         assertThrows<Throwable> {
             listOf(432, 44).assertEmpty()

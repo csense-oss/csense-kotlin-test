@@ -1,3 +1,9 @@
+# 0.0.46
+- more Extensions
+- updated strings assertions to have "ignoreCase"
+- updated char assertions to have "ignoreCase"
+- minor bugs fixed
+
 # 0.0.45
 
 - added more extensions for Map
