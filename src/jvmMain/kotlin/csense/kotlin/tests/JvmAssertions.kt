@@ -1,4 +1,4 @@
-@file:Suppress("MissingTestFunction", "unused")
+@file:Suppress("unused")
 
 package csense.kotlin.tests
 

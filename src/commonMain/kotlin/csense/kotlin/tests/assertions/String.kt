@@ -1,4 +1,4 @@
-@file:Suppress("unused", "NOTHING_TO_INLINE", "MissingTestFunction")
+@file:Suppress("unused", "NOTHING_TO_INLINE")
 
 package csense.kotlin.tests.assertions
 
@@ -58,8 +58,11 @@ public inline fun String.assertEmpty(): Unit =
  * @param value [String] the expected value (to assert)
  * @param message [String] the error message if they differ
  */
-public inline fun String.assert(value: String, message: String = "") {
-    assertEquals(value, this, message)
+public inline fun String.assert(value: String, ignoreCase: Boolean = false, message: String = "") {
+    val isEqual = this.equals(value, ignoreCase = ignoreCase)
+    if (!isEqual) {
+        failTest("Expected \"$this\" to be the same as \"value\". $message")
+    }
 }
 
 /**
@@ -68,7 +71,11 @@ public inline fun String.assert(value: String, message: String = "") {
  * @param value [String] the expected value
  * @param message [String] the error message if they are the same
  */
-public inline fun String.assertNot(value: String, message: String = "") {
+public inline fun String.assertNot(value: String, ignoreCase: Boolean = false, message: String = "") {
+    val isEqual = this.equals(value, ignoreCase = ignoreCase)
+    if (isEqual) {
+        failTest("Expected \"$this\" to be different from \"value\". $message")
+    }
     assertNotEquals(value, this, message)
 }
 

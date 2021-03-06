@@ -1,4 +1,4 @@
-@file:Suppress("unused", "NOTHING_TO_INLINE", "MissingTestFunction")
+@file:Suppress("unused", "NOTHING_TO_INLINE")
 
 package csense.kotlin.tests.assertions
 
@@ -28,6 +28,16 @@ public inline fun Map<*, *>.assertEmpty(
     message: String = "Map should be empty but is not."
 ): Unit =
     this.isEmpty().assertTrue(message)
+
+/**
+ * Asserts that this map has content
+ * @receiver [Map]<*, *>
+ * @param message [String] the message if this map's size is 0 / is Empty
+ */
+public inline fun Map<*, *>.assertNotEmpty(
+    message: String = "Map should have content"
+): Unit =
+    this.isNotEmpty().assertTrue(message)
 
 /**
  * Asserts this map only contains 1 element (the given [item])

@@ -1,4 +1,4 @@
-@file:Suppress("MissingTestFunction", "NOTHING_TO_INLINE")
+@file:Suppress("NOTHING_TO_INLINE", "unused")
 
 package csense.kotlin.tests.assertions
 
@@ -78,12 +78,6 @@ public inline fun Float.assertNot(
 }
 //endregion
 
-//region Number
-public inline fun <T : Number> T.assertNot(
-    value: T,
-    message: String = "Expected $value to be different from $this but they are the same"
-): Unit = assertNotEquals(value, this, message)
-//endregion
 
 //region Char
 /**
