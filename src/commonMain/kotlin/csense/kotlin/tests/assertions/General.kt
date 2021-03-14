@@ -140,7 +140,7 @@ public inline fun <reified T : Throwable> assertThrows(
     message: String = "should throw",
     messageWrongException: String = "wrong exception type",
     crossinline action: () -> Unit
-): Unit = assertThrows<T>(message, messageWrongException, action, {})
+): Unit = assertThrows<T>(message, messageWrongException, action, validateThrows = {})
 
 /**
  * Asserts the given [action] throws an exception of Type [T] and afterwards validates the exception.

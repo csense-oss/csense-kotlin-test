@@ -5,6 +5,7 @@ package csense.kotlin.tests.assertions
 import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.InvocationKind
 import kotlin.contracts.contract
+import kotlin.experimental.ExperimentalTypeInference
 import kotlin.test.assertEquals
 
 /**
@@ -101,11 +102,11 @@ public inline fun <T> Array<T>.assertSingle(item: T, message: String = "") {
 /**
  * Asserts that this array contains the only given item and if so invokes the given [callback]
  * @receiver [Array]<T>
- * @param callback Function1<T, Unit> the call to invoke if the array only have 1 element
  * @param message [String]  the message to print if the equality assertion fails
+ * @param callback Function1<T, Unit> the call to invoke if the array only have 1 element
  */
-@OptIn(ExperimentalContracts::class)
-public inline fun <T> Array<T>.assertSingle(callback: (T) -> Unit, message: String = "Should have 1 item") {
+@OptIn(ExperimentalContracts::class, ExperimentalTypeInference::class)
+public inline fun <T> Array<T>.assertSingle(message: String = "Should have 1 item", callback: (T) -> Unit) {
     contract {
         callsInPlace(callback, kind = InvocationKind.AT_MOST_ONCE)
     }

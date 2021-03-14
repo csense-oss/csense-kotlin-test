@@ -81,13 +81,28 @@ public inline fun String.assertNot(value: String, ignoreCase: Boolean = false, m
 /**
  * Asserts that this string contains some substrings in order (increasing), such that you may say "there is some x, followed by y"
  * @receiver [String] the string to assert contains the values in order
+ * @param strings [Array]<[String]> the list of strings to be contained in order, eg "x followed by y by z", so y have to come after x. ect.
+ * @param ignoreCase [Boolean] if true, will ignore casing, if false, all contains are case sensitive.
+ * @param message [String] the error message
+ */
+public fun String.assertContainsInOrder(
+    vararg strings: String,
+    ignoreCase: Boolean = false,
+    message: String = ""
+) {
+    assertContainsInOrder(values = strings.toList(), ignoreCase = ignoreCase, message = message)
+}
+
+/**
+ * Asserts that this string contains some substrings in order (increasing), such that you may say "there is some x, followed by y"
+ * @receiver [String] the string to assert contains the values in order
  * @param values [List]<[String]> the list of values to be contained in order, eg "x followed by y by z", so y have to come after x. ect.
  * @param ignoreCase [Boolean] if true, will ignore casing, if false, all contains are case sensitive.
  * @param message [String] the error message
  */
 public fun String.assertContainsInOrder(
     values: List<String>,
-    ignoreCase: Boolean,
+    ignoreCase: Boolean = false,
     message: String = ""
 ) {
     var currentIndex = 0

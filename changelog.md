@@ -1,9 +1,11 @@
 # 0.0.46
 
 - more Extensions
+- fixed assertContainsInOrder for strings (did not have default ignoreCase parameter) and added a varag overload
 - updated strings assertions to have "ignoreCase"
 - updated char assertions to have "ignoreCase"
 - minor bugs fixed
+- updated array's assertSingle to have the action as the last parameter
 
 # 0.0.45
 
