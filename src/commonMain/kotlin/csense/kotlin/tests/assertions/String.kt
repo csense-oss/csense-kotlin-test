@@ -1,8 +1,7 @@
-@file:Suppress("unused", "NOTHING_TO_INLINE", "MissingTestFunction")
+@file:Suppress("unused", "NOTHING_TO_INLINE")
 
 package csense.kotlin.tests.assertions
 
-import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertNotEquals
 import kotlin.test.assertTrue
@@ -58,8 +57,11 @@ public inline fun String.assertEmpty(): Unit =
  * @param value [String] the expected value (to assert)
  * @param message [String] the error message if they differ
  */
-public inline fun String.assert(value: String, message: String = "") {
-    assertEquals(value, this, message)
+public inline fun String.assert(value: String, ignoreCase: Boolean = false, message: String = "") {
+    val isEqual = this.equals(value, ignoreCase = ignoreCase)
+    if (!isEqual) {
+        failTest("Expected \"$this\" to be the same as \"value\". $message")
+    }
 }
 
 /**
@@ -68,8 +70,27 @@ public inline fun String.assert(value: String, message: String = "") {
  * @param value [String] the expected value
  * @param message [String] the error message if they are the same
  */
-public inline fun String.assertNot(value: String, message: String = "") {
+public inline fun String.assertNot(value: String, ignoreCase: Boolean = false, message: String = "") {
+    val isEqual = this.equals(value, ignoreCase = ignoreCase)
+    if (isEqual) {
+        failTest("Expected \"$this\" to be different from \"value\". $message")
+    }
     assertNotEquals(value, this, message)
+}
+
+/**
+ * Asserts that this string contains some substrings in order (increasing), such that you may say "there is some x, followed by y"
+ * @receiver [String] the string to assert contains the values in order
+ * @param strings [Array]<[String]> the list of strings to be contained in order, eg "x followed by y by z", so y have to come after x. ect.
+ * @param ignoreCase [Boolean] if true, will ignore casing, if false, all contains are case sensitive.
+ * @param message [String] the error message
+ */
+public fun String.assertContainsInOrder(
+    vararg strings: String,
+    ignoreCase: Boolean = false,
+    message: String = ""
+) {
+    assertContainsInOrder(values = strings.toList(), ignoreCase = ignoreCase, message = message)
 }
 
 /**
@@ -81,7 +102,7 @@ public inline fun String.assertNot(value: String, message: String = "") {
  */
 public fun String.assertContainsInOrder(
     values: List<String>,
-    ignoreCase: Boolean,
+    ignoreCase: Boolean = false,
     message: String = ""
 ) {
     var currentIndex = 0

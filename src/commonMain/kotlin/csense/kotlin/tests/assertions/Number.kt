@@ -1,9 +1,12 @@
-@file:Suppress("MissingTestFunction", "NOTHING_TO_INLINE")
+@file:Suppress("NOTHING_TO_INLINE", "unused")
 
 package csense.kotlin.tests.assertions
 
-import kotlin.math.*
-import kotlin.test.*
+import kotlin.math.abs
+import kotlin.test.assertEquals
+import kotlin.test.assertFalse
+import kotlin.test.assertNotEquals
+import kotlin.test.assertTrue
 
 //region Double
 /**
@@ -78,12 +81,6 @@ public inline fun Float.assertNot(
 }
 //endregion
 
-//region Number
-public inline fun <T : Number> T.assertNot(
-    value: T,
-    message: String = "Expected $value to be different from $this but they are the same"
-): Unit = assertNotEquals(value, this, message)
-//endregion
 
 //region Char
 /**
@@ -92,8 +89,15 @@ public inline fun <T : Number> T.assertNot(
  * @param value [Char] the expected char
  * @param message [String] the message to show if they differ
  */
-public inline fun Char.assert(value: Char, message: String = "Expected $value but is instead $this") {
-    assertEquals(value, this, message)
+public inline fun Char.assert(
+    value: Char,
+    ignoreCase: Boolean = false,
+    message: String = "Expected $value but is instead $this"
+) {
+    val isEqual = this.equals(value, ignoreCase)
+    if (!isEqual) {
+        failTest(message)
+    }
 }
 
 /**
@@ -102,8 +106,16 @@ public inline fun Char.assert(value: Char, message: String = "Expected $value bu
  * @param value Char
  * @param message String
  */
-public inline fun Char.assertNot(value: Char, message: String) {
-    assertNotEquals(value, this, message)
+public inline fun Char.assertNot(
+    value: Char,
+    ignoreCase: Boolean = false,
+    message: String = "Expected '$this' to be different from '$value', but they are the same"
+) {
+    val isEqual = this.equals(value, ignoreCase)
+    if (isEqual) {
+        failTest(message)
+    }
+
 }
 //endregion
 

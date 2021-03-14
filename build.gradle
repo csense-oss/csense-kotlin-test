@@ -1,12 +1,12 @@
 buildscript {
     //dependencies
-    ext.coroutinesVersion = "1.4.2"
-    ext.junit5Version = "5.7.0"
-    ext.kotlin_version = "1.4.21"
+    ext.coroutinesVersion = "1.4.3"
+    ext.junit5Version = "5.7.1"
+    ext.kotlin_version = "1.4.31"
 
 
     //versions & naming
-    ext.csenseVersionName = "0.0.45"
+    ext.csenseVersionName = "0.0.46"
     ext.csenseGroupId = "csense.kotlin"
     ext.csenseArtifactId = "csense-kotlin-tests"
 
@@ -31,8 +31,9 @@ buildscript {
 }
 
 plugins {
-    id 'org.jetbrains.kotlin.multiplatform' version "1.4.21"
-    id 'org.jetbrains.dokka' version "0.10.0"
+    id "net.linguica.maven-settings" version "0.5"
+    id 'org.jetbrains.kotlin.multiplatform' version "1.4.31"
+    id 'org.jetbrains.dokka' version "1.4.20"
     id "maven-publish"
 }
 
@@ -104,17 +105,5 @@ jvmTest {
         html.enabled = true
     }
 }
-
-//required for the dokka.
-
-task docJvm(type: org.jetbrains.dokka.gradle.DokkaTask) {
-
-    outputFormat = 'javadoc'
-
-    outputDirectory = "$buildDir/doc_jvm"
-
-    impliedPlatforms = ["Common"] // This will force platform tags for all non-common sources e.g. "JVM"
-}
-apply from: "$rootDir/gradle/dokka.gradle"
 
 apply from: "$rootDir/gradle/publish.gradle"

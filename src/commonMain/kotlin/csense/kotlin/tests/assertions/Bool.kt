@@ -1,8 +1,8 @@
-@file:Suppress("MissingTestFunction", "NOTHING_TO_INLINE")
+@file:Suppress("NOTHING_TO_INLINE")
 
 package csense.kotlin.tests.assertions
 
-import kotlin.test.*
+import kotlin.test.assertEquals
 
 /**
  * Asserts this [Boolean] is the given value

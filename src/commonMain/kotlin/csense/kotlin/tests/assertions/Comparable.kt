@@ -1,4 +1,4 @@
-@file:Suppress("unused", "NOTHING_TO_INLINE", "MissingTestFunction")
+@file:Suppress("unused", "NOTHING_TO_INLINE")
 
 package csense.kotlin.tests.assertions
 
@@ -67,7 +67,11 @@ public inline fun <T : Comparable<T>> T.assertNotEquals(
  * @param expected T the expected value, that the actual should be
  * @param message [String] a message if the [expected] is different from the receiver
  */
-@Deprecated("naming convention violation", replaceWith = ReplaceWith("assert(expected, message)"), level = DeprecationLevel.WARNING)
+@Deprecated(
+    "naming convention violation",
+    replaceWith = ReplaceWith("assert(expected, message)"),
+    level = DeprecationLevel.WARNING
+)
 public inline fun <T : Comparable<T>> T.assertEquals(
     expected: T,
     message: String = "expected to be equal, but $this !== $expected"

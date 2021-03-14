@@ -1,4 +1,4 @@
-@file:Suppress("unused", "NOTHING_TO_INLINE", "MissingTestFunction")
+@file:Suppress("unused", "NOTHING_TO_INLINE")
 
 package csense.kotlin.tests.assertions
 

@@ -1,4 +1,4 @@
-@file:Suppress("unused", "NOTHING_TO_INLINE", "MissingTestFunction")
+@file:Suppress("unused", "NOTHING_TO_INLINE")
 
 package csense.kotlin.tests.assertions
 
@@ -140,7 +140,7 @@ public inline fun <reified T : Throwable> assertThrows(
     message: String = "should throw",
     messageWrongException: String = "wrong exception type",
     crossinline action: () -> Unit
-): Unit = assertThrows<T>(message, messageWrongException, action, {})
+): Unit = assertThrows<T>(message, messageWrongException, action, validateThrows = {})
 
 /**
  * Asserts the given [action] throws an exception of Type [T] and afterwards validates the exception.
@@ -157,9 +157,9 @@ public inline fun <reified T : Throwable> assertThrows(
     validateThrows: (T) -> Unit
 ) {
 
+    var didCatchException = false
     try {
         action()
-        failTest("Expected an exception of type ${T::class} but got no exceptions\n$messageIfNoException")
     } catch (exception: Throwable) {
         if (exception !is T) {
             failTest(
@@ -168,8 +168,12 @@ public inline fun <reified T : Throwable> assertThrows(
                         "\n$messageWrongException"
             )
         }
+        didCatchException = true
         validateThrows(exception)
         //all is good / expected.
+    }
+    if (!didCatchException) {
+        failTest("Expected an exception of type ${T::class} but got no exceptions\n$messageIfNoException")
     }
 }
 
