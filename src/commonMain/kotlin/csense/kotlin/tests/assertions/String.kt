@@ -60,7 +60,7 @@ public inline fun String.assertEmpty(): Unit =
 public inline fun String.assert(value: String, ignoreCase: Boolean = false, message: String = "") {
     val isEqual = this.equals(value, ignoreCase = ignoreCase)
     if (!isEqual) {
-        failTest("Expected \"$this\" to be the same as \"value\". $message")
+        failTest("Expected \"$this\" to be the same as \"$value\". $message")
     }
 }
 
@@ -73,7 +73,7 @@ public inline fun String.assert(value: String, ignoreCase: Boolean = false, mess
 public inline fun String.assertNot(value: String, ignoreCase: Boolean = false, message: String = "") {
     val isEqual = this.equals(value, ignoreCase = ignoreCase)
     if (isEqual) {
-        failTest("Expected \"$this\" to be different from \"value\". $message")
+        failTest("Expected \"$this\" to be different from \"$value\". $message")
     }
     assertNotEquals(value, this, message)
 }
