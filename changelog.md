@@ -1,6 +1,6 @@
 # 0.0.48
 
-- fixed issue with assert not logging the expected value
+- fixed issue with string.assert{not} not logging the expected value
 
 # 0.0.47
 
