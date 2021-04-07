@@ -214,6 +214,44 @@ public inline fun assertNotCalled(
     action: (callback: () -> Unit) -> Unit
 ): Unit = assertCalled(message, 0, action)
 
+/**
+ * Asserts that the given [testCode] will have the given items in order (and called that exact amount of times)
+ * @param expectedItemsInOrder Iterable<T>
+ * @param testCode Function1<Function1<T, Unit>, Unit>
+ */
+public inline fun <reified T> assertCallbackCalledWith(
+    expectedItemsInOrder: Collection<T>,
+    testCode: ((T) -> Unit) -> Unit
+) where T : Comparable<T> {
+    assertCallbackCalledWith(expectedItemsInOrder, assertFunction = { lhs, rhs ->
+        lhs == rhs
+    }, testCode)
+}
+
+/**
+ * Asserts that the given [testCode] will have the given items in order (and called that exact amount of times)
+ * @param expectedItemsInOrder Collection<T>
+ * @param assertFunction Function2<T, T, Boolean>
+ * @param testCode Function1<Function1<T, Unit>, Unit>
+ */
+public inline fun <reified T> assertCallbackCalledWith(
+    expectedItemsInOrder: Collection<T>,
+    crossinline assertFunction: (T, T) -> Boolean,
+    testCode: ((T) -> Unit) -> Unit,
+): Unit = assertCalled(times = expectedItemsInOrder.size) { shouldBeCalled ->
+    val iterator = expectedItemsInOrder.iterator()
+    val callback: (T) -> Unit = { actual: T ->
+        val expected = iterator.next()
+        val isEqual = assertFunction(actual, expected)
+        if (isEqual.not()) {
+            failTest("Expected \"$actual\" to be \"$expected\"")
+        }
+        shouldBeCalled()
+    }
+    testCode(callback)
+}
+
+
 public object GeneralStrings {
     public const val assertCalledMessage: String = "Should be called, but did not get called enough times"
     public const val assertNotCalledMessage: String = "Should not be called but got called anyway"

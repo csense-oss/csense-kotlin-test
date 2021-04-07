@@ -1,3 +1,7 @@
+# 0.0.47
+- added assertCallbackCalledWith 
+- added CharSequence.assert & CharSequence.assertNot
+
 # 0.0.46
 
 - more Extensions
