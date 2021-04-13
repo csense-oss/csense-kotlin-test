@@ -52,7 +52,6 @@ public inline fun <@kotlin.internal.OnlyInputTypes T> Collection<T>.assertContai
  * @param item T
  * @param message [String]
  */
-@Suppress("INVISIBLE_MEMBER", "INVISIBLE_REFERENCE")
 public inline fun <@kotlin.internal.OnlyInputTypes T> Collection<T>.assertContainsNot(
     item: T,
     message: String = "Should not contain $item"
