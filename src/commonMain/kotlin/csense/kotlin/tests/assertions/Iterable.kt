@@ -1,4 +1,4 @@
-@file:Suppress("unused", "NOTHING_TO_INLINE")
+@file:Suppress("unused", "NOTHING_TO_INLINE", "INVISIBLE_MEMBER", "INVISIBLE_REFERENCE")
 
 package csense.kotlin.tests.assertions
 
@@ -8,7 +8,7 @@ package csense.kotlin.tests.assertions
  * @receiver [Iterable]<[T]> the iterable to search though
  * @param items [Array]<out T> The items we are expected to find in the receiver
  */
-public inline fun <T> Iterable<T>.assertContainsInOrder(
+public inline fun <@kotlin.internal.OnlyInputTypes T> Iterable<T>.assertContainsInOrder(
     vararg items: T
 ) {
     assertContainsInOrder(items.toList())
@@ -19,7 +19,7 @@ public inline fun <T> Iterable<T>.assertContainsInOrder(
  * @receiver [Iterable]<T> the iterable to search though
  * @param items [Iterable]<T> the items we are expected to find in the receiver
  */
-public inline fun <T> Iterable<T>.assertContainsInOrder(
+public inline fun <@kotlin.internal.OnlyInputTypes T> Iterable<T>.assertContainsInOrder(
     items: Iterable<T>
 ) {
     val itemsCount = count()
