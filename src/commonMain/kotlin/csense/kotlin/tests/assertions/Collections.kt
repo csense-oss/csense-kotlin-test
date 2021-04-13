@@ -1,4 +1,4 @@
-@file:Suppress("unused", "NOTHING_TO_INLINE")
+@file:Suppress("unused", "NOTHING_TO_INLINE", "INVISIBLE_MEMBER", "INVISIBLE_REFERENCE")
 
 package csense.kotlin.tests.assertions
 
@@ -29,7 +29,7 @@ public inline fun <T> Collection<T>.assertEmpty(message: String = ""): Unit = as
  * @param item T
  * @param message [String]
  */
-public inline fun <T> Collection<T>.assertContains(
+public inline fun <@kotlin.internal.OnlyInputTypes T> Collection<T>.assertContains(
     item: T,
     message: String = "Should contain $item"
 ) {
@@ -41,7 +41,8 @@ public inline fun <T> Collection<T>.assertContains(
  * @receiver [Collection]<T>
  * @param items [Array]<out T>
  */
-public inline fun <T> Collection<T>.assertContainsAll(
+
+public inline fun <@kotlin.internal.OnlyInputTypes T> Collection<T>.assertContainsAll(
     vararg items: T
 ): Unit = items.forEach { assertContains(it) }
 
@@ -51,7 +52,7 @@ public inline fun <T> Collection<T>.assertContainsAll(
  * @param item T
  * @param message [String]
  */
-public inline fun <T> Collection<T>.assertContainsNot(
+public inline fun <@kotlin.internal.OnlyInputTypes T> Collection<T>.assertContainsNot(
     item: T,
     message: String = "Should not contain $item"
 ) {
@@ -63,7 +64,7 @@ public inline fun <T> Collection<T>.assertContainsNot(
  * @receiver [Collection]<T>
  * @param items [Array]<out T>
  */
-public inline fun <T> Collection<T>.assertContainsNotAll(
+public inline fun <@kotlin.internal.OnlyInputTypes T> Collection<T>.assertContainsNotAll(
     vararg items: T
 ): Unit = items.forEach { assertContainsNot(it) }
 
@@ -72,7 +73,7 @@ public inline fun <T> Collection<T>.assertContainsNotAll(
  * @receiver [Collection]<T>
  * @param item T
  */
-public inline fun <T> Collection<T>.assertSingle(item: T) {
+public inline fun <@kotlin.internal.OnlyInputTypes T> Collection<T>.assertSingle(item: T) {
     assertSize(1)
     assertEquals(item, first())
 }
@@ -83,7 +84,7 @@ public inline fun <T> Collection<T>.assertSingle(item: T) {
  * @param callback (T) -> Unit
  */
 @OptIn(ExperimentalContracts::class)
-public inline fun <T> Collection<T>.assertSingle(callback: (T) -> Unit) {
+public inline fun <@kotlin.internal.OnlyInputTypes T> Collection<T>.assertSingle(callback: (T) -> Unit) {
     contract {
         callsInPlace(callback, kind = InvocationKind.AT_MOST_ONCE)
     }

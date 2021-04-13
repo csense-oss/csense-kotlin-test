@@ -6,7 +6,7 @@ buildscript {
 
 
     //versions & naming
-    ext.csenseVersionName = "0.0.48"
+    ext.csenseVersionName = "0.0.49"
     ext.csenseGroupId = "csense.kotlin"
     ext.csenseArtifactId = "csense-kotlin-tests"
 
@@ -104,6 +104,15 @@ jvmTest {
         junitXml.enabled = true
         html.enabled = true
     }
+}
+
+pluginManager.withPlugin("org.jetbrains.kotlin.multiplatform") {
+    kotlin.targets.matching { it.platformType.name == "jvm" }.all {
+        compilations.all {
+            kotlinOptions.useIR = true
+        }
+    }
+
 }
 
 apply from: "$rootDir/gradle/publish.gradle"

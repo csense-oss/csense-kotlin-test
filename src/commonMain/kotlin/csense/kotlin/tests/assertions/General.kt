@@ -1,4 +1,4 @@
-@file:Suppress("unused", "NOTHING_TO_INLINE")
+@file:Suppress("unused", "NOTHING_TO_INLINE", "INVISIBLE_MEMBER", "INVISIBLE_REFERENCE")
 
 package csense.kotlin.tests.assertions
 
@@ -104,7 +104,7 @@ public inline fun <T> T?.assertNotNullApply(message: String = "", action: T.() -
  * @param message [String] the message to display if the receiver does not match the expected.
  */
 @OptIn(ExperimentalContracts::class)
-public inline fun <T> T?.assertNotNullAndEquals(other: T?, message: String = "value was $this, expected $other") {
+public inline fun <@kotlin.internal.OnlyInputTypes T> T?.assertNotNullAndEquals(other: T?, message: String = "value was $this, expected $other") {
     contract {
         returns() implies (this@assertNotNullAndEquals != null)
     }

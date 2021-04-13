@@ -104,4 +104,80 @@ class CollectionsTest {
             }
         }
     }
+
+    class CollectionTAssertContainsAll {
+        @Test
+        fun emptyBoth() {
+            val lst = listOf<String>()
+            lst.assertContainsAll()
+        }
+
+        @Test
+        fun emptyList() = assertThrows<Throwable> {
+            val lst = listOf<String>()
+            lst.assertContainsAll("test")
+        }
+
+        @Test
+        fun emptyAssert() {
+            val lst = listOf("test")
+            lst.assertContainsAll()
+        }
+
+        @Test
+        fun singleNotFound() = assertThrows<Throwable> {
+            val lst = listOf("test")
+            lst.assertContainsAll("abc")
+        }
+
+        @Test
+        fun singleFound() {
+            val lst = listOf("test")
+            lst.assertContainsAll("test")
+        }
+
+        @Test
+        fun multipleNoneFound() = assertThrows<Throwable> {
+            val lst = listOf("test", "1234")
+            lst.assertContainsAll("abc")
+        }
+
+        @Test
+        fun multipleOneFound() {
+            val lst = listOf("test", "1234")
+            lst.assertContainsAll("1234")
+        }
+    }
+
+    class CollectionTAssertContains {
+        @Test
+        fun empty() = assertThrows<Throwable> {
+            val lst = listOf<String>()
+            lst.assertContains("test")
+        }
+
+        @Test
+        fun singleNotFound() = assertThrows<Throwable> {
+            val lst = listOf("1234")
+            lst.assertContains("test")
+        }
+
+        @Test
+        fun singleFound() {
+            val lst = listOf<String>("test")
+            lst.assertContains("test")
+        }
+
+        @Test
+        fun multipleNonFound() = assertThrows<Throwable> {
+            val lst = listOf("test", "1234")
+            lst.assertContains("abc")
+        }
+
+        @Test
+        fun multipleOneFound() {
+            val lst = listOf("test", "1234")
+            lst.assertContains("1234")
+        }
+    }
 }

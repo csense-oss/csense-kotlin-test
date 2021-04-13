@@ -1,10 +1,14 @@
+# 0.0.49
+
+- use of @kotlin.internal.OnlyInputTypes to limit type misuse for generic extension functions
+- use kotlin jvm IR 
+
 # 0.0.48
 
 - fixed issue with string.assert{not} not logging the expected value
 
 # 0.0.47
-
-- added assertCallbackCalledWith
+- added assertCallbackCalledWith 
 - added CharSequence.assert & CharSequence.assertNot
 
 # 0.0.46
