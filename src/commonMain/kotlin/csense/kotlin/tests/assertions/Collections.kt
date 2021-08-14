@@ -46,6 +46,11 @@ public inline fun <@kotlin.internal.OnlyInputTypes T> Collection<T>.assertContai
     vararg items: T
 ): Unit = items.forEach { assertContains(it) }
 
+
+public inline fun <@kotlin.internal.OnlyInputTypes T> Collection<T>.assertContainsAll(
+    items: Iterable<T>
+): Unit = items.forEach { assertContains(it) }
+
 /**
  * Asserts that the given list does not contain the given item
  * @receiver [List]<T>
@@ -66,6 +71,15 @@ public inline fun <@kotlin.internal.OnlyInputTypes T> Collection<T>.assertContai
  */
 public inline fun <@kotlin.internal.OnlyInputTypes T> Collection<T>.assertContainsNotAll(
     vararg items: T
+): Unit = items.forEach { assertContainsNot(it) }
+
+/**
+ * Asserts that this collection's items are different from the given [items] (none are contained)
+ * @receiver [Collection]<T>
+ * @param items [Array]<out T>
+ */
+public inline fun <@kotlin.internal.OnlyInputTypes T> Collection<T>.assertContainsNotAll(
+    items: Iterable<T>
 ): Unit = items.forEach { assertContainsNot(it) }
 
 /**
@@ -90,4 +104,26 @@ public inline fun <@kotlin.internal.OnlyInputTypes T> Collection<T>.assertSingle
     }
     assertSize(1)
     callback(first())
+}
+
+/**
+ * Asserts that the content of this collection is the same as the given collection (same count, same items)
+ * does not consider order important (instead see [assertContentAndOrder]
+ * @receiver Collection<T>
+ * @param
+ */
+public inline fun <T> Collection<T>.assertContent(expected: Collection<T>) where T : Comparable<T> {
+    assertSize(expected)
+    assertContainsAll(expected)
+}
+
+public inline fun <T> Collection<T>.assertContentAndOrder(expected: Collection<T>) where T : Comparable<T> {
+    assertSize(expected)
+    forEachIndexed { index, actual ->
+        actual.assert(expected.elementAt(index))
+    }
+}
+
+public inline fun <T> Collection<T>.assertSize(expected: Collection<T>) {
+    this.size.assert(expected.size, message = "Should have item count, actual = $size expected size = ${expected.size}")
 }
