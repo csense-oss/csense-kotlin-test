@@ -1,4 +1,6 @@
 # 0.0.50
+- kotlin 1.5.30
+- fixed bug with assertCallsCallbackWith
 
 # 0.0.49
 
