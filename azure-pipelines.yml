@@ -31,8 +31,20 @@ steps:
       jdkVersionOption: '1.11'
       jdkArchitectureOption: 'x64'
       publishJUnitResults: false
-      tasks: '--build-cache build'
+      tasks: '--build-cache assemble'
     displayName: Assemble & Test
+
+  - task: Gradle@2
+    inputs:
+      workingDirectory: ''
+      gradleWrapperFile: 'gradlew'
+      gradleOptions: '-Xmx4G'
+      javaHomeOption: 'JDKVersion'
+      jdkVersionOption: '1.11'
+      jdkArchitectureOption: 'x64'
+      publishJUnitResults: false
+      tasks: '--rerun-tasks jvmTest'
+    displayName: Jvm test with xml
 
   - task: PublishTestResults@2
     inputs:
