@@ -1,5 +1,5 @@
 # 0.0.51
-- attempt at fixing dependency issues
+- bump junit versions
 
 # 0.0.50
 - kotlin 1.5.30
