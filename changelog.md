@@ -2,6 +2,7 @@
 - kotlin 1.5.30
 - fixed bug with assertCallsCallbackWith
 - more collection extensions
+- documentation updates
 
 # 0.0.49
 

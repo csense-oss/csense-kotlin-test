@@ -78,7 +78,7 @@ kotlin {
         }
         all {
             languageSettings {
-                useExperimentalAnnotation('kotlin.RequiresOptIn')
+                optIn('kotlin.RequiresOptIn')
                 progressiveMode = true
             }
         }
