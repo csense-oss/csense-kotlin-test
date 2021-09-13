@@ -104,7 +104,10 @@ public inline fun <T> T?.assertNotNullApply(message: String = "", action: T.() -
  * @param message [String] the message to display if the receiver does not match the expected.
  */
 @OptIn(ExperimentalContracts::class)
-public inline fun <@kotlin.internal.OnlyInputTypes T> T?.assertNotNullAndEquals(other: T?, message: String = "value was $this, expected $other") {
+public inline fun <@kotlin.internal.OnlyInputTypes T> T?.assertNotNullAndEquals(
+    other: T?,
+    message: String = "value was $this, expected $other"
+) {
     contract {
         returns() implies (this@assertNotNullAndEquals != null)
     }
@@ -241,6 +244,12 @@ public inline fun <reified T> assertCallbackCalledWith(
 ): Unit = assertCalled(times = expectedItemsInOrder.size) { shouldBeCalled ->
     val iterator = expectedItemsInOrder.iterator()
     val callback: (T) -> Unit = { actual: T ->
+        if (!iterator.hasNext()) {
+            failTest(
+                "Tried to access next element but was not in the expectedItemsInOrder." +
+                        " You have called the assert function more than ${expectedItemsInOrder.size} times"
+            )
+        }
         val expected = iterator.next()
         val isEqual = assertFunction(actual, expected)
         if (isEqual.not()) {
