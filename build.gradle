@@ -7,7 +7,7 @@ buildscript {
 
 
     //versions & naming
-    ext.csenseVersionName = "0.0.51"
+    ext.csenseVersionName = "0.0.52"
     ext.csenseGroupId = "csense.kotlin"
     ext.csenseArtifactId = "csense-kotlin-tests"
 
