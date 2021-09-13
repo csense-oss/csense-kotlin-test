@@ -1,3 +1,6 @@
+# 0.0.51
+- attempt at fixing dependency issues
+
 # 0.0.50
 - kotlin 1.5.30
 - fixed bug with assertCallsCallbackWith

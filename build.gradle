@@ -1,7 +1,8 @@
 buildscript {
     //dependencies
     ext.coroutinesVersion = "1.5.2"
-    ext.junit5Version = "5.7.1"
+    ext.junit5Version = "5.8.0"
+    ext.junit4Version = "4.13.2"
     ext.kotlin_version = "1.5.30"
 
 
@@ -64,7 +65,7 @@ kotlin {
             dependencies {
                 api "org.junit.jupiter:junit-jupiter-api:$junit5Version"
                 api "org.junit.jupiter:junit-jupiter-engine:$junit5Version"
-                api 'junit:junit:4.13'
+                api "junit:junit:$junit4Version"
                 api "org.junit.vintage:junit-vintage-engine:$junit5Version"
                 api "org.jetbrains.kotlin:kotlin-test-junit5:$kotlin_version"
                 api "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
