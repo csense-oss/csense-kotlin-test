@@ -1,9 +1,9 @@
 buildscript {
     //dependencies
     ext.coroutinesVersion = "1.5.2"
-    ext.junit5Version = "5.8.0"
+    ext.junit5Version = "5.8.1"
     ext.junit4Version = "4.13.2"
-    ext.kotlin_version = "1.5.30"
+    ext.kotlin_version = "1.6.0"
 
 
     //versions & naming
@@ -33,7 +33,7 @@ buildscript {
 
 plugins {
     id "net.linguica.maven-settings" version "0.5"
-    id 'org.jetbrains.kotlin.multiplatform' version "1.5.30"
+    id 'org.jetbrains.kotlin.multiplatform' version "1.6.0"
     id 'org.jetbrains.dokka' version "1.5.0"
     id "maven-publish"
 }
