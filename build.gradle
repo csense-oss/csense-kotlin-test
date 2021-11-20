@@ -30,8 +30,7 @@ buildscript {
     ext.readme = "readme.md"
     ext.csenseWebsite = "https://github.com/csense-oss/csense-kotlin-tests"
     ext.csenseGit = "https://github.com/csense-oss/csense-kotlin-tests.git"
-    ext.csenseArtifactDescription = "A library for writing tests with a focus on simple features (assertions)"
-    ext.csenseVersionDescription = ""
+    ext.csenseArtifactDescription = "A library for writing tests with a focus on simple test features (assertions)"
 
 }
 
@@ -107,15 +106,6 @@ jvmTest {
         junitXml.enabled = true
         html.enabled = true
     }
-}
-
-pluginManager.withPlugin("org.jetbrains.kotlin.multiplatform") {
-    kotlin.targets.matching { it.platformType.name == "jvm" }.all {
-        compilations.all {
-            kotlinOptions.useIR = true
-        }
-    }
-
 }
 
 apply from: "$rootDir/gradle/publish.gradle"
