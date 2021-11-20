@@ -1,13 +1,17 @@
 buildscript {
     //dependencies
+    //https://github.com/Kotlin/kotlinx.coroutines
     ext.coroutinesVersion = "1.5.2"
-    ext.junit5Version = "5.8.0"
+    //https://github.com/junit-team/junit5/releases
+    ext.junit5Version = "5.8.1"
+    //https://github.com/junit-team/junit4/releases
     ext.junit4Version = "4.13.2"
-    ext.kotlin_version = "1.5.30"
+    //https://github.com/JetBrains/kotlin/releases
+    ext.kotlin_version = "1.6.0"
 
 
     //versions & naming
-    ext.csenseVersionName = "0.0.51"
+    ext.csenseVersionName = "0.0.52"
     ext.csenseGroupId = "csense.kotlin"
     ext.csenseArtifactId = "csense-kotlin-tests"
 
@@ -26,15 +30,12 @@ buildscript {
     ext.readme = "readme.md"
     ext.csenseWebsite = "https://github.com/csense-oss/csense-kotlin-tests"
     ext.csenseGit = "https://github.com/csense-oss/csense-kotlin-tests.git"
-    ext.csenseArtifactDescription = "A library for writing tests with a focus on simple features (assertions)"
-    ext.csenseVersionDescription = ""
+    ext.csenseArtifactDescription = "A library for writing tests with a focus on simple test features (assertions)"
 
 }
 
 plugins {
-    id "net.linguica.maven-settings" version "0.5"
-    id 'org.jetbrains.kotlin.multiplatform' version "1.5.30"
-    id 'org.jetbrains.dokka' version "1.5.0"
+    id 'org.jetbrains.kotlin.multiplatform' version "1.6.0"
     id "maven-publish"
 }
 
@@ -105,15 +106,6 @@ jvmTest {
         junitXml.enabled = true
         html.enabled = true
     }
-}
-
-pluginManager.withPlugin("org.jetbrains.kotlin.multiplatform") {
-    kotlin.targets.matching { it.platformType.name == "jvm" }.all {
-        compilations.all {
-            kotlinOptions.useIR = true
-        }
-    }
-
 }
 
 apply from: "$rootDir/gradle/publish.gradle"

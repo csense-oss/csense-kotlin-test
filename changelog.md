@@ -1,3 +1,6 @@
+# 0.0.52
+- kotlin 1.6.0
+
 # 0.0.51
 - bump junit versions
 
