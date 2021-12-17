@@ -1,13 +1,13 @@
 buildscript {
     //dependencies
     //https://github.com/Kotlin/kotlinx.coroutines
-    ext.coroutinesVersion = "1.5.2"
+    ext.coroutinesVersion = "1.6.0-RC2"
     //https://github.com/junit-team/junit5/releases
-    ext.junit5Version = "5.8.1"
+    ext.junit5Version = "5.8.2"
     //https://github.com/junit-team/junit4/releases
     ext.junit4Version = "4.13.2"
     //https://github.com/JetBrains/kotlin/releases
-    ext.kotlin_version = "1.6.0"
+    ext.kotlin_version = "1.6.10"
 
 
     //versions & naming
@@ -35,7 +35,7 @@ buildscript {
 }
 
 plugins {
-    id 'org.jetbrains.kotlin.multiplatform' version "1.6.0"
+    id 'org.jetbrains.kotlin.multiplatform' version "1.6.10"
     id "maven-publish"
 }
 
