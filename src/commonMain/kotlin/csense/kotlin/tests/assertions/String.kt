@@ -7,7 +7,7 @@ import kotlin.test.assertNotEquals
 import kotlin.test.assertTrue
 
 /**
- * Asserts that the this string contains the given value.
+ * Asserts that this string contains the given value.
  * @receiver [String] the string to assert contains the given [value]
  * @param value [String] the value that should be in this string
  * @param ignoreCase [Boolean] if true, will ignore the casing, false means case sensitive.
@@ -38,7 +38,7 @@ public inline fun String.assertContainsNot(
     )
 }
 
-/**Collection
+/**
  * Asserts that this string is not empty (length > 0)
  * @receiver String the string to test for fullness
  */
