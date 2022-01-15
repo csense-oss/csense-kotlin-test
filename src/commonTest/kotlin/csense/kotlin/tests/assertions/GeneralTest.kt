@@ -36,7 +36,7 @@ class GeneralTest {
     }
 
 
-    class AssertCallbackCalledWithExpectedItemsInOrder() {
+    class AssertCallbackCalledWithExpectedItemsInOrder {
         @Test
         fun empty() {
             assertCallbackCalledWith(listOf<String>()) {

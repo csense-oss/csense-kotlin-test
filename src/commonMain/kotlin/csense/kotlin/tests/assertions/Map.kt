@@ -2,6 +2,7 @@
 
 package csense.kotlin.tests.assertions
 
+import csense.kotlin.annotations.numbers.*
 import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.InvocationKind
 import kotlin.contracts.contract
@@ -14,7 +15,7 @@ import kotlin.test.assertEquals
  * @param message [String] the message if this map's size differs from the [expectedSize]
  */
 public inline fun Map<*, *>.assertSize(
-    expectedSize: Int,
+    @IntLimit(from = 0) expectedSize: Int,
     message: String = "Expected the map to have a size of $expectedSize, but it is instead ${this.size}"
 ): Unit =
     this.size.assert(expectedSize, message)

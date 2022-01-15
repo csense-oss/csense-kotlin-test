@@ -2,6 +2,7 @@
 
 package csense.kotlin.tests.assertions
 
+import csense.kotlin.annotations.numbers.*
 import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.contract
 import kotlin.test.*
@@ -48,12 +49,29 @@ public inline fun <reified T> Any.assertAs(
  */
 @OptIn(ExperimentalContracts::class)
 public inline fun <reified T> Any.assertIs(
-    message: String = "expected `$this` to be of type `${T::class}`, but it is not"
+    message: String = "expected `$this` of type `${this::class.simpleName}`  to be of type `${T::class}`, but it is not",
 ) {
     contract {
         returns() implies (this@assertIs is T)
     }
     assertTrue(this is T, message)
+}
+
+/**
+ * Assert this is the given type
+ * @receiver [Any] the receiver we are testing is the same type as [T]
+ * @param message [String] the message to print if the receiver is a different type from [T]
+ */
+@OptIn(ExperimentalContracts::class)
+public inline fun <reified T> Any.assertIsApply(
+    message: String = "expected `$this` of type `${this::class.simpleName}`  to be of type `${T::class}`, but it is not",
+    andAction: T.() -> Unit
+) {
+    contract {
+        returns() implies (this@assertIsApply is T)
+    }
+    assertTrue(this is T, message)
+    andAction(this)
 }
 
 /**
@@ -124,7 +142,7 @@ public inline fun <@kotlin.internal.OnlyInputTypes T> T?.assertNotNullAndEquals(
  */
 public inline fun assertCalled(
     message: String = GeneralStrings.assertCalledMessage,
-    times: Int = 1,
+    @IntLimit(from = 1) times: Int = 1,
     action: (callback: () -> Unit) -> Unit
 ) {
     var counter = 0

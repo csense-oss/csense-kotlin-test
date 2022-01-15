@@ -1,17 +1,19 @@
 buildscript {
     //dependencies
     //https://github.com/Kotlin/kotlinx.coroutines
-    ext.coroutinesVersion = "1.5.2"
+    ext.coroutinesVersion = "1.6.0"
     //https://github.com/junit-team/junit5/releases
-    ext.junit5Version = "5.8.1"
+    ext.junit5Version = "5.8.2"
     //https://github.com/junit-team/junit4/releases
     ext.junit4Version = "4.13.2"
     //https://github.com/JetBrains/kotlin/releases
-    ext.kotlin_version = "1.6.0"
+    ext.kotlin_version = "1.6.10"
+    //https://github.com/csense-oss/csense-kotlin-annotations
+    ext.csenseAnnotationVersion = "0.0.50"
 
 
     //versions & naming
-    ext.csenseVersionName = "0.0.52"
+    ext.csenseVersionName = "0.0.53"
     ext.csenseGroupId = "csense.kotlin"
     ext.csenseArtifactId = "csense-kotlin-tests"
 
@@ -35,12 +37,16 @@ buildscript {
 }
 
 plugins {
-    id 'org.jetbrains.kotlin.multiplatform' version "1.6.0"
+    id 'org.jetbrains.kotlin.multiplatform' version "$kotlin_version"
     id "maven-publish"
 }
 
 repositories {
     mavenCentral()
+    maven {
+        url 'https://pkgs.dev.azure.com/csense-oss/csense-oss/_packaging/csense-oss/maven/v1'
+        name 'csense-oss'
+    }
 }
 
 group project.csenseGroupId
@@ -59,6 +65,7 @@ kotlin {
                 implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
                 implementation kotlin('test-common')
                 implementation kotlin('test-annotations-common')
+                implementation "csense.kotlin:csense-kotlin-annotations:$csenseAnnotationVersion"
             }
         }
 
