@@ -2,7 +2,11 @@
 - kotlin 1.6.10
 - added 
   - assertIsApply
-  - 
+  - assertSizeAnd
+  - added assertSingle & assertEmpty for primitive array types
+  - added some @{int, etc}limit annotations 
+  - {Collection, Array}.assertNotEmpty
+
 # 0.0.52
 - kotlin 1.6.0
 

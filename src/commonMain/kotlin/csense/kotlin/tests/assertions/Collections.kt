@@ -2,6 +2,7 @@
 
 package csense.kotlin.tests.assertions
 
+import csense.kotlin.annotations.numbers.*
 import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.InvocationKind
 import kotlin.contracts.contract
@@ -14,14 +15,39 @@ import kotlin.test.assertEquals
  * @param size [Int]
  * @param message [String]
  */
-public inline fun <T> Collection<T>.assertSize(size: Int, message: String = ""): Unit = this.size.assert(size, message)
+public inline fun <T> Collection<T>.assertSize(@IntLimit(from = 0) size: Int, message: String = ""): Unit =
+    this.size.assert(size, message)
+
+/**
+ * Asserts that the size of this collection is the given size, and if so, calls the given [action]
+ * @receiver Collection<T>
+ * @param size Int
+ * @param message String
+ * @param action Function1<Collection<T>, Unit>
+ */
+public inline fun <T> Collection<T>.assertSizeAnd(
+    @IntLimit(from = 0) size: Int,
+    message: String = "",
+    action: Collection<T>.() -> Unit
+) {
+    assertSize(size, message)
+    action()
+}
 
 /**
  * Asserts that this collection is empty
  * @receiver [Collection]<T>
  * @param message [String]
  */
-public inline fun <T> Collection<T>.assertEmpty(message: String = ""): Unit = assertSize(0, message)
+public inline fun <T> Collection<T>.assertEmpty(message: String = "should be empty"): Unit = assertSize(0, message)
+
+/**
+ * Asserts that this collection has content
+ * @receiver [Collection]<T>
+ * @param message [String]
+ */
+public inline fun <T> Collection<T>.assertNotEmpty(message: String = "should have content"): Unit =
+    this.size.assertLargerOrEqualTo(1, message)
 
 /**
  * Asserts that the given list contains the given item

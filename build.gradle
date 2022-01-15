@@ -8,6 +8,8 @@ buildscript {
     ext.junit4Version = "4.13.2"
     //https://github.com/JetBrains/kotlin/releases
     ext.kotlin_version = "1.6.10"
+    //https://github.com/csense-oss/csense-kotlin-annotations
+    ext.csenseAnnotationVersion = "0.0.50"
 
 
     //versions & naming
@@ -41,6 +43,10 @@ plugins {
 
 repositories {
     mavenCentral()
+    maven {
+        url 'https://pkgs.dev.azure.com/csense-oss/csense-oss/_packaging/csense-oss/maven/v1'
+        name 'csense-oss'
+    }
 }
 
 group project.csenseGroupId
@@ -59,6 +65,7 @@ kotlin {
                 implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
                 implementation kotlin('test-common')
                 implementation kotlin('test-annotations-common')
+                implementation "csense.kotlin:csense-kotlin-annotations:$csenseAnnotationVersion"
             }
         }
 

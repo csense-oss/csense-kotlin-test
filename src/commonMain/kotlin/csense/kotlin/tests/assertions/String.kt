@@ -38,7 +38,7 @@ public inline fun String.assertContainsNot(
     )
 }
 
-/**
+/**Collection
  * Asserts that this string is not empty (length > 0)
  * @receiver String the string to test for fullness
  */

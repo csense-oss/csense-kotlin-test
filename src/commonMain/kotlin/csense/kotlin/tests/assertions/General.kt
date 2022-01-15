@@ -2,6 +2,7 @@
 
 package csense.kotlin.tests.assertions
 
+import csense.kotlin.annotations.numbers.*
 import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.contract
 import kotlin.test.*
@@ -141,7 +142,7 @@ public inline fun <@kotlin.internal.OnlyInputTypes T> T?.assertNotNullAndEquals(
  */
 public inline fun assertCalled(
     message: String = GeneralStrings.assertCalledMessage,
-    times: Int = 1,
+    @IntLimit(from = 1) times: Int = 1,
     action: (callback: () -> Unit) -> Unit
 ) {
     var counter = 0
