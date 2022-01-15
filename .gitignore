@@ -29,3 +29,4 @@ local.properties
 .idea
 build/
 kotlin-js-store/yarn.lock
+/kotlin-js-store/

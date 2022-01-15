@@ -1,7 +1,7 @@
 buildscript {
     //dependencies
     //https://github.com/Kotlin/kotlinx.coroutines
-    ext.coroutinesVersion = "1.6.0-RC2"
+    ext.coroutinesVersion = "1.6.0"
     //https://github.com/junit-team/junit5/releases
     ext.junit5Version = "5.8.2"
     //https://github.com/junit-team/junit4/releases
@@ -11,7 +11,7 @@ buildscript {
 
 
     //versions & naming
-    ext.csenseVersionName = "0.0.52"
+    ext.csenseVersionName = "0.0.53"
     ext.csenseGroupId = "csense.kotlin"
     ext.csenseArtifactId = "csense-kotlin-tests"
 
@@ -35,7 +35,7 @@ buildscript {
 }
 
 plugins {
-    id 'org.jetbrains.kotlin.multiplatform' version "1.6.10"
+    id 'org.jetbrains.kotlin.multiplatform' version "$kotlin_version"
     id "maven-publish"
 }
 

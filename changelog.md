@@ -1,3 +1,8 @@
+# 0.0.53
+- kotlin 1.6.10
+- added 
+  - assertIsApply
+  - 
 # 0.0.52
 - kotlin 1.6.0
 
