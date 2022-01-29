@@ -66,4 +66,37 @@ class NumberTest {
         }
         'a'.assertNot('A', ignoreCase = false)
     }
+
+    class NumberAssertOther {
+
+        @Test
+        fun sameValuesShouldPass() {
+            42.assert(42.0)
+            (-42).assert(-42.0)
+            (-42.5F).assert(-42.5)
+        }
+
+        @Test
+        fun differentValuesShouldThrow() {
+            assertThrows<Throwable> {
+                42.assert(41L)
+            }
+
+            assertThrows<Throwable> {
+                42.0.assert(41L)
+            }
+            assertThrows<Throwable> {
+                142L.assert(411L)
+            }
+
+            assertThrows<Throwable> {
+                142L.assert(411L)
+            }
+            assertThrows<Throwable> {
+                0.5F.assert(0.4)
+            }
+
+        }
+
+    }
 }

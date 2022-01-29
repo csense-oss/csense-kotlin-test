@@ -65,3 +65,24 @@ public inline fun <reified T : Throwable> assertThrows(
         failTest("Expected an exception of type ${T::class} but got no exceptions\n$messageIfNoException")
     }
 }
+
+public fun Throwable?.assert(expected: Throwable, message: String = "") {
+    if (this == null) {
+        failTest("Expected $expected but got null;$message")
+    }
+    if (this::class != expected::class) {
+        failTest("Mismatching types. Expected $expected but got $this;$message")
+    }
+    val otherMessage = expected.message
+    if (otherMessage != null) {
+        this.message.assert(otherMessage, message)
+    } else {
+        this.message.assertNull()
+    }
+    val otherCause = expected.cause
+    if (otherCause != null) {
+        this.cause.assert(otherCause, message)
+    } else {
+        this.cause.assertNull()
+    }
+}

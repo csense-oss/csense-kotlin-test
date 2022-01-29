@@ -1,12 +1,9 @@
-@file:Suppress("NOTHING_TO_INLINE", "unused")
+@file:Suppress("unused", "NOTHING_TO_INLINE", "INVISIBLE_MEMBER", "INVISIBLE_REFERENCE")
 
 package csense.kotlin.tests.assertions
 
 import kotlin.math.abs
-import kotlin.test.assertEquals
-import kotlin.test.assertFalse
-import kotlin.test.assertNotEquals
-import kotlin.test.assertTrue
+import kotlin.test.*
 
 //region Double
 /**
@@ -152,3 +149,14 @@ public inline fun IntRange.assertNot(
     message: String = "Expected $this to be different from $otherRange but they are the same"
 ): Unit = assertNotEquals(otherRange, this, message)
 //endregion
+
+
+@kotlin.internal.LowPriorityInOverloadResolution
+public inline fun Number?.assert(expected: Number) {
+    if (this == null) {
+        fail("expected $expected but got $this")
+    }
+    this.toLong().assert(expected.toLong())
+    //in case there is a loss of precision in "toLong".
+    this.toDouble().assert(expected.toDouble(), delta = 0.01)
+}

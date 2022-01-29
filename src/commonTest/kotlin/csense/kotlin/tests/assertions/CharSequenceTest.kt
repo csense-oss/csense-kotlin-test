@@ -48,4 +48,10 @@ class CharSequenceTest {
             nonEmptya.assertNot(nonEmptyA, ignoreCase = true)
         }
     }
+
+    @Test
+    fun nullToNonNullShouldThrow() = assertThrows<Throwable> {
+        val c1: CharSequence? = null
+        c1.assert("asd")
+    }
 }

@@ -110,27 +110,41 @@ class StringTest {
 
     }
 
-    @Test
-    fun stringAssert() {
-        "".assert("")
-        assertThrows<Throwable> {
-            "".assert("test")
-        }
-        assertThrows<Throwable> {
-            "test".assert("")
-        }
-        "test".assert("test")
+    class StringAssert {
+        @Test
+        fun shouldWorkOnNormalNonNullStrings() {
+            "".assert("")
+            assertThrows<Throwable> {
+                "".assert("test")
+            }
+            assertThrows<Throwable> {
+                "test".assert("")
+            }
+            "test".assert("test")
 
-        assertThrows<Throwable> {
-            "tesT".assert("test", ignoreCase = false)
-        }
-        assertThrows<Throwable> {
-            "tesT".assert("Test", ignoreCase = false)
+            assertThrows<Throwable> {
+                "tesT".assert("test", ignoreCase = false)
+            }
+            assertThrows<Throwable> {
+                "tesT".assert("Test", ignoreCase = false)
+            }
+
+            "Test".assert("test", ignoreCase = true)
+
+            "tESt".assert("TesT", ignoreCase = true)
         }
 
-        "Test".assert("test", ignoreCase = true)
+        @Test
+        fun assertShouldWorkOnNullableString() = assertThrows<Throwable> {
+            val str: String? = null
+            str.assert("")
+        }
 
-        "tESt".assert("TesT", ignoreCase = true)
+        @Test
+        fun assertShouldWorkOnNullableIgnoreCaseString() = assertThrows<Throwable> {
+            val str: String? = null
+            str.assert("abC", ignoreCase = true)
+        }
 
     }
 

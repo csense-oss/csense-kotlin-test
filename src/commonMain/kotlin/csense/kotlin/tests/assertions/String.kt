@@ -57,7 +57,7 @@ public inline fun String.assertEmpty(): Unit =
  * @param value [String] the expected value (to assert)
  * @param message [String] the error message if they differ
  */
-public inline fun String.assert(value: String, ignoreCase: Boolean = false, message: String = "") {
+public inline fun String?.assert(value: String, ignoreCase: Boolean = false, message: String = "") {
     val isEqual = this.equals(value, ignoreCase = ignoreCase)
     if (!isEqual) {
         failTest("Expected \"$this\" to be the same as \"$value\". $message")
