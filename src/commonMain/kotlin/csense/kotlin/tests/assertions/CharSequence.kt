@@ -3,13 +3,9 @@
 package csense.kotlin.tests.assertions
 
 
-public inline fun CharSequence?.assert(other: CharSequence?, ignoreCase: Boolean = false) {
-    if (this == null || other == null) {
-        if (this == other) {
-            return
-        } else {
-            failTest("Expected $other but got $this")
-        }
+public inline fun CharSequence?.assert(other: CharSequence, ignoreCase: Boolean = false) {
+    if (this == null) {
+        failTest("Expected $other but got $this")
     }
     this.length.assert(
         other.length, message = "expected length to be equal for both " +
