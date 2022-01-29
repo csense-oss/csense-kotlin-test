@@ -85,7 +85,7 @@ public inline fun <T : Comparable<T>> T.assertEquals(
  * @param expected T the expected value, that the actual should be
  * @param message [String] a message if the [expected] is different from the receiver
  */
-public inline fun <T : Comparable<T>> T.assert(
+public inline fun <T : Comparable<T>> T?.assert(
     expected: T,
     message: String = "expected to be equal, but $this !== $expected"
 ) {

@@ -121,6 +121,7 @@ public inline fun <T> T?.assertNotNullApply(message: String = "", action: T.() -
  * @param other T? the value it should be (the expected)
  * @param message [String] the message to display if the receiver does not match the expected.
  */
+@Deprecated("Use regular assert. ", replaceWith = ReplaceWith("this.assert(other, message)"))
 @OptIn(ExperimentalContracts::class)
 public inline fun <@kotlin.internal.OnlyInputTypes T> T?.assertNotNullAndEquals(
     other: T?,

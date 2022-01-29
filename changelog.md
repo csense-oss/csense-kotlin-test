@@ -2,6 +2,15 @@
 
 - added
     - Map.entry.assert which takes a key, value
+    - Pair assert which
+        - first & second parameters
+        - other pair
+
+- updated
+    - (some) assert now accepts a nullable receiver.
+
+- deprecated
+    - assertNotNullAndEquals
 
 # 0.0.53
 

@@ -10,7 +10,7 @@ import kotlin.test.assertEquals
  * @param value [Boolean] the expected value
  * @param message [String] the message to show if the receiver is not the given [value]
  */
-public inline fun Boolean.assert(value: Boolean, message: String = "expected $value got $this") {
+public inline fun Boolean?.assert(value: Boolean, message: String = "expected $value got $this") {
     assertEquals(value, this, message)
 }
 

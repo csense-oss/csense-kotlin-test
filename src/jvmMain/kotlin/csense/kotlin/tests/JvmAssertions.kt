@@ -9,6 +9,6 @@ import csense.kotlin.tests.assertions.*
  * @receiver Class<*>
  * @param other Class<*>
  */
-public fun Class<*>.assert(other: Class<*>) {
+public fun Class<*>?.assert(other: Class<*>) {
     (this === other).assertTrue("class type should be same (thus reference should since its singleton)\n receiver is $this, argument is $other")
 }
