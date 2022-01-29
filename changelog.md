@@ -5,10 +5,13 @@
     - Pair assert which
         - first & second parameters
         - other pair
-
+    - assert for Throwable
+    - assert for Number
+    
 - updated
     - (some) assert now accepts a nullable receiver.
-
+    - renamed all "other" parameters to expected
+    
 - deprecated
     - assertNotNullAndEquals
 

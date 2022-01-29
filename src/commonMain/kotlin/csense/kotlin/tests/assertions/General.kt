@@ -116,22 +116,22 @@ public inline fun <T> T?.assertNotNullApply(message: String = "", action: T.() -
 }
 
 /**
- * Asserts this is not null and equals the [other] object
- * @receiver T? the object to make sure is not null and equals [other]
- * @param other T? the value it should be (the expected)
+ * Asserts this is not null and equals the [expected] object
+ * @receiver T? the object to make sure is not null and equals [expected]
+ * @param expected T? the value it should be (the expected)
  * @param message [String] the message to display if the receiver does not match the expected.
  */
 @Deprecated("Use regular assert. ", replaceWith = ReplaceWith("this.assert(other, message)"))
 @OptIn(ExperimentalContracts::class)
 public inline fun <@kotlin.internal.OnlyInputTypes T> T?.assertNotNullAndEquals(
-    other: T?,
-    message: String = "value was $this, expected $other"
+    expected: T?,
+    message: String = "value was $this, expected $expected"
 ) {
     contract {
         returns() implies (this@assertNotNullAndEquals != null)
     }
     this.assertNotNull()
-    assertEquals(other, this, message)
+    assertEquals(expected, this, message)
 }
 
 
