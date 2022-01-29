@@ -1,19 +1,28 @@
+# 0.0.54
+
+- added
+    - Map.entry.assert which takes a key, value
+
 # 0.0.53
+
 - kotlin 1.6.10
-- added 
-  - assertIsApply
-  - assertSizeAnd
-  - added assertSingle & assertEmpty for primitive array types
-  - added some @{int, etc}limit annotations 
-  - {Collection, Array}.assertNotEmpty
+- added
+    - assertIsApply
+    - assertSizeAnd
+    - added assertSingle & assertEmpty for primitive array types
+    - added some @{int, etc}limit annotations
+    - {Collection, Array}.assertNotEmpty
 
 # 0.0.52
+
 - kotlin 1.6.0
 
 # 0.0.51
+
 - bump junit versions
 
 # 0.0.50
+
 - kotlin 1.5.30
 - fixed bug with assertCallsCallbackWith
 - more collection extensions
