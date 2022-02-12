@@ -1,3 +1,6 @@
+# 0.0.55
+- added assertByEquals
+
 # 0.0.54
 
 - added

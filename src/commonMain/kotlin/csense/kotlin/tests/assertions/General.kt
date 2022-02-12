@@ -215,6 +215,19 @@ public inline fun <reified T> assertCallbackCalledWith(
     testCode(callback)
 }
 
+/**
+ * Asserts that this is equal to expected
+ */
+public inline fun <T> T.assertByEquals(
+    expected: T?,
+    optMessage: String? = null
+) {
+    val isEqual = this?.equals(expected) == true
+    isEqual.assertTrue(
+        message = "Expected $this to be equal (via equals) to $expected. ${optMessage ?: ""}"
+    )
+}
+
 
 public object GeneralStrings {
     public const val assertCalledMessage: String = "Should be called, but did not get called enough times"
