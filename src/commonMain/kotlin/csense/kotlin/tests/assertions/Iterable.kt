@@ -53,3 +53,13 @@ public inline fun <@kotlin.internal.OnlyInputTypes T> Iterable<T>.assertContains
     }
     failTest("Could not find `$currentItem`, last successful found item was at index $lastFoundMessage, which is `$lastFoundElement`")
 }
+
+public inline fun <E> Iterable<E>.assertContains(
+    message: String = "",
+    predicate: (item: E) -> Boolean
+) {
+    val foundAny = any {
+        predicate(it)
+    }
+    foundAny.assertTrue("Wanted to find a item matching the given predicate, but found none.$message")
+}

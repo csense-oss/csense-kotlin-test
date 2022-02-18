@@ -1,3 +1,7 @@
+# 0.0.56
+- added
+  - assertContains on iterable
+
 # 0.0.55
 - added assertByEquals
 
