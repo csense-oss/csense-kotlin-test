@@ -218,7 +218,7 @@ public inline fun <reified T> assertCallbackCalledWith(
 /**
  * Asserts that this is equal to expected
  */
-public inline fun <T> T.assertByEquals(
+public inline fun <@kotlin.internal.OnlyInputTypes T> T.assertByEquals(
     expected: T?,
     optMessage: String? = null
 ) {

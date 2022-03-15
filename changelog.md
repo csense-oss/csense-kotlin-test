@@ -1,6 +1,8 @@
 # 0.0.56
 - added
   - assertContains on iterable
+- updated 
+  - assertByEquals so it requires the same type for both actual & expected (before it would generically default to any)
 
 # 0.0.55
 - added assertByEquals
