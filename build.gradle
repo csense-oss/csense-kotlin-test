@@ -13,7 +13,7 @@ buildscript {
 
 
     //versions & naming
-    ext.csenseVersionName = "0.0.55"
+    ext.csenseVersionName = "0.0.56"
     ext.csenseGroupId = "csense.kotlin"
     ext.csenseArtifactId = "csense-kotlin-tests"
 
@@ -54,7 +54,15 @@ version project.csenseVersionName
 
 kotlin {
     explicitApi = 'strict'
-    jvm()
+    jvm {
+        compilations.all {
+            kotlinOptions.jvmTarget = '1.8'
+        }
+        withJava()
+        testRuns["test"].executionTask.configure {
+            useJUnitPlatform()
+        }
+    }
     js(BOTH) { //https://kotlinlang.org/docs/reference/whatsnew14.html#new-js-ir-backend
         browser()
         nodejs()
@@ -98,21 +106,5 @@ kotlin {
 project.group = csenseGroupId
 project.version = csenseVersionName
 
-
-jvmTest {
-    testLogging {
-        showStandardStreams = true
-        events "skipped", "failed", "standardOut", "standardError"
-        exceptionFormat "full"
-        showCauses true
-        showExceptions true
-        showStackTraces true
-    }
-    useJUnitPlatform()
-    reports {
-        junitXml.enabled = true
-        html.enabled = true
-    }
-}
 
 apply from: "$rootDir/gradle/publish.gradle"
