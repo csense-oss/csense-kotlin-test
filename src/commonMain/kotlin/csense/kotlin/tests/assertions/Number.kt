@@ -152,6 +152,10 @@ public inline fun IntRange.assertNot(
 
 
 @kotlin.internal.LowPriorityInOverloadResolution
+@Deprecated(
+    message = "This causes problems thus it is best to avoid it. Will be removed in a future release",
+    level = DeprecationLevel.WARNING
+)
 public inline fun Number?.assert(expected: Number) {
     if (this == null) {
         fail("expected $expected but got $this")

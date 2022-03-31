@@ -3,6 +3,8 @@
   - assertContains on iterable
 - updated 
   - assertByEquals so it requires the same type for both actual & expected (before it would generically default to any)
+- deprecated
+  - number.assert
 
 # 0.0.55
 - added assertByEquals
