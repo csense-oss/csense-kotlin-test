@@ -62,23 +62,23 @@ class NumberTest {
             Double.NaN.assertNot(Double.NaN)
         }
 
-//        Double.NaN.assertNot(3.0)
+        Double.NaN.assertNot(3.0)
 
-//        3.0.assertNot(Double.NaN)
-//
-//
-//        assertThrows<Throwable> {
-//            Double.POSITIVE_INFINITY.assertNot(Double.POSITIVE_INFINITY)
-//        }
-//        assertThrows<Throwable> {
-//            Double.NEGATIVE_INFINITY.assertNot(Double.NEGATIVE_INFINITY)
-//        }
-//
-//        Double.POSITIVE_INFINITY.assertNot(Double.NEGATIVE_INFINITY)
-//        3.0.assertNot(Double.NEGATIVE_INFINITY)
-//        3.0.assertNot(Double.POSITIVE_INFINITY)
-//        Double.NEGATIVE_INFINITY.assertNot(3.0)
-//        Double.POSITIVE_INFINITY.assertNot(3.0)
+        3.0.assertNot(Double.NaN)
+
+
+        assertThrows<Throwable> {
+            Double.POSITIVE_INFINITY.assertNot(Double.POSITIVE_INFINITY)
+        }
+        assertThrows<Throwable> {
+            Double.NEGATIVE_INFINITY.assertNot(Double.NEGATIVE_INFINITY)
+        }
+
+        Double.POSITIVE_INFINITY.assertNot(Double.NEGATIVE_INFINITY)
+        3.0.assertNot(Double.NEGATIVE_INFINITY)
+        3.0.assertNot(Double.POSITIVE_INFINITY)
+        Double.NEGATIVE_INFINITY.assertNot(3.0)
+        Double.POSITIVE_INFINITY.assertNot(3.0)
     }
 
     @Test
