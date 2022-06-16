@@ -1,4 +1,4 @@
-@file:Suppress("NOTHING_TO_INLINE", "unused")
+@file:Suppress("unused")
 
 package csense.kotlin.tests.assertions
 
@@ -15,7 +15,7 @@ import kotlin.test.assertEquals
  * @param size [Int] the size it should be, if not this will stop the test.
  * @param message [String] the message to print if the assertion fails
  */
-public inline fun IntArray.assertSize(@IntLimit(from = 0) size: Int, message: String = ""): Unit =
+public fun IntArray.assertSize(@IntLimit(from = 0) size: Int, message: String = ""): Unit =
     this.size.assert(size, message)
 
 /**
@@ -24,7 +24,7 @@ public inline fun IntArray.assertSize(@IntLimit(from = 0) size: Int, message: St
  * @param size [Int] the size it should be, if not this will stop the test.
  * @param message [String] the message to print if the assertion fails
  */
-public inline fun BooleanArray.assertSize(@IntLimit(from = 0) size: Int, message: String = ""): Unit =
+public fun BooleanArray.assertSize(@IntLimit(from = 0) size: Int, message: String = ""): Unit =
     this.size.assert(size, message)
 
 /**
@@ -33,7 +33,7 @@ public inline fun BooleanArray.assertSize(@IntLimit(from = 0) size: Int, message
  * @param size [Int] the size it should be, if not this will stop the test.
  * @param message [String] the message to print if the assertion fails
  */
-public inline fun DoubleArray.assertSize(@IntLimit(from = 0) size: Int, message: String = ""): Unit =
+public fun DoubleArray.assertSize(@IntLimit(from = 0) size: Int, message: String = ""): Unit =
     this.size.assert(size, message)
 
 /**
@@ -42,7 +42,7 @@ public inline fun DoubleArray.assertSize(@IntLimit(from = 0) size: Int, message:
  * @param size [Int] the size it should be, if not this will stop the test.
  * @param message [String] the message to print if the assertion fails
  */
-public inline fun LongArray.assertSize(@IntLimit(from = 0) size: Int, message: String = ""): Unit =
+public fun LongArray.assertSize(@IntLimit(from = 0) size: Int, message: String = ""): Unit =
     this.size.assert(size, message)
 
 /**
@@ -51,7 +51,7 @@ public inline fun LongArray.assertSize(@IntLimit(from = 0) size: Int, message: S
  * @param size [Int] the size it should be, if not this will stop the test.
  * @param message [String] the message to print if the assertion fails
  */
-public inline fun ByteArray.assertSize(@IntLimit(from = 0) size: Int, message: String = ""): Unit =
+public fun ByteArray.assertSize(@IntLimit(from = 0) size: Int, message: String = ""): Unit =
     this.size.assert(size, message)
 
 /**
@@ -60,7 +60,7 @@ public inline fun ByteArray.assertSize(@IntLimit(from = 0) size: Int, message: S
  * @param size [Int] the size it should be, if not this will stop the test.
  * @param message [String] the message to print if the assertion fails
  */
-public inline fun ShortArray.assertSize(@IntLimit(from = 0) size: Int, message: String = ""): Unit =
+public fun ShortArray.assertSize(@IntLimit(from = 0) size: Int, message: String = ""): Unit =
     this.size.assert(size, message)
 
 /**
@@ -69,7 +69,7 @@ public inline fun ShortArray.assertSize(@IntLimit(from = 0) size: Int, message: 
  * @param size [Int] the size it should be, if not this will stop the test.
  * @param message [String] the message to print if the assertion fails
  */
-public inline fun CharArray.assertSize(@IntLimit(from = 0) size: Int, message: String = ""): Unit =
+public fun CharArray.assertSize(@IntLimit(from = 0) size: Int, message: String = ""): Unit =
     this.size.assert(size, message)
 
 /**
@@ -78,7 +78,7 @@ public inline fun CharArray.assertSize(@IntLimit(from = 0) size: Int, message: S
  * @param size [Int] the size it should be, if not this will stop the test.
  * @param message [String] the message to print if the assertion fails
  */
-public inline fun FloatArray.assertSize(@IntLimit(from = 0) size: Int, message: String = ""): Unit =
+public fun FloatArray.assertSize(@IntLimit(from = 0) size: Int, message: String = ""): Unit =
     this.size.assert(size, message)
 
 //region Array<T>
@@ -88,7 +88,7 @@ public inline fun FloatArray.assertSize(@IntLimit(from = 0) size: Int, message: 
  * @param size [Int] the expected size
  * @param message [String]  the message to print if the assertion fails
  */
-public inline fun <T> Array<T>.assertSize(@IntLimit(from = 0) size: Int, message: String = ""): Unit =
+public fun <T> Array<T>.assertSize(@IntLimit(from = 0) size: Int, message: String = ""): Unit =
     this.size.assert(size, message)
 
 /**
@@ -96,13 +96,13 @@ public inline fun <T> Array<T>.assertSize(@IntLimit(from = 0) size: Int, message
  * @receiver [Array]<T>
  * @param message [String] the message to print if the assertion fails
  */
-public inline fun <T> Array<T>.assertEmpty(message: String = "should be empty"): Unit = assertSize(0, message = message)
+public fun <T> Array<T>.assertEmpty(message: String = "should be empty"): Unit = assertSize(0, message = message)
 
 /**
  * Asserts that this array has content
  * @param message String the assertion message if the array is empty
  */
-public inline fun <T> Array<T>.assertNotEmpty(message: String = "should have content"): Unit =
+public fun <T> Array<T>.assertNotEmpty(message: String = "should have content"): Unit =
     size.assertLargerOrEqualTo(1, optMessage = message)
 
 
@@ -111,43 +111,43 @@ public inline fun <T> Array<T>.assertNotEmpty(message: String = "should have con
  * Asserts that this array is empty
  * @param message [String] the message to print if the assertion fails
  */
-public inline fun IntArray.assertEmpty(message: String = "should be empty"): Unit = assertSize(0, message = message)
+public fun IntArray.assertEmpty(message: String = "should be empty"): Unit = assertSize(0, message = message)
 
 /**
  * Asserts that this array is empty
  * @param message [String] the message to print if the assertion fails
  */
-public inline fun BooleanArray.assertEmpty(message: String = "should be empty"): Unit = assertSize(0, message = message)
+public fun BooleanArray.assertEmpty(message: String = "should be empty"): Unit = assertSize(0, message = message)
 
 /**
  * Asserts that this array is empty
  * @param message [String] the message to print if the assertion fails
  */
-public inline fun DoubleArray.assertEmpty(message: String = "should be empty"): Unit = assertSize(0, message = message)
+public fun DoubleArray.assertEmpty(message: String = "should be empty"): Unit = assertSize(0, message = message)
 
 /**
  * Asserts that this array is empty
  * @param message [String] the message to print if the assertion fails
  */
-public inline fun LongArray.assertEmpty(message: String = "should be empty"): Unit = assertSize(0, message = message)
+public fun LongArray.assertEmpty(message: String = "should be empty"): Unit = assertSize(0, message = message)
 
 /**
  * Asserts that this array is empty
  * @param message [String] the message to print if the assertion fails
  */
-public inline fun FloatArray.assertEmpty(message: String = "should be empty"): Unit = assertSize(0, message = message)
+public fun FloatArray.assertEmpty(message: String = "should be empty"): Unit = assertSize(0, message = message)
 
 /**
  * Asserts that this array is empty
  * @param message [String] the message to print if the assertion fails
  */
-public inline fun ShortArray.assertEmpty(message: String = "should be empty"): Unit = assertSize(0, message = message)
+public fun ShortArray.assertEmpty(message: String = "should be empty"): Unit = assertSize(0, message = message)
 
 /**
  * Asserts that this array is empty
  * @param message [String] the message to print if the assertion fails
  */
-public inline fun CharArray.assertEmpty(message: String = "should be empty"): Unit = assertSize(0, message = message)
+public fun CharArray.assertEmpty(message: String = "should be empty"): Unit = assertSize(0, message = message)
 //endregion
 
 //region specific array type: assertSingle
@@ -156,7 +156,7 @@ public inline fun CharArray.assertEmpty(message: String = "should be empty"): Un
  * @param item Int the item that this array should contain
  * @param message [String]  the message to print if the equality assertion fails
  */
-public inline fun IntArray.assertSingle(item: Int, message: String = "") {
+public fun IntArray.assertSingle(item: Int, message: String = "") {
     assertSize(1, message = "Should have 1 item")
     assertEquals(item, first(), message)
 }
@@ -166,7 +166,7 @@ public inline fun IntArray.assertSingle(item: Int, message: String = "") {
  * @param item Boolean the item that this array should contain
  * @param message [String]  the message to print if the equality assertion fails
  */
-public inline fun BooleanArray.assertSingle(item: Boolean, message: String = "") {
+public fun BooleanArray.assertSingle(item: Boolean, message: String = "") {
     assertSize(1, message = "Should have 1 item")
     assertEquals(item, first(), message)
 }
@@ -176,7 +176,7 @@ public inline fun BooleanArray.assertSingle(item: Boolean, message: String = "")
  * @param item Double the item that this array should contain
  * @param message [String]  the message to print if the equality assertion fails
  */
-public inline fun DoubleArray.assertSingle(item: Double, message: String = "") {
+public fun DoubleArray.assertSingle(item: Double, message: String = "") {
     assertSize(1, message = "Should have 1 item")
     assertEquals(item, first(), message)
 }
@@ -186,7 +186,7 @@ public inline fun DoubleArray.assertSingle(item: Double, message: String = "") {
  * @param item Long the item that this array should contain
  * @param message [String]  the message to print if the equality assertion fails
  */
-public inline fun LongArray.assertSingle(item: Long, message: String = "") {
+public fun LongArray.assertSingle(item: Long, message: String = "") {
     assertSize(1, message = "Should have 1 item")
     assertEquals(item, first(), message)
 }
@@ -196,7 +196,7 @@ public inline fun LongArray.assertSingle(item: Long, message: String = "") {
  * @param item Float the item that this array should contain
  * @param message [String]  the message to print if the equality assertion fails
  */
-public inline fun FloatArray.assertSingle(item: Float, message: String = "") {
+public fun FloatArray.assertSingle(item: Float, message: String = "") {
     assertSize(1, message = "Should have 1 item")
     assertEquals(item, first(), message)
 }
@@ -206,7 +206,7 @@ public inline fun FloatArray.assertSingle(item: Float, message: String = "") {
  * @param item Short the item that this array should contain
  * @param message [String]  the message to print if the equality assertion fails
  */
-public inline fun ShortArray.assertSingle(item: Short, message: String = "") {
+public fun ShortArray.assertSingle(item: Short, message: String = "") {
     assertSize(1, message = "Should have 1 item")
     assertEquals(item, first(), message)
 }
@@ -216,7 +216,7 @@ public inline fun ShortArray.assertSingle(item: Short, message: String = "") {
  * @param item Char the item that this array should contain
  * @param message [String]  the message to print if the equality assertion fails
  */
-public inline fun CharArray.assertSingle(item: Char, message: String = "") {
+public fun CharArray.assertSingle(item: Char, message: String = "") {
     assertSize(1, message = "Should have 1 item")
     assertEquals(item, first(), message)
 }
@@ -228,7 +228,7 @@ public inline fun CharArray.assertSingle(item: Char, message: String = "") {
  * @param item T the item that this array should contain
  * @param message [String]  the message to print if the equality assertion fails
  */
-public inline fun <T> Array<T>.assertSingle(item: T, message: String = "") {
+public fun <T> Array<T>.assertSingle(item: T, message: String = "") {
     assertSize(1, message = "Should have 1 item")
     assertEquals(item, first(), message)
 }
@@ -240,7 +240,7 @@ public inline fun <T> Array<T>.assertSingle(item: T, message: String = "") {
  * @param callback Function1<T, Unit> the call to invoke if the array only have 1 element
  */
 @OptIn(ExperimentalContracts::class, ExperimentalTypeInference::class)
-public inline fun <T> Array<T>.assertSingle(message: String = "Should have 1 item", callback: (T) -> Unit) {
+public fun <T> Array<T>.assertSingle(message: String = "Should have 1 item", callback: (T) -> Unit) {
     contract {
         callsInPlace(callback, kind = InvocationKind.AT_MOST_ONCE)
     }

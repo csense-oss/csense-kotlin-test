@@ -1,4 +1,4 @@
-@file:Suppress("unused", "NOTHING_TO_INLINE", "INVISIBLE_MEMBER", "INVISIBLE_REFERENCE")
+@file:Suppress("unused", "INVISIBLE_MEMBER", "INVISIBLE_REFERENCE")
 
 package csense.kotlin.tests.assertions
 
@@ -13,13 +13,17 @@ import kotlin.test.*
  * @param delta [Double] the "allowed imprecision" for value to differ from the receiver
  * @param message [String] the message to show if they differ by more than [delta]
  */
-public inline fun Double.assert(
+public fun Double.assert(
     value: Double,
     delta: Double = 0.1,
-    message: String = "expected $value within $delta margins, but got $this"
+    message: String = ""
 ) {
+    if (this.isNaN() && value.isNaN()) {
+        return
+    }
+    val errorMessage = "expected $value within $delta margins, but got $this."
     val safeDelta = abs(delta)
-    assertTrue(this >= value - safeDelta && this <= value + safeDelta, message)
+    assertTrue(this >= value - safeDelta && this <= value + safeDelta, errorMessage + message)
 }
 
 
@@ -30,13 +34,17 @@ public inline fun Double.assert(
  * @param delta Double
  * @param message String
  */
-public inline fun Double.assertNot(
+public fun Double.assertNot(
     value: Double,
     delta: Double = 0.1,
-    message: String = "expected $value to be different from $this within $delta margins, but they are equal"
+    message: String = ""
 ) {
+    if (this.isNaN() && value.isNaN()) {
+        failTest("Both $this and $value are NaN's, but expected them to be different")
+    }
+    val errorMessage = "expected $value to be different from $this within $delta margins, but they are equal."
     val safeDelta = abs(delta)
-    assertFalse(this >= value - safeDelta && this <= value + safeDelta, message)
+    assertFalse(this >= value - safeDelta && this <= value + safeDelta, errorMessage + message)
 }
 
 
@@ -51,13 +59,17 @@ public inline fun Double.assertNot(
  * @param delta [Float] the "allowed imprecision" for value to differ from the receiver
  * @param message [String] the message to show if they differ by more than [delta]
  */
-public inline fun Float.assert(
+public fun Float.assert(
     value: Float,
     delta: Float = 0.1f,
-    message: String = "expected $value within $delta margins, but got $this"
+    message: String = ""
 ) {
+    if (this.isNaN() && value.isNaN()) {
+        return
+    }
+    val errorMessage = "expected $value within $delta margins, but got $this."
     val safeDelta = abs(delta)
-    assertTrue(this >= value - safeDelta && this <= value + safeDelta, message)
+    assertTrue(this >= value - safeDelta && this <= value + safeDelta, errorMessage + message)
 }
 
 
@@ -68,13 +80,17 @@ public inline fun Float.assert(
  * @param delta Double
  * @param message String
  */
-public inline fun Float.assertNot(
+public fun Float.assertNot(
     value: Float,
     delta: Float = 0.1F,
-    message: String = "expected $value to be different from $this within $delta margins, but they are equal"
+    message: String = ""
 ) {
+    if (this.isNaN() && value.isNaN()) {
+        failTest("Both $this and $value are NaN's, but expected them to be different")
+    }
+    val errorMessage = "expected $value to be different from $this within $delta margins, but they are equal."
     val safeDelta = abs(delta)
-    assertFalse(this >= value - safeDelta && this <= value + safeDelta, message)
+    assertFalse(this >= value - safeDelta && this <= value + safeDelta, errorMessage + message)
 }
 //endregion
 
@@ -86,14 +102,15 @@ public inline fun Float.assertNot(
  * @param value [Char] the expected char
  * @param message [String] the message to show if they differ
  */
-public inline fun Char.assert(
+public fun Char.assert(
     value: Char,
     ignoreCase: Boolean = false,
-    message: String = "Expected $value but is instead $this"
+    message: String = ""
 ) {
     val isEqual = this.equals(value, ignoreCase)
     if (!isEqual) {
-        failTest(message)
+        val errorMessage = "Expected $value but is instead $this."
+        failTest(errorMessage + message)
     }
 }
 
@@ -103,14 +120,15 @@ public inline fun Char.assert(
  * @param value Char
  * @param message String
  */
-public inline fun Char.assertNot(
+public fun Char.assertNot(
     value: Char,
     ignoreCase: Boolean = false,
-    message: String = "Expected '$this' to be different from '$value', but they are the same"
+    message: String = ""
 ) {
     val isEqual = this.equals(value, ignoreCase)
     if (isEqual) {
-        failTest(message)
+        val errorMessage = "Expected '$this' to be different from '$value', but they are the same."
+        failTest(errorMessage + message)
     }
 
 }
@@ -123,13 +141,18 @@ public inline fun Char.assertNot(
  * @param value [Byte] the expected value
  * @param message [String] the message to show if they differ
  */
-public inline fun Byte.assert(value: Byte, message: String = "Expected $value but is instead $this"): Unit =
-    assertEquals(value, this, message)
+public fun Byte.assert(value: Byte, message: String = ""): Unit {
+    val errorMessage = "Expected $value but is instead $this."
+    assertEquals(value, this, errorMessage + message)
+}
 
-public inline fun Byte.assertNot(
+public fun Byte.assertNot(
     value: Byte,
-    message: String = "Expected $value to be different from $this but they are the same"
-): Unit = assertNotEquals(value, this, message)
+    message: String = ""
+): Unit {
+    val errorMessage = "Expected $value to be different from $this but they are the same."
+    assertNotEquals(value, this, errorMessage + message)
+}
 //endregion
 
 //region IntRange
@@ -139,28 +162,20 @@ public inline fun Byte.assertNot(
  * @param otherRange [IntRange] the expected range
  * @param message [String] the message to show if they differ
  */
-public inline fun IntRange.assert(
+public fun IntRange.assert(
     otherRange: IntRange,
-    message: String = "Expected $otherRange but is instead $this"
-): Unit = assertEquals(otherRange, this, message)
+    message: String = ""
+): Unit {
+    val errorMessage = "Expected $otherRange but is instead $this."
+    assertEquals(otherRange, this, errorMessage + message)
+}
 
-public inline fun IntRange.assertNot(
+public fun IntRange.assertNot(
     otherRange: IntRange,
-    message: String = "Expected $this to be different from $otherRange but they are the same"
-): Unit = assertNotEquals(otherRange, this, message)
+    message: String = ""
+): Unit {
+    val errorMessage = "Expected $this to be different from $otherRange but they are the same."
+    assertNotEquals(otherRange, this, errorMessage + message)
+}
 //endregion
 
-
-@kotlin.internal.LowPriorityInOverloadResolution
-@Deprecated(
-    message = "This causes problems thus it is best to avoid it. Will be removed in a future release",
-    level = DeprecationLevel.WARNING
-)
-public inline fun Number?.assert(expected: Number) {
-    if (this == null) {
-        fail("expected $expected but got $this")
-    }
-    this.toLong().assert(expected.toLong())
-    //in case there is a loss of precision in "toLong".
-    this.toDouble().assert(expected.toDouble(), delta = 0.01)
-}

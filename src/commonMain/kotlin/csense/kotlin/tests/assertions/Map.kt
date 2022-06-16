@@ -1,4 +1,4 @@
-@file:Suppress("unused", "NOTHING_TO_INLINE")
+@file:Suppress("unused")
 
 package csense.kotlin.tests.assertions
 
@@ -14,7 +14,7 @@ import kotlin.test.assertEquals
  * @param expectedSize [Int] the expected size of this map
  * @param message [String] the message if this map's size differs from the [expectedSize]
  */
-public inline fun Map<*, *>.assertSize(
+public fun Map<*, *>.assertSize(
     @IntLimit(from = 0) expectedSize: Int,
     message: String = "Expected the map to have a size of $expectedSize, but it is instead ${this.size}"
 ): Unit =
@@ -25,7 +25,7 @@ public inline fun Map<*, *>.assertSize(
  * @receiver [Map]<*, *>
  * @param message [String] the message if this map's size differs from empty
  */
-public inline fun Map<*, *>.assertEmpty(
+public fun Map<*, *>.assertEmpty(
     message: String = "Map should be empty but is not."
 ): Unit =
     this.isEmpty().assertTrue(message)
@@ -35,7 +35,7 @@ public inline fun Map<*, *>.assertEmpty(
  * @receiver [Map]<*, *>
  * @param message [String] the message if this map's size is 0 / is Empty
  */
-public inline fun Map<*, *>.assertNotEmpty(
+public fun Map<*, *>.assertNotEmpty(
     message: String = "Map should have content"
 ): Unit =
     this.isNotEmpty().assertTrue(message)
@@ -46,7 +46,7 @@ public inline fun Map<*, *>.assertNotEmpty(
  * @param item [Map.Entry]<Key, Value>
  * @param message String
  */
-public inline fun <Key, Value> Map<Key, Value>.assertSingle(item: Map.Entry<Key, Value>, message: String = "") {
+public fun <Key, Value> Map<Key, Value>.assertSingle(item: Map.Entry<Key, Value>, message: String = "") {
     assertSize(1, "should have single item. $message")
     assertEquals(item, entries.first())
 }
@@ -72,7 +72,7 @@ public inline fun <Key, reified Value> Map<Key, Value>.assertSingle(
  * @receiver [Map]<Key, Value>
  * @param callback Function1<[Map.Entry]<Key, Value>, Unit>
  */
-@OptIn(ExperimentalContracts::class)
+
 public inline fun <Key, Value> Map<Key, Value>.assertSingle(callback: (Map.Entry<Key, Value>) -> Unit) {
     contract {
         callsInPlace(callback, kind = InvocationKind.AT_MOST_ONCE)
@@ -86,7 +86,7 @@ public inline fun <Key, Value> Map<Key, Value>.assertSingle(callback: (Map.Entry
  * @receiver [Map]<Key, Value>
  * @param key [Key] the key to test for
  */
-public inline fun <Key, Value> Map<Key, Value>.assertContainsKey(key: Key) {
+public fun <Key, Value> Map<Key, Value>.assertContainsKey(key: Key) {
     containsKey(key).assertTrue()
 }
 
@@ -95,7 +95,7 @@ public inline fun <Key, Value> Map<Key, Value>.assertContainsKey(key: Key) {
  * @receiver [Map]<Key, Value>
  * @param key [Key] the key to test whenever is missing
  */
-public inline fun <Key, Value> Map<Key, Value>.assertDoesNotContainsKey(key: Key) {
+public fun <Key, Value> Map<Key, Value>.assertDoesNotContainsKey(key: Key) {
     containsKey(key).assertFalse()
 }
 
