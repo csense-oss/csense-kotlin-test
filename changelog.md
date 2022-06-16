@@ -3,7 +3,7 @@
 - better usage of message(s)
 - fixed issues with Double & Float (infinities, and NaN's)
 - removed most inlines to "help" debugger / kotlin with precise line numbers etc.
-
+- removed (deprecated in 0.0.56) Number?.assert
 
 # 0.0.56
 
