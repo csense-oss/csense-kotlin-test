@@ -1,9 +1,7 @@
-@file:Suppress("NOTHING_TO_INLINE")
-
 package csense.kotlin.tests.assertions
 
 
-public inline fun CharSequence?.assert(expected: CharSequence, ignoreCase: Boolean = false) {
+public fun CharSequence?.assert(expected: CharSequence, ignoreCase: Boolean = false) {
     if (this == null) {
         failTest("Expected $expected but got $this")
     }
@@ -24,7 +22,7 @@ public inline fun CharSequence?.assert(expected: CharSequence, ignoreCase: Boole
 
 }
 
-public inline fun CharSequence.assertNot(expected: CharSequence, ignoreCase: Boolean = false) {
+public fun CharSequence.assertNot(expected: CharSequence, ignoreCase: Boolean = false) {
     if (this.length != expected.length) {
         return
     }

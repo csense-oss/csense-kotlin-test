@@ -1,4 +1,4 @@
-@file:Suppress("unused", "NOTHING_TO_INLINE")
+@file:Suppress("unused")
 
 package csense.kotlin.tests.assertions
 
@@ -13,7 +13,7 @@ import kotlin.test.assertTrue
  * @param ignoreCase [Boolean] if true, will ignore the casing, false means case sensitive.
  * @param message [String] the error message.
  */
-public inline fun String.assertContains(
+public fun String.assertContains(
     value: String,
     ignoreCase: Boolean = false,
     message: String = "Could not find \"$value\", in  \r\n\"$this\""
@@ -27,7 +27,7 @@ public inline fun String.assertContains(
  * @param value [String] the value that should NOT be in this string
  * @param ignoreCase [Boolean] if true, will ignore the casing, false means case sensitive.
  */
-public inline fun String.assertContainsNot(
+public fun String.assertContainsNot(
     value: String,
     ignoreCase: Boolean = false,
     message: String = "Could find \"$value\", in \r\n\"$this\""
@@ -42,13 +42,13 @@ public inline fun String.assertContainsNot(
  * Asserts that this string is not empty (length > 0)
  * @receiver String the string to test for fullness
  */
-public inline fun String.assertNotEmpty(): Unit = isNotEmpty().assertTrue("Expected string to not be empty but it was")
+public fun String.assertNotEmpty(): Unit = isNotEmpty().assertTrue("Expected string to not be empty but it was")
 
 /**
  * Asserts that this string is empty (length == 0)
  * @receiver String the string to test for emptiness
  */
-public inline fun String.assertEmpty(): Unit =
+public fun String.assertEmpty(): Unit =
     isEmpty().assertTrue("Expected string to be empty but was instead \"$this\"")
 
 /**
@@ -57,7 +57,7 @@ public inline fun String.assertEmpty(): Unit =
  * @param value [String] the expected value (to assert)
  * @param message [String] the error message if they differ
  */
-public inline fun String?.assert(value: String, ignoreCase: Boolean = false, message: String = "") {
+public fun String?.assert(value: String, ignoreCase: Boolean = false, message: String = "") {
     val isEqual = this.equals(value, ignoreCase = ignoreCase)
     if (!isEqual) {
         failTest("Expected \"$this\" to be the same as \"$value\". $message")
@@ -70,7 +70,7 @@ public inline fun String?.assert(value: String, ignoreCase: Boolean = false, mes
  * @param value [String] the expected value
  * @param message [String] the error message if they are the same
  */
-public inline fun String.assertNot(value: String, ignoreCase: Boolean = false, message: String = "") {
+public fun String.assertNot(value: String, ignoreCase: Boolean = false, message: String = "") {
     val isEqual = this.equals(value, ignoreCase = ignoreCase)
     if (isEqual) {
         failTest("Expected \"$this\" to be different from \"$value\". $message")

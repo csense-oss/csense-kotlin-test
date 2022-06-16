@@ -1,12 +1,22 @@
+# 0.0.57
+- better callback names (makes idea suggest / use meaningful name(s) such as "shouldBeCalled" instead of "callback")
+- better usage of message(s)
+- fixed issues with Double & Float (infinities, and NaN's)
+- removed most inlines to "help" debugger / kotlin with precise line numbers etc.
+
+
 # 0.0.56
+
 - added
-  - assertContains on iterable
-- updated 
-  - assertByEquals so it requires the same type for both actual & expected (before it would generically default to any)
+    - assertContains on iterable
+- updated
+    - assertByEquals so it requires the same type for both actual & expected (before it would generically default to
+      any)
 - deprecated
-  - number.assert
+    - number.assert
 
 # 0.0.55
+
 - added assertByEquals
 
 # 0.0.54
@@ -18,11 +28,11 @@
         - other pair
     - assert for Throwable
     - assert for Number
-    
+
 - updated
     - (some) assert now accepts a nullable receiver.
     - renamed all "other" parameters to expected
-    
+
 - deprecated
     - assertNotNullAndEquals
 

@@ -1,4 +1,4 @@
-@file:Suppress("unused", "NOTHING_TO_INLINE")
+@file:Suppress("unused")
 
 package csense.kotlin.tests.assertions
 
@@ -12,7 +12,7 @@ import kotlin.test.assertTrue
  * @param expected U the value that the receiver should be larger than or equal to
  * @param optMessage [String] if the receiver is less than [expected] then this gets printed
  */
-public inline fun <U : Comparable<U>> U.assertLargerOrEqualTo(expected: U, optMessage: String = "") {
+public fun <U : Comparable<U>> U.assertLargerOrEqualTo(expected: U, optMessage: String = "") {
     assertTrue(this >= expected, "$this should be larger or equal to $expected, but it is not.\n$optMessage")
 }
 
@@ -22,7 +22,7 @@ public inline fun <U : Comparable<U>> U.assertLargerOrEqualTo(expected: U, optMe
  * @param expected U the value the receiver should be less than or equal to
  * @param optMessage [String] if the receiver is larger than the [expected] then this will be printed
  */
-public inline fun <U : Comparable<U>> U.assertLessOrEqualTo(expected: U, optMessage: String = "") {
+public fun <U : Comparable<U>> U.assertLessOrEqualTo(expected: U, optMessage: String = "") {
     assertTrue(this <= expected, "$this should be smaller or equal to $expected, but it is not.\n$optMessage")
 }
 
@@ -32,7 +32,7 @@ public inline fun <U : Comparable<U>> U.assertLessOrEqualTo(expected: U, optMess
  * @param expected U the value the receiver should be less than
  * @param optMessage [String] if the receiver is greater or equal to the [expected] then this will be printed
  */
-public inline fun <U : Comparable<U>> U.assertLessThan(expected: U, optMessage: String = "") {
+public fun <U : Comparable<U>> U.assertLessThan(expected: U, optMessage: String = "") {
     assertTrue(this < expected, "$this should be smaller than $expected, but it is not.\n$optMessage")
 }
 
@@ -42,7 +42,7 @@ public inline fun <U : Comparable<U>> U.assertLessThan(expected: U, optMessage: 
  * @param expected U the value the receiver should be greater than
  * @param optMessage [String] if the receiver is less than or equal to the [expected] then this will be printed
  */
-public inline fun <U : Comparable<U>> U.assertLargerThan(expected: U, optMessage: String = "") {
+public fun <U : Comparable<U>> U.assertLargerThan(expected: U, optMessage: String = "") {
     assertTrue(this > expected, "$this should be larger than $expected, but it is not.\n$optMessage")
 }
 
@@ -54,7 +54,7 @@ public inline fun <U : Comparable<U>> U.assertLargerThan(expected: U, optMessage
  * @param message [String] a message if the [expected] is the same as the receiver
  */
 @Deprecated("naming convention violation", replaceWith = ReplaceWith("assertNot(other, message)"))
-public inline fun <T : Comparable<T>> T.assertNotEquals(
+public fun <T : Comparable<T>> T.assertNotEquals(
     expected: T,
     message: String = "expected not to be equal, but $this == $expected"
 ) {
@@ -72,7 +72,7 @@ public inline fun <T : Comparable<T>> T.assertNotEquals(
     replaceWith = ReplaceWith("assert(expected, message)"),
     level = DeprecationLevel.WARNING
 )
-public inline fun <T : Comparable<T>> T.assertEquals(
+public fun <T : Comparable<T>> T.assertEquals(
     expected: T,
     message: String = "expected to be equal, but $this !== $expected"
 ) {
@@ -85,7 +85,7 @@ public inline fun <T : Comparable<T>> T.assertEquals(
  * @param expected T the expected value, that the actual should be
  * @param message [String] a message if the [expected] is different from the receiver
  */
-public inline fun <T : Comparable<T>> T?.assert(
+public fun <T : Comparable<T>> T?.assert(
     expected: T,
     message: String = "expected to be equal, but $this !== $expected"
 ) {
@@ -99,7 +99,7 @@ public inline fun <T : Comparable<T>> T?.assert(
  * @param different Enum<T> the value we are expecting this to be different from
  * @param message [String] a message if they are the same
  */
-public inline fun <T : Comparable<T>> T.assertNot(
+public fun <T : Comparable<T>> T.assertNot(
     different: T,
     message: String? = "Expected $this to be different from $different but they are the same"
 ): Unit = assertNotEquals(different, this, message)

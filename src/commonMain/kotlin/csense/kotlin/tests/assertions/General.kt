@@ -1,4 +1,4 @@
-@file:Suppress("unused", "NOTHING_TO_INLINE", "INVISIBLE_MEMBER", "INVISIBLE_REFERENCE")
+@file:Suppress("unused", "INVISIBLE_MEMBER", "INVISIBLE_REFERENCE")
 
 package csense.kotlin.tests.assertions
 
@@ -10,7 +10,7 @@ import kotlin.test.*
 /**
  * As the name suggest, calling this means failure.
  */
-public inline fun shouldNotBeCalled(): Nothing {
+public fun shouldNotBeCalled(): Nothing {
     fail(GeneralStrings.assertNotCalledMessage)
 }
 
@@ -18,7 +18,7 @@ public inline fun shouldNotBeCalled(): Nothing {
  * fails the test with the given message
  * @param message String
  */
-public inline fun failTest(message: String = ""): Nothing {
+public fun failTest(message: String = ""): Nothing {
     fail(message)
 }
 
@@ -28,7 +28,7 @@ public inline fun failTest(message: String = ""): Nothing {
  * @param otherValue T the value this receiver should be (both type and equals)
  * @param message [String] if they are different this will be printed (nb if they are different type another message will be printed).
  */
-@OptIn(ExperimentalContracts::class)
+
 public inline fun <reified T> Any.assertAs(
     otherValue: T,
     message: String = "value of \"$this\" is not the expected \"$otherValue\""
@@ -47,7 +47,7 @@ public inline fun <reified T> Any.assertAs(
  * @receiver [Any] the receiver we are testing is the same type as [T]
  * @param message [String] the message to print if the receiver is a different type from [T]
  */
-@OptIn(ExperimentalContracts::class)
+
 public inline fun <reified T> Any.assertIs(
     message: String = "expected `$this` of type `${this::class.simpleName}`  to be of type `${T::class}`, but it is not",
 ) {
@@ -62,7 +62,6 @@ public inline fun <reified T> Any.assertIs(
  * @receiver [Any] the receiver we are testing is the same type as [T]
  * @param message [String] the message to print if the receiver is a different type from [T]
  */
-@OptIn(ExperimentalContracts::class)
 public inline fun <reified T> Any.assertIsApply(
     message: String = "expected `$this` of type `${this::class.simpleName}`  to be of type `${T::class}`, but it is not",
     andAction: T.() -> Unit
@@ -79,8 +78,7 @@ public inline fun <reified T> Any.assertIsApply(
  * @receiver [Any]? the value to assert is not null
  * @param message [String] the message that gets printed if this is null
  */
-@OptIn(ExperimentalContracts::class)
-public inline fun Any?.assertNotNull(message: String = "") {
+public fun Any?.assertNotNull(message: String = "") {
     contract {
         returns() implies (this@assertNotNull != null)
     }
@@ -92,8 +90,8 @@ public inline fun Any?.assertNotNull(message: String = "") {
  * @receiver [Any]?
  * @param message [String]
  */
-@OptIn(ExperimentalContracts::class)
-public inline fun Any?.assertNull(message: String = "") {
+
+public fun Any?.assertNull(message: String = "") {
     contract {
         returns() implies (this@assertNull == null)
     }
@@ -106,7 +104,7 @@ public inline fun Any?.assertNull(message: String = "") {
  * @param message [String] the message to display if the receiver is null
  * @param action Function1<T, Unit> the receiver action  to run if the receiver is not null
  */
-@OptIn(ExperimentalContracts::class)
+
 public inline fun <T> T?.assertNotNullApply(message: String = "", action: T.() -> Unit) {
     contract {
         returns() implies (this@assertNotNullApply != null)
@@ -122,8 +120,8 @@ public inline fun <T> T?.assertNotNullApply(message: String = "", action: T.() -
  * @param message [String] the message to display if the receiver does not match the expected.
  */
 @Deprecated("Use regular assert. ", replaceWith = ReplaceWith("this.assert(other, message)"))
-@OptIn(ExperimentalContracts::class)
-public inline fun <@kotlin.internal.OnlyInputTypes T> T?.assertNotNullAndEquals(
+
+public fun <@kotlin.internal.OnlyInputTypes T> T?.assertNotNullAndEquals(
     expected: T?,
     message: String = "value was $this, expected $expected"
 ) {
@@ -144,7 +142,7 @@ public inline fun <@kotlin.internal.OnlyInputTypes T> T?.assertNotNullAndEquals(
 public inline fun assertCalled(
     message: String = GeneralStrings.assertCalledMessage,
     @IntLimit(from = 1) times: Int = 1,
-    action: (callback: () -> Unit) -> Unit
+    action: (shouldBeCalled: () -> Unit) -> Unit
 ) {
     var counter = 0
     action { counter += 1 }
@@ -158,7 +156,7 @@ public inline fun assertCalled(
  */
 public inline fun assertCalled(
     message: String = GeneralStrings.assertCalledMessage,
-    action: (callback: () -> Unit) -> Unit
+    action: (shouldBeCalled: () -> Unit) -> Unit
 ): Unit = assertCalled(message, 1, action)
 
 /**
@@ -169,7 +167,7 @@ public inline fun assertCalled(
  */
 public inline fun assertNotCalled(
     message: String = GeneralStrings.assertNotCalledMessage,
-    action: (callback: () -> Unit) -> Unit
+    action: (shouldNotBeCalled: () -> Unit) -> Unit
 ): Unit = assertCalled(message, 0, action)
 
 /**
@@ -218,7 +216,7 @@ public inline fun <reified T> assertCallbackCalledWith(
 /**
  * Asserts that this is equal to expected
  */
-public inline fun <@kotlin.internal.OnlyInputTypes T> T.assertByEquals(
+public fun <@kotlin.internal.OnlyInputTypes T> T.assertByEquals(
     expected: T?,
     optMessage: String? = null
 ) {

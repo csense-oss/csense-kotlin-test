@@ -1,5 +1,3 @@
-@file:Suppress("NOTHING_TO_INLINE")
-
 package csense.kotlin.tests.assertions
 
 import kotlin.test.assertEquals
@@ -10,7 +8,7 @@ import kotlin.test.assertEquals
  * @param value [Boolean] the expected value
  * @param message [String] the message to show if the receiver is not the given [value]
  */
-public inline fun Boolean?.assert(value: Boolean, message: String = "expected $value got $this") {
+public fun Boolean?.assert(value: Boolean, message: String = "expected $value got $this") {
     assertEquals(value, this, message)
 }
 
@@ -19,7 +17,7 @@ public inline fun Boolean?.assert(value: Boolean, message: String = "expected $v
  * @receiver [Boolean] the [Boolean] to test
  * @param message [String] the message to show if the receiver is not false
  */
-public inline fun Boolean.assertFalse(message: String = "expected false got true") {
+public fun Boolean.assertFalse(message: String = "expected false got true") {
     assert(false, message)
 }
 
@@ -28,6 +26,6 @@ public inline fun Boolean.assertFalse(message: String = "expected false got true
  * @receiver [Boolean] the [Boolean] to test
  * @param message [String] the message to show if the receiver is not true
  */
-public inline fun Boolean.assertTrue(message: String = "expected true, got false") {
+public fun Boolean.assertTrue(message: String = "expected true, got false") {
     assert(true, message)
 }

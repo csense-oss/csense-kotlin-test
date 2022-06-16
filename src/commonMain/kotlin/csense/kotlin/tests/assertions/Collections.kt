@@ -1,4 +1,4 @@
-@file:Suppress("unused", "NOTHING_TO_INLINE", "INVISIBLE_MEMBER", "INVISIBLE_REFERENCE")
+@file:Suppress("unused", "INVISIBLE_MEMBER", "INVISIBLE_REFERENCE")
 
 package csense.kotlin.tests.assertions
 
@@ -15,7 +15,7 @@ import kotlin.test.assertEquals
  * @param size [Int]
  * @param message [String]
  */
-public inline fun <T> Collection<T>.assertSize(@IntLimit(from = 0) size: Int, message: String = ""): Unit =
+public fun <T> Collection<T>.assertSize(@IntLimit(from = 0) size: Int, message: String = ""): Unit =
     this.size.assert(size, message)
 
 /**
@@ -39,14 +39,14 @@ public inline fun <T> Collection<T>.assertSizeAnd(
  * @receiver [Collection]<T>
  * @param message [String]
  */
-public inline fun <T> Collection<T>.assertEmpty(message: String = "should be empty"): Unit = assertSize(0, message)
+public fun <T> Collection<T>.assertEmpty(message: String = "should be empty"): Unit = assertSize(0, message)
 
 /**
  * Asserts that this collection has content
  * @receiver [Collection]<T>
  * @param message [String]
  */
-public inline fun <T> Collection<T>.assertNotEmpty(message: String = "should have content"): Unit =
+public fun <T> Collection<T>.assertNotEmpty(message: String = "should have content"): Unit =
     this.size.assertLargerOrEqualTo(1, message)
 
 /**
@@ -55,7 +55,7 @@ public inline fun <T> Collection<T>.assertNotEmpty(message: String = "should hav
  * @param item T
  * @param message [String]
  */
-public inline fun <@kotlin.internal.OnlyInputTypes T> Collection<T>.assertContains(
+public fun <@kotlin.internal.OnlyInputTypes T> Collection<T>.assertContains(
     item: T,
     message: String = "Should contain $item"
 ) {
@@ -68,12 +68,12 @@ public inline fun <@kotlin.internal.OnlyInputTypes T> Collection<T>.assertContai
  * @param items [Array]<out T>
  */
 
-public inline fun <@kotlin.internal.OnlyInputTypes T> Collection<T>.assertContainsAll(
+public fun <@kotlin.internal.OnlyInputTypes T> Collection<T>.assertContainsAll(
     vararg items: T
 ): Unit = items.forEach { assertContains(it) }
 
 
-public inline fun <@kotlin.internal.OnlyInputTypes T> Collection<T>.assertContainsAll(
+public fun <@kotlin.internal.OnlyInputTypes T> Collection<T>.assertContainsAll(
     items: Iterable<T>
 ): Unit = items.forEach { assertContains(it) }
 
@@ -83,7 +83,7 @@ public inline fun <@kotlin.internal.OnlyInputTypes T> Collection<T>.assertContai
  * @param item T
  * @param message [String]
  */
-public inline fun <@kotlin.internal.OnlyInputTypes T> Collection<T>.assertContainsNot(
+public fun <@kotlin.internal.OnlyInputTypes T> Collection<T>.assertContainsNot(
     item: T,
     message: String = "Should not contain $item"
 ) {
@@ -95,7 +95,7 @@ public inline fun <@kotlin.internal.OnlyInputTypes T> Collection<T>.assertContai
  * @receiver [Collection]<T>
  * @param items [Array]<out T>
  */
-public inline fun <@kotlin.internal.OnlyInputTypes T> Collection<T>.assertContainsNotAll(
+public fun <@kotlin.internal.OnlyInputTypes T> Collection<T>.assertContainsNotAll(
     vararg items: T
 ): Unit = items.forEach { assertContainsNot(it) }
 
@@ -104,7 +104,7 @@ public inline fun <@kotlin.internal.OnlyInputTypes T> Collection<T>.assertContai
  * @receiver [Collection]<T>
  * @param items [Array]<out T>
  */
-public inline fun <@kotlin.internal.OnlyInputTypes T> Collection<T>.assertContainsNotAll(
+public fun <@kotlin.internal.OnlyInputTypes T> Collection<T>.assertContainsNotAll(
     items: Iterable<T>
 ): Unit = items.forEach { assertContainsNot(it) }
 
@@ -113,7 +113,7 @@ public inline fun <@kotlin.internal.OnlyInputTypes T> Collection<T>.assertContai
  * @receiver [Collection]<T>
  * @param item T
  */
-public inline fun <@kotlin.internal.OnlyInputTypes T> Collection<T>.assertSingle(item: T) {
+public fun <@kotlin.internal.OnlyInputTypes T> Collection<T>.assertSingle(item: T) {
     assertSize(1)
     assertEquals(item, first())
 }
@@ -123,7 +123,7 @@ public inline fun <@kotlin.internal.OnlyInputTypes T> Collection<T>.assertSingle
  * @receiver [Collection]<T>
  * @param callback (T) -> Unit
  */
-@OptIn(ExperimentalContracts::class)
+
 public inline fun <@kotlin.internal.OnlyInputTypes T> Collection<T>.assertSingle(callback: (T) -> Unit) {
     contract {
         callsInPlace(callback, kind = InvocationKind.AT_MOST_ONCE)
@@ -138,18 +138,18 @@ public inline fun <@kotlin.internal.OnlyInputTypes T> Collection<T>.assertSingle
  * @receiver Collection<T>
  * @param
  */
-public inline fun <T> Collection<T>.assertContent(expected: Collection<T>) where T : Comparable<T> {
+public fun <T> Collection<T>.assertContent(expected: Collection<T>) where T : Comparable<T> {
     assertSize(expected)
     assertContainsAll(expected)
 }
 
-public inline fun <T> Collection<T>.assertContentAndOrder(expected: Collection<T>) where T : Comparable<T> {
+public fun <T> Collection<T>.assertContentAndOrder(expected: Collection<T>) where T : Comparable<T> {
     assertSize(expected)
     forEachIndexed { index, actual ->
         actual.assert(expected.elementAt(index))
     }
 }
 
-public inline fun <T> Collection<T>.assertSize(expected: Collection<T>) {
+public fun <T> Collection<T>.assertSize(expected: Collection<T>) {
     this.size.assert(expected.size, message = "Should have item count, actual = $size expected size = ${expected.size}")
 }
