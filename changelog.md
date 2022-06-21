@@ -5,6 +5,7 @@
   - assertNotEmpty() for all specific array types
 
 # 0.0.57
+- kotlin 1.7.0
 - better callback names (makes idea suggest / use meaningful name(s) such as "shouldBeCalled" instead of "callback")
 - better usage of message(s)
 - fixed issues with Double & Float (infinities, and NaN's)
