@@ -3,12 +3,11 @@
 package csense.kotlin.tests.assertions
 
 import csense.kotlin.annotations.numbers.*
-import kotlin.contracts.ExperimentalContracts
-import kotlin.contracts.InvocationKind
-import kotlin.contracts.contract
-import kotlin.experimental.ExperimentalTypeInference
-import kotlin.test.assertEquals
+import kotlin.contracts.*
+import kotlin.math.*
+import kotlin.test.*
 
+//region assertSize
 /**
  * Asserts the size of the given [IntArray]
  * @receiver [IntArray] the array to assert the size (length) of
@@ -81,7 +80,6 @@ public fun CharArray.assertSize(@IntLimit(from = 0) size: Int, message: String =
 public fun FloatArray.assertSize(@IntLimit(from = 0) size: Int, message: String = ""): Unit =
     this.size.assert(size, message)
 
-//region Array<T>
 /**
  * Asserts that the size of this array is the given size.
  * @receiver [Array]<T>
@@ -91,6 +89,9 @@ public fun FloatArray.assertSize(@IntLimit(from = 0) size: Int, message: String 
 public fun <T> Array<T>.assertSize(@IntLimit(from = 0) size: Int, message: String = ""): Unit =
     this.size.assert(size, message)
 
+//endregion
+
+//region assertEmpty
 /**
  * Asserts that this array is empty
  * @receiver [Array]<T>
@@ -98,15 +99,6 @@ public fun <T> Array<T>.assertSize(@IntLimit(from = 0) size: Int, message: Strin
  */
 public fun <T> Array<T>.assertEmpty(message: String = "should be empty"): Unit = assertSize(0, message = message)
 
-/**
- * Asserts that this array has content
- * @param message String the assertion message if the array is empty
- */
-public fun <T> Array<T>.assertNotEmpty(message: String = "should have content"): Unit =
-    size.assertLargerOrEqualTo(1, optMessage = message)
-
-
-//region specific array type: assertEmpty
 /**
  * Asserts that this array is empty
  * @param message [String] the message to print if the assertion fails
@@ -150,7 +142,70 @@ public fun ShortArray.assertEmpty(message: String = "should be empty"): Unit = a
 public fun CharArray.assertEmpty(message: String = "should be empty"): Unit = assertSize(0, message = message)
 //endregion
 
-//region specific array type: assertSingle
+//region assertNotEmpty
+/**
+ * Asserts that this array has content
+ * @param message String the assertion message if the array is empty
+ */
+public fun <T> Array<T>.assertNotEmpty(message: String = "should have content"): Unit =
+    size.assertLargerOrEqualTo(1, optMessage = message)
+
+
+/**
+ * Asserts that this IntArray has content
+ * @param message String the assertion message if the array is empty
+ */
+public fun IntArray.assertNotEmpty(message: String = "should have content"): Unit =
+    size.assertLargerOrEqualTo(1, optMessage = message)
+
+
+/**
+ * Asserts that this LongArray has content
+ * @param message String the assertion message if the array is empty
+ */
+public fun LongArray.assertNotEmpty(message: String = "should have content"): Unit =
+    size.assertLargerOrEqualTo(1, optMessage = message)
+
+/**
+ * Asserts that this ShortArray has content
+ * @param message String the assertion message if the array is empty
+ */
+public fun ShortArray.assertNotEmpty(message: String = "should have content"): Unit =
+    size.assertLargerOrEqualTo(1, optMessage = message)
+
+/**
+ * Asserts that this BooleanArray has content
+ * @param message String the assertion message if the array is empty
+ */
+public fun BooleanArray.assertNotEmpty(message: String = "should have content"): Unit =
+    size.assertLargerOrEqualTo(1, optMessage = message)
+
+/**
+ * Asserts that this CharArray has content
+ * @param message String the assertion message if the array is empty
+ */
+public fun CharArray.assertNotEmpty(message: String = "should have content"): Unit =
+    size.assertLargerOrEqualTo(1, optMessage = message)
+
+
+/**
+ * Asserts that this FloatArray has content
+ * @param message String the assertion message if the array is empty
+ */
+public fun FloatArray.assertNotEmpty(message: String = "should have content"): Unit =
+    size.assertLargerOrEqualTo(1, optMessage = message)
+
+
+/**
+ * Asserts that this DoubleArray has content
+ * @param message String the assertion message if the array is empty
+ */
+public fun DoubleArray.assertNotEmpty(message: String = "should have content"): Unit =
+    size.assertLargerOrEqualTo(1, optMessage = message)
+
+//endregion
+
+//region assertSingle
 /**
  * Asserts that this array contains the only given item
  * @param item Int the item that this array should contain
@@ -220,7 +275,6 @@ public fun CharArray.assertSingle(item: Char, message: String = "") {
     assertSize(1, message = "Should have 1 item")
     assertEquals(item, first(), message)
 }
-//endregion
 
 /**
  * Asserts that this array contains the only given item
@@ -233,18 +287,172 @@ public fun <T> Array<T>.assertSingle(item: T, message: String = "") {
     assertEquals(item, first(), message)
 }
 
+//endregion
+
+//region assertSingle with callback
+
 /**
  * Asserts that this array contains the only given item and if so invokes the given [callback]
  * @receiver [Array]<T>
  * @param message [String]  the message to print if the equality assertion fails
  * @param callback Function1<T, Unit> the call to invoke if the array only have 1 element
  */
-@OptIn(ExperimentalContracts::class, ExperimentalTypeInference::class)
 public fun <T> Array<T>.assertSingle(message: String = "Should have 1 item", callback: (T) -> Unit) {
     contract {
         callsInPlace(callback, kind = InvocationKind.AT_MOST_ONCE)
     }
     assertSize(1, message = message)
     callback(first())
+}
+
+
+//TODO add assertSingle for all specific array types.
+
+//endregion
+
+//region assert
+
+public fun BooleanArray.assert(
+    expected: BooleanArray,
+    message: String = "Expected this BooleanArray to be the same as expected but was different"
+) {
+    ArrayAssertions.AssertArrays(
+        givenArray = this,
+        expected = expected,
+        message = message,
+        getSize = BooleanArray::size,
+        getElementAt = BooleanArray::get
+    )
+}
+
+public fun ByteArray.assert(
+    expected: ByteArray,
+    message: String = "Expected this ByteArray to be the same as expected but was different"
+) {
+    ArrayAssertions.AssertArrays(
+        givenArray = this,
+        expected = expected,
+        message = message,
+        getSize = ByteArray::size,
+        getElementAt = ByteArray::get
+    )
+}
+
+public fun CharArray.assert(
+    expected: CharArray,
+    message: String = "Expected this CharArray to be the same as expected but was different"
+) {
+    ArrayAssertions.AssertArrays(
+        givenArray = this,
+        expected = expected,
+        message = message,
+        getSize = CharArray::size,
+        getElementAt = CharArray::get
+    )
+}
+
+public fun DoubleArray.assert(
+    expected: DoubleArray,
+    message: String = "Expected this DoubleArray to be the same as expected but was different"
+) {
+    ArrayAssertions.AssertArrays(
+        givenArray = this,
+        expected = expected,
+        message = message,
+        getSize = DoubleArray::size,
+        getElementAt = DoubleArray::get
+    )
+}
+
+
+public fun FloatArray.assert(
+    expected: FloatArray,
+    message: String = "Expected this FloatArray to be the same as expected but was different"
+) {
+    ArrayAssertions.AssertArrays(
+        givenArray = this,
+        expected = expected,
+        message = message,
+        getSize = FloatArray::size,
+        getElementAt = FloatArray::get
+    )
+}
+
+public fun IntArray.assert(
+    expected: IntArray,
+    message: String = "Expected this IntArray to be the same as expected but was different"
+) {
+    ArrayAssertions.AssertArrays(
+        givenArray = this,
+        expected = expected,
+        message = message,
+        getSize = IntArray::size,
+        getElementAt = IntArray::get
+    )
+}
+
+public fun LongArray.assert(
+    expected: LongArray,
+    message: String = "Expected this LongArray to be the same as expected but was different"
+) {
+    ArrayAssertions.AssertArrays(
+        givenArray = this,
+        expected = expected,
+        message = message,
+        getSize = LongArray::size,
+        getElementAt = LongArray::get
+    )
+}
+
+public fun ShortArray.assert(
+    expected: ShortArray,
+    message: String = "Expected this ShortArray to be the same as expected but was different"
+) {
+    ArrayAssertions.AssertArrays(
+        givenArray = this,
+        expected = expected,
+        message = message,
+        getSize = ShortArray::size,
+        getElementAt = ShortArray::get
+    )
+}
+
+public fun <T : Comparable<T>> Array<T>.assert(
+    expected: Array<T>,
+    message: String = "Expected this Array to be the same as expected but was different"
+) {
+    ArrayAssertions.AssertArrays(
+        givenArray = this,
+        expected = expected,
+        message = message,
+        getSize = Array<T>::size,
+        getElementAt = Array<T>::get
+    )
+}
+
+public object ArrayAssertions {
+    public fun <T, U : Comparable<U>> AssertArrays(
+        givenArray: T,
+        expected: T,
+        message: String,
+        getSize: T.() -> Int,
+        getElementAt: T.(index: Int) -> U
+    ) {
+        val givenSize = givenArray.getSize()
+        val expectedSize = expected.getSize()
+        givenSize.assert(
+            expectedSize,
+            message = "Expected this to have same number($givenSize of elements as the expected ($expectedSize)"
+        )
+        for (index in 0 until givenSize) {
+            val thisItem = givenArray.getElementAt(index)
+            val expectedItem = expected.getElementAt(index)
+
+            thisItem.assert(
+                expected = expectedItem,
+                message = "$message.Failed at index $index, with byte: $thisItem, expected $expectedItem"
+            )
+        }
+    }
 }
 //endregion

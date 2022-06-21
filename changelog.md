@@ -1,3 +1,9 @@
+# 0.0.58
+- added 
+  - Array<T>.assert
+    - and for all specific array types
+  - assertNotEmpty() for all specific array types
+
 # 0.0.57
 - better callback names (makes idea suggest / use meaningful name(s) such as "shouldBeCalled" instead of "callback")
 - better usage of message(s)

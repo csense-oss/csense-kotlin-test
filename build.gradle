@@ -1,7 +1,7 @@
 buildscript {
     //dependencies
     //https://github.com/Kotlin/kotlinx.coroutines
-    ext.coroutinesVersion = "1.6.1"
+    ext.coroutinesVersion = "1.6.3"
     //https://github.com/junit-team/junit5/releases
     ext.junit5Version = "5.8.2"
     //https://github.com/junit-team/junit4/releases
@@ -13,7 +13,7 @@ buildscript {
 
 
     //versions & naming
-    ext.csenseVersionName = "0.0.57"
+    ext.csenseVersionName = "0.0.58-snapshot"
     ext.csenseGroupId = "csense.kotlin"
     ext.csenseArtifactId = "csense-kotlin-tests"
 
