@@ -1,3 +1,9 @@
+# 0.0.59
+- added
+  - (T & Any).nullable (to assist if say there are deprecated overloads for functions that disallow nonnull able types)
+
+- improved Array.assert (with "out variance")
+
 # 0.0.58
 - added 
   - Array<T>.assert

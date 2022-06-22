@@ -226,8 +226,14 @@ public fun <@kotlin.internal.OnlyInputTypes T> T.assertByEquals(
     )
 }
 
+@Suppress("RedundantNullableReturnType", "NOTHING_TO_INLINE")
+public inline fun <T> (T & Any).nullable(): T? {
+    return this
+}
+
 
 public object GeneralStrings {
     public const val assertCalledMessage: String = "Should be called, but did not get called enough times"
     public const val assertNotCalledMessage: String = "Should not be called but got called anyway"
 }
+
