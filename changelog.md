@@ -1,10 +1,24 @@
+# 0.0.59
+
+- using kotlin 1.7.20
+- added
+    - (T & Any).nullable (to assist if say there are deprecated overloads for functions that disallow nonnull able
+      types)
+    - TestScope.advanceTimeBy(duration: Duration)
+    - Map.Entry.assertByEquals
+
+- improved Array.assert (with "out variance")
+- renamed Pair.assert to Pair.assertByEquals
+
 # 0.0.58
-- added 
-  - Array<T>.assert
-    - and for all specific array types
-  - assertNotEmpty() for all specific array types
+
+- added
+    - Array<T>.assert
+        - and for all specific array types
+    - assertNotEmpty() for all specific array types
 
 # 0.0.57
+
 - kotlin 1.7.0
 - better callback names (makes idea suggest / use meaningful name(s) such as "shouldBeCalled" instead of "callback")
 - better usage of message(s)

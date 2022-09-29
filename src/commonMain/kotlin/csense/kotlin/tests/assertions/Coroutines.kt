@@ -1,11 +1,12 @@
+@file:OptIn(ExperimentalCoroutinesApi::class, ExperimentalCoroutinesApi::class)
 @file:Suppress("unused")
 
 package csense.kotlin.tests.assertions
 
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.CoroutineScope
-import kotlin.coroutines.ContinuationInterceptor
-import kotlin.coroutines.CoroutineContext
+import kotlinx.coroutines.*
+import kotlinx.coroutines.test.*
+import kotlin.coroutines.*
+import kotlin.time.*
 
 
 public fun CoroutineScope.assertDispatcher(otherDispatcher: CoroutineDispatcher) {
@@ -16,3 +17,8 @@ private fun CoroutineScope.getCurrentDispatcher() = coroutineContext.getCurrentD
 
 private fun CoroutineContext.getCurrentDispatcher(): CoroutineDispatcher =
     this[ContinuationInterceptor] as CoroutineDispatcher
+
+
+public fun TestScope.advanceTimeBy(duration: Duration) {
+    advanceTimeBy(delayTimeMillis = duration.inWholeMilliseconds)
+}

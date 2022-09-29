@@ -1,19 +1,19 @@
 buildscript {
     //dependencies
     //https://github.com/Kotlin/kotlinx.coroutines
-    ext.coroutinesVersion = "1.6.3"
+    ext.coroutinesVersion = "1.6.4"
     //https://github.com/junit-team/junit5/releases
-    ext.junit5Version = "5.8.2"
+    ext.junit5Version = "5.9.1"
     //https://github.com/junit-team/junit4/releases
     ext.junit4Version = "4.13.2"
     //https://github.com/JetBrains/kotlin/releases
-    ext.kotlin_version = "1.7.0"
+    ext.kotlin_version = "1.7.20"
     //https://github.com/csense-oss/csense-kotlin-annotations
     ext.csenseAnnotationVersion = "0.0.50"
 
 
     //versions & naming
-    ext.csenseVersionName = "0.0.58"
+    ext.csenseVersionName = "0.0.59"
     ext.csenseGroupId = "csense.kotlin"
     ext.csenseArtifactId = "csense-kotlin-tests"
 
@@ -70,7 +70,7 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
+                implementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
                 implementation kotlin('test-common')
                 implementation kotlin('test-annotations-common')
                 implementation "csense.kotlin:csense-kotlin-annotations:$csenseAnnotationVersion"

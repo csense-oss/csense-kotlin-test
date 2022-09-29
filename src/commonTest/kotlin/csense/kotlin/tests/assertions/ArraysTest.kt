@@ -1206,7 +1206,7 @@ class ArraysTest {
     }
 
 
-    class ArrayTAssertExpected {
+    class ArrayOutTAssertExpected {
 
         @Test
         fun emptyToEmpty() {

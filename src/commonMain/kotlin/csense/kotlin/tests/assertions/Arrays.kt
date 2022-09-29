@@ -4,7 +4,6 @@ package csense.kotlin.tests.assertions
 
 import csense.kotlin.annotations.numbers.*
 import kotlin.contracts.*
-import kotlin.math.*
 import kotlin.test.*
 
 //region assertSize
@@ -417,16 +416,16 @@ public fun ShortArray.assert(
     )
 }
 
-public fun <T : Comparable<T>> Array<T>.assert(
-    expected: Array<T>,
+public fun <T : Comparable<T>> Array<out T>.assert(
+    expected: Array<out T>,
     message: String = "Expected this Array to be the same as expected but was different"
 ) {
     ArrayAssertions.AssertArrays(
         givenArray = this,
         expected = expected,
         message = message,
-        getSize = Array<T>::size,
-        getElementAt = Array<T>::get
+        getSize = { size },
+        getElementAt = { get(it) }
     )
 }
 

@@ -11,3 +11,14 @@ public inline fun <@kotlin.internal.OnlyInputTypes Key, @kotlin.internal.OnlyInp
     this.key.assert(key)
     this.value.assert(value)
 }
+
+
+public inline fun <Key, Value> Map.Entry<Key, Value>?.assertByEquals(
+    key: Key,
+    value: Value
+) {
+    assertNotNull()
+    this.key.assertByEquals(key)
+    this.value.assertByEquals(value)
+}
+

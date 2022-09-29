@@ -3,10 +3,8 @@
 package csense.kotlin.tests.assertions
 
 import csense.kotlin.annotations.numbers.*
-import kotlin.contracts.ExperimentalContracts
-import kotlin.contracts.InvocationKind
-import kotlin.contracts.contract
-import kotlin.test.assertEquals
+import kotlin.contracts.*
+import kotlin.test.*
 
 
 /**

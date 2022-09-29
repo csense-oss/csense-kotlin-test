@@ -1,11 +1,9 @@
 package csense.kotlin.tests.assertions
 
-import kotlin.test.*
-
-public fun <First, Second> Pair<First, Second>?.assert(expected: Pair<First, Second>) {
+public fun <First, Second> Pair<First, Second>?.assertByEquals(expected: Pair<First, Second>) {
     if (this == null) {
         failTest("Expected $expected but got $this")
     }
-    assertEquals(expected.first, this.first)
-    assertEquals(expected.second, this.second)
+    expected.first.assertByEquals(first)
+    expected.second.assertByEquals(second)
 }
