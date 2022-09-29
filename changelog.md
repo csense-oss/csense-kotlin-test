@@ -1,3 +1,7 @@
+# 0.0.60
+- added
+    - assertDispatcher<Default, Main, Unconfined, IO>
+
 # 0.0.59
 
 - using kotlin 1.7.20
