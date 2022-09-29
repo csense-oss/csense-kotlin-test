@@ -2,10 +2,8 @@
 
 package csense.kotlin.tests.assertions
 
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.CoroutineScope
-import kotlin.coroutines.ContinuationInterceptor
-import kotlin.coroutines.CoroutineContext
+import kotlinx.coroutines.*
+import kotlin.coroutines.*
 
 
 public fun CoroutineScope.assertDispatcher(otherDispatcher: CoroutineDispatcher) {

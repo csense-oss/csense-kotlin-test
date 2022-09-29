@@ -1,6 +1,6 @@
 package csense.kotlin.tests.assertions
 
-import kotlin.test.assertEquals
+import kotlin.test.*
 
 /**
  * Asserts this [Boolean] is the given value

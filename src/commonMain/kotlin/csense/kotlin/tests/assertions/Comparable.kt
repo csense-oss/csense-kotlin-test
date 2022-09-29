@@ -2,9 +2,7 @@
 
 package csense.kotlin.tests.assertions
 
-import kotlin.test.assertEquals
-import kotlin.test.assertNotEquals
-import kotlin.test.assertTrue
+import kotlin.test.*
 
 /**
  * Asserts the given value is larger or equal to (>=) the asserted value

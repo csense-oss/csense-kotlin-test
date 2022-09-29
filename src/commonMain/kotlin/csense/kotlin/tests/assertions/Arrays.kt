@@ -4,7 +4,6 @@ package csense.kotlin.tests.assertions
 
 import csense.kotlin.annotations.numbers.*
 import kotlin.contracts.*
-import kotlin.math.*
 import kotlin.test.*
 
 //region assertSize

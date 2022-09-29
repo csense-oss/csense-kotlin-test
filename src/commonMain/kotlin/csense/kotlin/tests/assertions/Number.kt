@@ -2,7 +2,7 @@
 
 package csense.kotlin.tests.assertions
 
-import kotlin.math.abs
+import kotlin.math.*
 import kotlin.test.*
 
 //region Double
