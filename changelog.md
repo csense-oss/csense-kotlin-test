@@ -6,7 +6,6 @@
       types)
     - TestScope.advanceTimeBy(duration: Duration)
     - Map.Entry.assertByEquals
-    - 
 
 - improved Array.assert (with "out variance")
 - renamed Pair.assert to Pair.assertByEquals
