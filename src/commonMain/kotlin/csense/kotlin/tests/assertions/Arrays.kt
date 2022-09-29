@@ -374,7 +374,7 @@ public fun FloatArray.assert(
         message = message,
         getSize = FloatArray::size,
         getElementAt = FloatArray::get
-    )
+    )TestScope.advanceTimeBy(duration: Duration)
 }
 
 public fun IntArray.assert(

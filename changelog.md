@@ -1,6 +1,7 @@
 # 0.0.59
 - added
   - (T & Any).nullable (to assist if say there are deprecated overloads for functions that disallow nonnull able types)
+  - TestScope.advanceTimeBy(duration: Duration)
 
 - improved Array.assert (with "out variance")
 
