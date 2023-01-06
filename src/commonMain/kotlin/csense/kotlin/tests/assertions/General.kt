@@ -47,14 +47,16 @@ public inline fun <reified T> Any.assertAs(
  * @param message [String] the message to print if the receiver is a different type from [T]
  */
 
-public inline fun <reified T> Any.assertIs(
-    message: String = "expected `$this` of type `${this::class.simpleName}`  to be of type `${T::class}`, but it is not",
+public inline fun <reified T> Any?.assertIs(
+    message: String = "expected `$this` of type `${this.helpers.simpleClassNameOrDash()}`  to be of type `${T::class}`, but it is not",
 ) {
     contract {
         returns() implies (this@assertIs is T)
     }
     assertTrue(this is T, message)
 }
+
+
 
 /**
  * Assert this is the given type
@@ -84,6 +86,13 @@ public fun Any?.assertNotNull(message: String = "") {
     assertNotNull(this, message)
 }
 
+@Suppress("UnusedReceiverParameter", "DeprecatedCallableAddReplaceWith")
+@Deprecated(
+    "Asserting compile time known notnull value to be not null is an error",
+    level = DeprecationLevel.ERROR
+)
+public fun Any.assertNotNull(message: String = ""): Nothing = failTest()
+
 /**
  * Asserts this is null (and if it is null, then kotlin smart casts it to a null variable)
  * @receiver [Any]?
@@ -96,6 +105,13 @@ public fun Any?.assertNull(message: String = "") {
     }
     assertNull(this, message)
 }
+
+@Suppress("UnusedReceiverParameter", "DeprecatedCallableAddReplaceWith")
+@Deprecated(
+    "Asserting compile time known notnull value to be null is an error",
+    level = DeprecationLevel.ERROR
+)
+public fun Any.assertNull(message: String = ""): Nothing = failTest()
 
 /**
  * Asserts this is not null and if not then applies the given [action] on it
@@ -222,6 +238,16 @@ public fun <@kotlin.internal.OnlyInputTypes T> T.assertByEquals(
     val isEqual = this?.equals(expected) == true
     isEqual.assertTrue(
         message = "Expected $this to be equal (via equals) to $expected. ${optMessage ?: ""}"
+    )
+}
+
+public fun <@kotlin.internal.OnlyInputTypes T> T.assertNotByEquals(
+    unexpected: T?,
+    optMessage: String? = null
+) {
+    val isNotEqual = this?.equals(unexpected) != true
+    isNotEqual.assertTrue(
+        message = "Expected $this to be different (via equals) to $unexpected. ${optMessage ?: ""}"
     )
 }
 

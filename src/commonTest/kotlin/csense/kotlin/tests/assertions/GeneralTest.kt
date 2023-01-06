@@ -19,7 +19,7 @@ class GeneralTest {
 
     @Test
     fun anyAssertNotNull() {
-        "".assertNotNull()
+        "".nullable().assertNotNull()
         assertThrows<Throwable> {
             val x: Int? = null
             x.assertNotNull()
@@ -31,7 +31,7 @@ class GeneralTest {
         val x: Int? = null
         x.assertNull()
         assertThrows<Throwable> {
-            "".assertNull()
+            "".nullable().assertNull()
         }
     }
 
