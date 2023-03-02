@@ -1,5 +1,5 @@
 # 0.0.60
-- now available on macos targets & ios targets
+- now available on tier 1 & tier 2 (mostly) targets + mingw
 - targets java 11
 - only ships with junit 5 on jvm.
 - added
