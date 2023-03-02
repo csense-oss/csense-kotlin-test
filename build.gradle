@@ -3,17 +3,17 @@ buildscript {
     //https://github.com/Kotlin/kotlinx.coroutines
     ext.coroutinesVersion = "1.6.4"
     //https://github.com/junit-team/junit5/releases
-    ext.junit5Version = "5.9.1"
+    ext.junit5Version = "5.9.2"
     //https://github.com/junit-team/junit4/releases
     ext.junit4Version = "4.13.2"
     //https://github.com/JetBrains/kotlin/releases
-    ext.kotlin_version = "1.7.20"
+    ext.kotlin_version = "1.8.10"
     //https://github.com/csense-oss/csense-kotlin-annotations
-    ext.csenseAnnotationVersion = "0.0.50"
+    ext.csenseAnnotationVersion = "0.0.60"
 
 
     //versions & naming
-    ext.csenseVersionName = "0.0.59"
+    ext.csenseVersionName = "0.0.60"
     ext.csenseGroupId = "csense.kotlin"
     ext.csenseArtifactId = "csense-kotlin-tests"
 
@@ -56,14 +56,18 @@ kotlin {
     explicitApi = 'strict'
     jvm {
         compilations.all {
-            kotlinOptions.jvmTarget = '1.8'
+            kotlinOptions.jvmTarget = '11'
         }
         withJava()
         testRuns["test"].executionTask.configure {
             useJUnitPlatform()
         }
     }
-    js(BOTH) { //https://kotlinlang.org/docs/reference/whatsnew14.html#new-js-ir-backend
+    iosArm64()
+    iosX64()
+    macosArm64()
+    macosX64()
+    js(IR) { //https://kotlinlang.org/docs/reference/whatsnew14.html#new-js-ir-backend
         browser()
         nodejs()
     }

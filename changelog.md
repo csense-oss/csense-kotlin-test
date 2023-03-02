@@ -1,9 +1,11 @@
 # 0.0.60
+- now available on macos targets & ios targets
+- targets java 11
 - added
     - assertDispatcher<Default, Main, Unconfined, IO>
     - assertNotByEquals
     - error(s) to when using assertNull / assertNotNull wrongly (eg on a non-nullable value)
-
+  
 - changed
   - assertIs(apply) to accept null, which of cause will fail the test
   - 
