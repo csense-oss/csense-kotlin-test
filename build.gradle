@@ -80,7 +80,7 @@ kotlin {
     iosX64()
 
     //- tier 2
-    linuxArm64()
+    //linuxArm64() //cannot be used as of now, due to coroutines not having this (will be fixed in the future)
     watchosSimulatorArm64()
     watchosX64()
     watchosArm32()
@@ -109,10 +109,8 @@ kotlin {
             dependencies {
                 api "org.junit.jupiter:junit-jupiter-api:$junit5Version"
                 api "org.junit.jupiter:junit-jupiter-engine:$junit5Version"
-                api "junit:junit:$junit4Version"
                 api "org.junit.vintage:junit-vintage-engine:$junit5Version"
                 api "org.jetbrains.kotlin:kotlin-test-junit5:$kotlin_version"
-                api "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
             }
         }
 

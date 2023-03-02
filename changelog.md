@@ -1,6 +1,7 @@
 # 0.0.60
 - now available on macos targets & ios targets
 - targets java 11
+- only ships with junit 5 on jvm.
 - added
     - assertDispatcher<Default, Main, Unconfined, IO>
     - assertNotByEquals
