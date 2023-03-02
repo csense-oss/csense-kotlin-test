@@ -91,7 +91,7 @@ public fun Any?.assertNotNull(message: String = "") {
     "Asserting compile time known notnull value to be not null is an error",
     level = DeprecationLevel.ERROR
 )
-public fun Any.assertNotNull(message: String = ""): Nothing = failTest()
+public fun Any.assertNotNull(message: String = ""): Nothing = failTest(message)
 
 /**
  * Asserts this is null (and if it is null, then kotlin smart casts it to a null variable)
@@ -111,7 +111,7 @@ public fun Any?.assertNull(message: String = "") {
     "Asserting compile time known notnull value to be null is an error",
     level = DeprecationLevel.ERROR
 )
-public fun Any.assertNull(message: String = ""): Nothing = failTest()
+public fun Any.assertNull(message: String = ""): Nothing = failTest(message)
 
 /**
  * Asserts this is not null and if not then applies the given [action] on it

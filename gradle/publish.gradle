@@ -14,10 +14,7 @@ afterEvaluate {
                 apply from: "$rootDir/gradle/publish-mpp-root-module-in-platform.gradle"
                 publishPlatformArtifactsInRootModule(publishing.publications["jvm"])
                 break
-            case 'metadata':
-            case 'jvm':
-            case 'js':
-            case 'native':
+            default:
                 it.artifactId = "$project.name-$type"
                 break
         }

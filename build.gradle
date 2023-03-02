@@ -1,3 +1,6 @@
+import org.jetbrains.kotlin.gradle.dsl.ExplicitApiMode
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 buildscript {
     //dependencies
     //https://github.com/Kotlin/kotlinx.coroutines
@@ -53,13 +56,13 @@ group project.csenseGroupId
 version project.csenseVersionName
 
 kotlin {
-    explicitApi = 'strict'
+    explicitApi = ExplicitApiMode.Strict
     jvm {
-        compilations.all {
+        compilations.configureEach {
             kotlinOptions.jvmTarget = '11'
         }
         withJava()
-        testRuns["test"].executionTask.configure {
+        test {
             useJUnitPlatform()
         }
     }
@@ -97,12 +100,13 @@ kotlin {
                 api "org.jetbrains.kotlin:kotlin-test-js:$kotlin_version"
             }
         }
-        all {
+        configureEach {
             languageSettings {
-                languageVersion = "1.7"
+                languageVersion = "1.8"
                 optIn("kotlin.contracts.ExperimentalContracts")
                 progressiveMode = true
             }
+
         }
     }
 }
@@ -113,3 +117,11 @@ project.version = csenseVersionName
 
 
 apply from: "$rootDir/gradle/publish.gradle"
+
+
+// warnings as errors
+tasks.withType(KotlinCompile).configureEach {
+    kotlinOptions {
+        kotlinOptions.allWarningsAsErrors = true
+    }
+}
