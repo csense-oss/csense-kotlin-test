@@ -2,10 +2,10 @@ apply plugin: "maven-publish"
 
 
 afterEvaluate {
-    project.publishing.publications.all {
+    project.publishing.publications.configureEach {
         groupId = group
         // Rename MPP artifacts for backward compatibility
-        def type = it.name
+        final String type = it.name
         switch (type) {
             case 'kotlinMultiplatform':
                 // With Kotlin 1.4 & HMPP, the root module should have no suffix in the ID, but for compatibility with
@@ -61,7 +61,7 @@ publishing {
             final Properties properties = new Properties()
             try {
                 properties.load(project.rootProject.file("local.properties").newDataInputStream())
-            } catch (Exception) {
+            } catch (ignored) {
 
             }
             url 'https://pkgs.dev.azure.com/csense-oss/csense-oss/_packaging/csense-oss/maven/v1'

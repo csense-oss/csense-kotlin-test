@@ -66,14 +66,35 @@ kotlin {
             useJUnitPlatform()
         }
     }
-    iosArm64()
-    iosX64()
-    macosArm64()
-    macosX64()
-    js(IR) { //https://kotlinlang.org/docs/reference/whatsnew14.html#new-js-ir-backend
+    js(IR) {
         browser()
         nodejs()
     }
+
+    //Native targets, based on https://kotlinlang.org/docs/native-target-support.html
+    //- tier 1
+    linuxX64()
+    macosX64()
+    macosArm64()
+    iosSimulatorArm64()
+    iosX64()
+
+    //- tier 2
+    linuxArm64()
+    watchosSimulatorArm64()
+    watchosX64()
+    watchosArm32()
+    watchosArm64()
+    tvosSimulatorArm64()
+    tvosX64()
+    tvosArm64()
+    iosArm64()
+
+    //- tier 3 (some)
+    mingwX64()
+    //end native targets
+
+
     sourceSets {
         commonMain {
             dependencies {
@@ -100,14 +121,6 @@ kotlin {
                 api "org.jetbrains.kotlin:kotlin-test-js:$kotlin_version"
             }
         }
-        configureEach {
-            languageSettings {
-                languageVersion = "1.8"
-                optIn("kotlin.contracts.ExperimentalContracts")
-                progressiveMode = true
-            }
-
-        }
     }
 }
 
@@ -121,7 +134,15 @@ apply from: "$rootDir/gradle/publish.gradle"
 
 // warnings as errors
 tasks.withType(KotlinCompile).configureEach {
-    kotlinOptions {
-        kotlinOptions.allWarningsAsErrors = true
+    kotlinOptions.allWarningsAsErrors = true
+}
+
+//progressive mode & api version + optIns
+kotlin.sourceSets.configureEach {
+    languageSettings {
+        progressiveMode = true
+        languageVersion = "1.8"
+        optIn("kotlin.contracts.ExperimentalContracts")
     }
 }
+
