@@ -12,7 +12,7 @@ buildscript {
     //https://github.com/JetBrains/kotlin/releases
     ext.kotlin_version = "1.8.10"
     //https://github.com/csense-oss/csense-kotlin-annotations
-    ext.csenseAnnotationVersion = "0.0.60"
+    ext.csenseAnnotationVersion = "0.0.61"
 
 
     //versions & naming
