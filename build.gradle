@@ -1,19 +1,26 @@
+import org.jetbrains.kotlin.gradle.dsl.ExplicitApiMode
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 buildscript {
+
+    ext.compileJavaVersion = "11"
+
+
     //dependencies
     //https://github.com/Kotlin/kotlinx.coroutines
     ext.coroutinesVersion = "1.6.4"
     //https://github.com/junit-team/junit5/releases
-    ext.junit5Version = "5.9.1"
+    ext.junit5Version = "5.9.2"
     //https://github.com/junit-team/junit4/releases
     ext.junit4Version = "4.13.2"
     //https://github.com/JetBrains/kotlin/releases
-    ext.kotlin_version = "1.7.20"
+    ext.kotlin_version = "1.8.10"
     //https://github.com/csense-oss/csense-kotlin-annotations
-    ext.csenseAnnotationVersion = "0.0.50"
+    ext.csenseAnnotationVersion = "0.0.61"
 
 
     //versions & naming
-    ext.csenseVersionName = "0.0.59"
+    ext.csenseVersionName = "0.0.60"
     ext.csenseGroupId = "csense.kotlin"
     ext.csenseArtifactId = "csense-kotlin-tests"
 
@@ -53,20 +60,45 @@ group project.csenseGroupId
 version project.csenseVersionName
 
 kotlin {
-    explicitApi = 'strict'
+    explicitApi = ExplicitApiMode.Strict
     jvm {
-        compilations.all {
-            kotlinOptions.jvmTarget = '1.8'
+        compilations.configureEach {
+            kotlinOptions.jvmTarget = compileJavaVersion
         }
         withJava()
-        testRuns["test"].executionTask.configure {
+        test {
             useJUnitPlatform()
         }
     }
-    js(BOTH) { //https://kotlinlang.org/docs/reference/whatsnew14.html#new-js-ir-backend
+    js(IR) {
         browser()
         nodejs()
     }
+
+    //Native targets, based on https://kotlinlang.org/docs/native-target-support.html
+    //- tier 1
+    linuxX64()
+    macosX64()
+    macosArm64()
+    iosSimulatorArm64()
+    iosX64()
+
+    //- tier 2
+    //linuxArm64() //cannot be used as of now, due to coroutines not having this (will be fixed in the future)
+    watchosSimulatorArm64()
+    watchosX64()
+    watchosArm32()
+    watchosArm64()
+    tvosSimulatorArm64()
+    tvosX64()
+    tvosArm64()
+    iosArm64()
+
+    //- tier 3 (some)
+    mingwX64()
+    //end native targets
+
+
     sourceSets {
         commonMain {
             dependencies {
@@ -81,23 +113,14 @@ kotlin {
             dependencies {
                 api "org.junit.jupiter:junit-jupiter-api:$junit5Version"
                 api "org.junit.jupiter:junit-jupiter-engine:$junit5Version"
-                api "junit:junit:$junit4Version"
                 api "org.junit.vintage:junit-vintage-engine:$junit5Version"
                 api "org.jetbrains.kotlin:kotlin-test-junit5:$kotlin_version"
-                api "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
             }
         }
 
         jsMain {
             dependencies {
                 api "org.jetbrains.kotlin:kotlin-test-js:$kotlin_version"
-            }
-        }
-        all {
-            languageSettings {
-                languageVersion = "1.7"
-                optIn("kotlin.contracts.ExperimentalContracts")
-                progressiveMode = true
             }
         }
     }
@@ -109,3 +132,26 @@ project.version = csenseVersionName
 
 
 apply from: "$rootDir/gradle/publish.gradle"
+
+
+kotlin {
+    jvmToolchain {
+        languageVersion.set(JavaLanguageVersion.of(compileJavaVersion))
+    }
+}
+
+
+// warnings as errors
+tasks.withType(KotlinCompile).configureEach {
+    kotlinOptions.allWarningsAsErrors = true
+}
+
+//progressive mode & api version + optIns
+kotlin.sourceSets.configureEach {
+    languageSettings {
+        progressiveMode = true
+        languageVersion = "1.8"
+        optIn("kotlin.contracts.ExperimentalContracts")
+    }
+}
+

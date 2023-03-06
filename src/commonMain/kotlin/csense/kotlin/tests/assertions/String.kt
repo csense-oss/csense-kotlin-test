@@ -20,7 +20,7 @@ public fun String.assertContains(
 }
 
 /**
- * Asserts that the this string does not contain the given value.
+ * Asserts that this string does not contain the given value.
  * @receiver [String] the string to assert not containing the given [value]
  * @param value [String] the value that should NOT be in this string
  * @param ignoreCase [Boolean] if true, will ignore the casing, false means case sensitive.
@@ -107,7 +107,7 @@ public fun String.assertContainsInOrder(
     values.forEach {
         val next = indexOf(it, currentIndex, ignoreCase)
         if (next < 0) {
-            val messageWithNewline = message.useIfNotEmptyOrThis(message + "\n\n")
+            val messageWithNewline = message.helpers.useIfNotEmptyOrThis(message + "\n\n")
             failTest(
                 "{$messageWithNewline}Could not find \n\t\"$it\" after index $currentIndex in string \n" +
                         "\"$this\"\n" +
@@ -130,7 +130,7 @@ public fun String.assertStartsWith(
     ignoreCase: Boolean = false,
     message: String = ""
 ) {
-    val messageWithNewline = message.useIfNotEmptyOrThis(message + "\n")
+    val messageWithNewline = message.helpers.useIfNotEmptyOrThis(message + "\n")
     val textOutput = "${messageWithNewline}Could not find \"$prefix\", in  \n" +
             "\"$this\""
     assertTrue(this.startsWith(prefix, ignoreCase = ignoreCase), textOutput)
@@ -148,7 +148,7 @@ public fun String.assertEndsWith(
     ignoreCase: Boolean = false,
     message: String = ""
 ) {
-    val messageWithNewline = message.useIfNotEmptyOrThis(message + "\n")
+    val messageWithNewline = message.helpers.useIfNotEmptyOrThis(message + "\n")
     val textOutput = "${messageWithNewline}Could not find \"$prefix\", in  \n" +
             "\"$this\""
     assertTrue(this.endsWith(prefix, ignoreCase = ignoreCase), textOutput)
