@@ -2,6 +2,10 @@ import org.jetbrains.kotlin.gradle.dsl.ExplicitApiMode
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 buildscript {
+
+    ext.compileJavaVersion = "11"
+
+
     //dependencies
     //https://github.com/Kotlin/kotlinx.coroutines
     ext.coroutinesVersion = "1.6.4"
@@ -59,7 +63,7 @@ kotlin {
     explicitApi = ExplicitApiMode.Strict
     jvm {
         compilations.configureEach {
-            kotlinOptions.jvmTarget = '11'
+            kotlinOptions.jvmTarget = compileJavaVersion
         }
         withJava()
         test {
@@ -128,6 +132,13 @@ project.version = csenseVersionName
 
 
 apply from: "$rootDir/gradle/publish.gradle"
+
+
+kotlin {
+    jvmToolchain {
+        languageVersion.set(JavaLanguageVersion.of(compileJavaVersion))
+    }
+}
 
 
 // warnings as errors
