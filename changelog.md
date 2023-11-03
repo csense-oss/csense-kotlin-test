@@ -1,3 +1,8 @@
+# 0.0.61
+- bumped dependencies
+- added linux arm 64 target
+- added flow test function(s)
+
 # 0.0.60
 - now available on tier 1 & tier 2 (mostly) targets + mingw
 - targets java 11
