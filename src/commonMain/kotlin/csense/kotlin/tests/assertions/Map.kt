@@ -45,8 +45,8 @@ public fun Map<*, *>.assertNotEmpty(
  * @param message String
  */
 public fun <Key, Value> Map<Key, Value>.assertSingle(item: Map.Entry<Key, Value>, message: String = "") {
-    assertSize(1, "should have single item. $message")
-    assertEquals(item, entries.first())
+    assertSize(expectedSize = 1, message = "should have single item. $message")
+    assertEquals(expected = item, actual = entries.first())
 }
 
 /**
@@ -59,8 +59,8 @@ public inline fun <Key, reified Value> Map<Key, Value>.assertSingle(
     keyValue: Pair<Key, Value>,
     messageForSize: String = ""
 ) {
-    assertSize(1, "should have single item. $messageForSize")
-    val value = get(keyValue.first)
+    assertSize(expectedSize = 1, message = "should have single item. $messageForSize")
+    val value: Value? = get(keyValue.first)
     value.assertNotNull("Could not find key \"${keyValue.first}\"")
     value.assertAs(keyValue.second)
 }
@@ -73,9 +73,9 @@ public inline fun <Key, reified Value> Map<Key, Value>.assertSingle(
 
 public inline fun <Key, Value> Map<Key, Value>.assertSingle(callback: (Map.Entry<Key, Value>) -> Unit) {
     contract {
-        callsInPlace(callback, kind = InvocationKind.AT_MOST_ONCE)
+        callsInPlace(callback, InvocationKind.AT_MOST_ONCE)
     }
-    assertSize(1, "should have single item.")
+    assertSize(expectedSize = 1, message = "should have single item.")
     callback(entries.first())
 }
 
@@ -105,7 +105,7 @@ public fun <Key, Value> Map<Key, Value>.assertDoesNotContainsKey(key: Key) {
 public inline fun <Key, reified Value> Map<Key, Value>.assertContains(
     entry: Map.Entry<Key, Value>
 ) {
-    val value = get(entry.key)
+    val value: Value? = get(entry.key)
     value.assertNotNull("key \"${entry.key}\" not found in ($keys)")
     value.assertAs(entry.value)
 }
@@ -118,7 +118,7 @@ public inline fun <Key, reified Value> Map<Key, Value>.assertContains(
 public inline fun <Key, reified Value> Map<Key, Value>.assertContains(
     keyValue: Pair<Key, Value>
 ) {
-    val value = get(keyValue.first)
+    val value: Value? = get(keyValue.first)
     value.assertNotNull("key \"${keyValue.first}\" not found in ($keys)")
     value.assertAs(keyValue.second)
 }
@@ -133,7 +133,7 @@ public inline fun <Key, reified Value> Map<Key, Value>.assertContainsKeyAnd(
     key: Key,
     ifFoundAction: (Value) -> Unit
 ) {
-    val value = get(key)
+    val value: Value? = get(key)
     value.assertNotNull("key \"$key\" not found in ($keys)")
     ifFoundAction(value)
 }

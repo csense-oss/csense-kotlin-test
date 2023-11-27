@@ -210,7 +210,8 @@ public fun DoubleArray.assertNotEmpty(message: String = "should have content"): 
  * @param item Int the item that this array should contain
  * @param message [String]  the message to print if the equality assertion fails
  */
-public fun IntArray.assertSingle(item: Int, message: String = "") {
+public fun IntArray?.assertSingle(item: Int, message: String = "") {
+    assertNotNull()
     assertSize(1, message = "Should have 1 item")
     assertEquals(item, first(), message)
 }
@@ -220,7 +221,8 @@ public fun IntArray.assertSingle(item: Int, message: String = "") {
  * @param item Boolean the item that this array should contain
  * @param message [String]  the message to print if the equality assertion fails
  */
-public fun BooleanArray.assertSingle(item: Boolean, message: String = "") {
+public fun BooleanArray?.assertSingle(item: Boolean, message: String = "") {
+    assertNotNull()
     assertSize(1, message = "Should have 1 item")
     assertEquals(item, first(), message)
 }
@@ -230,7 +232,8 @@ public fun BooleanArray.assertSingle(item: Boolean, message: String = "") {
  * @param item Double the item that this array should contain
  * @param message [String]  the message to print if the equality assertion fails
  */
-public fun DoubleArray.assertSingle(item: Double, message: String = "") {
+public fun DoubleArray?.assertSingle(item: Double, message: String = "") {
+    assertNotNull()
     assertSize(1, message = "Should have 1 item")
     assertEquals(item, first(), message)
 }
@@ -240,7 +243,8 @@ public fun DoubleArray.assertSingle(item: Double, message: String = "") {
  * @param item Long the item that this array should contain
  * @param message [String]  the message to print if the equality assertion fails
  */
-public fun LongArray.assertSingle(item: Long, message: String = "") {
+public fun LongArray?.assertSingle(item: Long, message: String = "") {
+    assertNotNull()
     assertSize(1, message = "Should have 1 item")
     assertEquals(item, first(), message)
 }
@@ -250,7 +254,8 @@ public fun LongArray.assertSingle(item: Long, message: String = "") {
  * @param item Float the item that this array should contain
  * @param message [String]  the message to print if the equality assertion fails
  */
-public fun FloatArray.assertSingle(item: Float, message: String = "") {
+public fun FloatArray?.assertSingle(item: Float, message: String = "") {
+    assertNotNull()
     assertSize(1, message = "Should have 1 item")
     assertEquals(item, first(), message)
 }
@@ -260,7 +265,8 @@ public fun FloatArray.assertSingle(item: Float, message: String = "") {
  * @param item Short the item that this array should contain
  * @param message [String]  the message to print if the equality assertion fails
  */
-public fun ShortArray.assertSingle(item: Short, message: String = "") {
+public fun ShortArray?.assertSingle(item: Short, message: String = "") {
+    assertNotNull()
     assertSize(1, message = "Should have 1 item")
     assertEquals(item, first(), message)
 }
@@ -270,7 +276,8 @@ public fun ShortArray.assertSingle(item: Short, message: String = "") {
  * @param item Char the item that this array should contain
  * @param message [String]  the message to print if the equality assertion fails
  */
-public fun CharArray.assertSingle(item: Char, message: String = "") {
+public fun CharArray?.assertSingle(item: Char, message: String = "") {
+    assertNotNull()
     assertSize(1, message = "Should have 1 item")
     assertEquals(item, first(), message)
 }
@@ -281,7 +288,8 @@ public fun CharArray.assertSingle(item: Char, message: String = "") {
  * @param item T the item that this array should contain
  * @param message [String]  the message to print if the equality assertion fails
  */
-public fun <T> Array<T>.assertSingle(item: T, message: String = "") {
+public fun <T> Array<T>?.assertSingle(item: T, message: String = "") {
+    assertNotNull()
     assertSize(1, message = "Should have 1 item")
     assertEquals(item, first(), message)
 }
@@ -296,11 +304,12 @@ public fun <T> Array<T>.assertSingle(item: T, message: String = "") {
  * @param message [String]  the message to print if the equality assertion fails
  * @param callback Function1<T, Unit> the call to invoke if the array only have 1 element
  */
-public fun <T> Array<T>.assertSingle(message: String = "Should have 1 item", callback: (T) -> Unit) {
+public fun <T> Array<T>?.assertSingle(message: String = "Should have 1 item", callback: (T) -> Unit) {
     contract {
-        callsInPlace(callback, kind = InvocationKind.AT_MOST_ONCE)
+        callsInPlace(callback, InvocationKind.AT_MOST_ONCE)
     }
-    assertSize(1, message = message)
+    assertNotNull()
+    assertSize(size = 1, message = message)
     callback(first())
 }
 
@@ -315,6 +324,7 @@ public fun BooleanArray.assert(
     expected: BooleanArray,
     message: String = "Expected this BooleanArray to be the same as expected but was different"
 ) {
+
     ArrayAssertions.AssertArrays(
         givenArray = this,
         expected = expected,

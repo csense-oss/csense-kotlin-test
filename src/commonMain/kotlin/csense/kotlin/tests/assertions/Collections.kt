@@ -14,7 +14,7 @@ import kotlin.test.*
  * @param message [String]
  */
 public fun <T> Collection<T>.assertSize(@IntLimit(from = 0) size: Int, message: String = ""): Unit =
-    this.size.assert(size, message)
+    this.size.assert(expected = size, message = message)
 
 /**
  * Asserts that the size of this collection is the given size, and if so, calls the given [action]
@@ -28,7 +28,7 @@ public inline fun <T> Collection<T>.assertSizeAnd(
     message: String = "",
     action: Collection<T>.() -> Unit
 ) {
-    assertSize(size, message)
+    assertSize(size = size, message = message)
     action()
 }
 
@@ -45,7 +45,7 @@ public fun <T> Collection<T>.assertEmpty(message: String = "should be empty"): U
  * @param message [String]
  */
 public fun <T> Collection<T>.assertNotEmpty(message: String = "should have content"): Unit =
-    this.size.assertLargerOrEqualTo(1, message)
+    this.size.assertLargerOrEqualTo(expected = 1, optMessage = message)
 
 /**
  * Asserts that the given list contains the given item
@@ -57,7 +57,7 @@ public fun <@kotlin.internal.OnlyInputTypes T> Collection<T>.assertContains(
     item: T,
     message: String = "Should contain $item"
 ) {
-    contains(item).assertTrue(message)
+    contains(item).assertTrue(message = message)
 }
 
 /**
@@ -85,7 +85,7 @@ public fun <@kotlin.internal.OnlyInputTypes T> Collection<T>.assertContainsNot(
     item: T,
     message: String = "Should not contain $item"
 ) {
-    contains(item).assertFalse(message)
+    contains(item).assertFalse(message = message)
 }
 
 /**
@@ -111,9 +111,10 @@ public fun <@kotlin.internal.OnlyInputTypes T> Collection<T>.assertContainsNotAl
  * @receiver [Collection]<T>
  * @param item T
  */
-public fun <@kotlin.internal.OnlyInputTypes T> Collection<T>.assertSingle(item: T) {
-    assertSize(1)
-    assertEquals(item, first())
+public fun <@kotlin.internal.OnlyInputTypes T> Collection<T>?.assertSingle(item: T) {
+    assertNotNull()
+    assertSize(size = 1)
+    assertEquals(expected = item, actual = first())
 }
 
 /**
@@ -122,11 +123,12 @@ public fun <@kotlin.internal.OnlyInputTypes T> Collection<T>.assertSingle(item: 
  * @param callback (T) -> Unit
  */
 
-public inline fun <@kotlin.internal.OnlyInputTypes T> Collection<T>.assertSingle(callback: (T) -> Unit) {
+public inline fun <@kotlin.internal.OnlyInputTypes T> Collection<T>?.assertSingle(callback: (T) -> Unit) {
     contract {
-        callsInPlace(callback, kind = InvocationKind.AT_MOST_ONCE)
+        callsInPlace(callback, InvocationKind.AT_MOST_ONCE)
     }
-    assertSize(1)
+    assertNotNull()
+    assertSize(size = 1)
     callback(first())
 }
 
@@ -143,7 +145,7 @@ public fun <T> Collection<T>.assertContent(expected: Collection<T>) where T : Co
 
 public fun <T> Collection<T>.assertContentAndOrder(expected: Collection<T>) where T : Comparable<T> {
     assertSize(expected)
-    forEachIndexed { index, actual ->
+    forEachIndexed { index: Int, actual: T ->
         actual.assert(expected.elementAt(index))
     }
 }

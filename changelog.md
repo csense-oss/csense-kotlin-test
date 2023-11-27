@@ -1,3 +1,7 @@
+# 0.1.0
+- Kotlin 2.0.0
+
+
 # 0.0.61
 - bumped dependencies
 - added linux arm 64 target

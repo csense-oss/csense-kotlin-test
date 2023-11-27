@@ -14,7 +14,7 @@ buildscript {
     //https://github.com/junit-team/junit4/releases
     ext.junit4Version = "4.13.2"
     //https://github.com/JetBrains/kotlin/releases
-    ext.kotlin_version = "1.9.20"
+    ext.kotlin_version = "2.0.0-Beta1"
     //https://github.com/csense-oss/csense-kotlin-annotations
     ext.csenseAnnotationVersion = "0.1.0-Beta"
 
@@ -147,14 +147,14 @@ kotlin {
 
 // warnings as errors
 tasks.withType(KotlinCompile).configureEach {
-    kotlinOptions.allWarningsAsErrors = true
+//    kotlinOptions.allWarningsAsErrors = true
 }
 
 //progressive mode & api version + optIns
 kotlin.sourceSets.configureEach {
     languageSettings {
         progressiveMode = true
-        languageVersion = "1.9"
+        languageVersion = "2.0"
         optIn("kotlin.contracts.ExperimentalContracts")
     }
 }

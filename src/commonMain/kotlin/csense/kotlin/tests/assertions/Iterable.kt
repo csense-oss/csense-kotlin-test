@@ -22,8 +22,8 @@ public fun <@kotlin.internal.OnlyInputTypes T> Iterable<T>.assertContainsInOrder
 public fun <@kotlin.internal.OnlyInputTypes T> Iterable<T>.assertContainsInOrder(
     items: Iterable<T>
 ) {
-    val itemsCount = count()
-    val count = this.count()
+    val itemsCount: Int = count()
+    val count: Int = this.count()
     if (itemsCount == 0 || count == 0) {
         failTest("Either the asserted items is empty or the receiver is empty, thus failing not matter what...")
     }
@@ -31,10 +31,10 @@ public fun <@kotlin.internal.OnlyInputTypes T> Iterable<T>.assertContainsInOrder
         failTest("Collection is not big enough to contain the given items in order. this collection is $count, but items size is $itemsCount")
     }
 
-    val iterator = items.iterator()
+    val iterator: Iterator<T> = items.iterator()
     var lastFoundElementIndex: Int? = null
     var lastFoundElement: T? = null
-    var currentItem: T = iterator.next() //assumed to work given the 0 case is handled
+    var currentItem: T = iterator.next()
     forEachIndexed { index: Int, item: T ->
         if (item == currentItem) {
             if (iterator.hasNext()) {
@@ -46,7 +46,7 @@ public fun <@kotlin.internal.OnlyInputTypes T> Iterable<T>.assertContainsInOrder
             }
         }
     }
-    val lastFoundMessage = if (lastFoundElementIndex == null) {
+    val lastFoundMessage: String = if (lastFoundElementIndex == null) {
         "<nowhere>"
     } else {
         lastFoundElementIndex.toString()
@@ -54,7 +54,7 @@ public fun <@kotlin.internal.OnlyInputTypes T> Iterable<T>.assertContainsInOrder
     failTest("Could not find `$currentItem`, last successful found item was at index $lastFoundMessage, which is `$lastFoundElement`")
 }
 
-public inline fun <E> Iterable<E>.assertContains(
+public inline fun <@kotlin.internal.OnlyInputTypes E> Iterable<E>.assertContains(
     message: String = "",
     predicate: (item: E) -> Boolean
 ) {
@@ -63,3 +63,16 @@ public inline fun <E> Iterable<E>.assertContains(
     }
     foundAny.assertTrue("Wanted to find a item matching the given predicate, but found none.$message")
 }
+
+public inline fun <@kotlin.internal.OnlyInputTypes E> Iterable<E>.assertSingle(
+    message: String = "",
+    expected: E
+) where E : Comparable<E> {
+    single().assert(expected = expected, message = message)
+}
+
+public inline fun Iterable<*>.assertSize(expectedCount: Int): Unit =
+    count().assert(expectedCount)
+
+public inline fun Iterable<*>.assertEmpty(): Unit =
+    assertSize(expectedCount = 0)
