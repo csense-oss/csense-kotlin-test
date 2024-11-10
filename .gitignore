@@ -30,3 +30,4 @@ local.properties
 build/
 kotlin-js-store/yarn.lock
 /kotlin-js-store/
+.kotlin/

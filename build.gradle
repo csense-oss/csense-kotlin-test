@@ -8,19 +8,19 @@ buildscript {
 
     //dependencies
     //https://github.com/Kotlin/kotlinx.coroutines
-    ext.coroutinesVersion = "1.7.3"
+    ext.coroutinesVersion = "1.9.0"
     //https://github.com/junit-team/junit5/releases
-    ext.junit5Version = "5.10.0"
+    ext.junit5Version = "5.11.3"
     //https://github.com/junit-team/junit4/releases
     ext.junit4Version = "4.13.2"
     //https://github.com/JetBrains/kotlin/releases
-    ext.kotlin_version = "2.0.0-Beta1"
+    ext.kotlin_version = "2.0.21"
     //https://github.com/csense-oss/csense-kotlin-annotations
-    ext.csenseAnnotationVersion = "0.1.0-Beta"
+    ext.csenseAnnotationVersion = "0.0.1"
 
     //versions & naming
-    ext.csenseVersionName = "0.1.0-Beta"
-    ext.csenseGroupId = "csense.kotlin"
+    ext.csenseVersionName = "0.0.1"
+    ext.csenseGroupId = "org.csenseoss.kotlin"
     ext.csenseArtifactId = "csense-kotlin-tests"
 
     //repo settings
@@ -45,6 +45,8 @@ buildscript {
 plugins {
     id 'org.jetbrains.kotlin.multiplatform' version "$kotlin_version"
     id "maven-publish"
+    //https://github.com/vanniktech/gradle-maven-publish-plugin
+    id "com.vanniktech.maven.publish" version "0.30.0"
 }
 
 repositories {
@@ -81,8 +83,8 @@ kotlin {
 //    iosX64()
 
     //- tier 2
-    linuxX64()
-    linuxArm64()
+//    linuxX64()
+//    linuxArm64()
 //    watchosSimulatorArm64()
 //    watchosX64()
 //    watchosArm32()
@@ -93,12 +95,12 @@ kotlin {
 //    iosArm64()
 
     //- tier 3
-    androidNativeArm32()
-    androidNativeArm64()
-    androidNativeX86()
-    androidNativeX64()
-    mingwX64()
-    androidNativeX64()
+//    androidNativeArm32()
+//    androidNativeArm64()
+//    androidNativeX86()
+//    androidNativeX64()
+//    mingwX64()
+//    androidNativeX64()
 //    watchosDeviceArm64()
     //end native targets
 
@@ -109,7 +111,7 @@ kotlin {
                 implementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
                 implementation kotlin('test-common')
                 implementation kotlin('test-annotations-common')
-                implementation "csense.kotlin:csense-kotlin-annotations:$csenseAnnotationVersion"
+                implementation "org.csenseoss.kotlin:csense-kotlin-annotations:$csenseAnnotationVersion"
             }
         }
 
@@ -159,3 +161,8 @@ kotlin.sourceSets.configureEach {
     }
 }
 
+mavenPublishing {
+    coordinates(csenseGroupId, csenseArtifactId, csenseVersionName)
+}
+
+apply from: "$projectDir/gradle/publish.gradle"
