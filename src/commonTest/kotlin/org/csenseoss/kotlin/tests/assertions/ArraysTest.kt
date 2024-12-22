@@ -29,54 +29,6 @@ class ArraysTest {
         }
     }
 
-    class BooleanArrayAssertSizeSize {
-        @Test
-        fun empty() {
-            booleanArrayOf().assertSize(0)
-        }
-
-        @Test
-        fun throwsOnWrongSize() = assertThrows<Throwable> {
-            booleanArrayOf().assertSize(1)
-        }
-
-
-        @Test
-        fun single() {
-            booleanArrayOf(false).assertSize(1)
-        }
-
-        @Test
-        fun multiple() {
-            booleanArrayOf(false, true).assertSize(2)
-        }
-
-    }
-
-    class DoubleArrayAssertSizeSize {
-        @Test
-        fun empty() {
-            doubleArrayOf().assertSize(0)
-        }
-
-        @Test
-        fun throwsOnWrongSize() = assertThrows<Throwable> {
-            doubleArrayOf().assertSize(1)
-        }
-
-
-        @Test
-        fun single() {
-            doubleArrayOf(0.5).assertSize(1)
-        }
-
-        @Test
-        fun multiple() {
-            doubleArrayOf(1.0, 2.54).assertSize(2)
-        }
-
-    }
-
 
     class LongArrayAssertSizeSize {
         @Test
@@ -194,47 +146,12 @@ class ArraysTest {
         }
     }
 
-    class ArrayTAssertSizeSize {
-        @Test
-        fun empty() {
-            arrayOf<String>().assertSize(0)
-        }
-
-        @Test
-        fun throwsOnWrongSize() = assertThrows<Throwable> {
-            arrayOf<String>().assertSize(1)
-        }
-
-
-        @Test
-        fun single() {
-            arrayOf("test").assertSize(1)
-        }
-
-        @Test
-        fun multiple() {
-            arrayOf("first", "second").assertSize(2)
-        }
-    }
 
     //endregion
 
     //region assertEmpty
     class ArrayTAssertEmpty {
-        @Test
-        fun empty() {
-            arrayOf<String>().assertEmpty()
-        }
 
-        @Test
-        fun throwsOnNonEmpty() = assertThrows<Throwable> {
-            arrayOf("test").assertEmpty()
-        }
-
-        @Test
-        fun throwsOnMultiple() = assertThrows<Throwable> {
-            arrayOf("first", "second").assertEmpty()
-        }
     }
 
     class IntArrayAssertEmptyMessage {

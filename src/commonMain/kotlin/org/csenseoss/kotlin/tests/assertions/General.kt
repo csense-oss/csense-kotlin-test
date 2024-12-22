@@ -233,21 +233,21 @@ public inline fun <reified T> assertCallbackCalledWith(
  */
 public fun <@kotlin.internal.OnlyInputTypes T> T.assertByEquals(
     expected: T?,
-    optMessage: String? = null
+    message: String? = null
 ) {
     val isEqual = this?.equals(expected) == true
     isEqual.assertTrue(
-        message = "Expected $this to be equal (via equals) to $expected. ${optMessage ?: ""}"
+        message = "Expected $this to be equal (via equals) to $expected. ${message ?: ""}"
     )
 }
 
 public fun <@kotlin.internal.OnlyInputTypes T> T.assertNotByEquals(
     unexpected: T?,
-    optMessage: String? = null
+    message: String? = null
 ) {
     val isNotEqual = this?.equals(unexpected) != true
     isNotEqual.assertTrue(
-        message = "Expected $this to be different (via equals) to $unexpected. ${optMessage ?: ""}"
+        message = "Expected $this to be different (via equals) to $unexpected. ${message ?: ""}"
     )
 }
 

@@ -8,15 +8,15 @@ buildscript {
 
     //dependencies
     //https://github.com/Kotlin/kotlinx.coroutines
-    ext.coroutinesVersion = "1.9.0"
+    ext.coroutinesVersion = "1.10.1"
     //https://github.com/junit-team/junit5/releases
-    ext.junit5Version = "5.11.3"
+    ext.junit5Version = "5.11.4"
     //https://github.com/junit-team/junit4/releases
     ext.junit4Version = "4.13.2"
     //https://github.com/JetBrains/kotlin/releases
-    ext.kotlin_version = "2.0.21"
+    ext.kotlin_version = "2.1.0"
     //https://github.com/csense-oss/csense-kotlin-annotations
-    ext.csenseAnnotationVersion = "0.0.1"
+    ext.csenseAnnotationVersion = "0.0.2"
 
     //versions & naming
     ext.csenseVersionName = "0.0.1"
@@ -77,31 +77,31 @@ kotlin {
 
     //Native targets, based on https://kotlinlang.org/docs/native-target-support.html
     //- tier 1
-//    macosX64()
-//    macosArm64()
-//    iosSimulatorArm64()
-//    iosX64()
+    macosX64()
+    macosArm64()
+    iosSimulatorArm64()
+    iosX64()
 
     //- tier 2
-//    linuxX64()
-//    linuxArm64()
-//    watchosSimulatorArm64()
-//    watchosX64()
-//    watchosArm32()
-//    watchosArm64()
-//    tvosSimulatorArm64()
-//    tvosX64()
-//    tvosArm64()
-//    iosArm64()
+    linuxX64()
+    linuxArm64()
+    watchosSimulatorArm64()
+    watchosX64()
+    watchosArm32()
+    watchosArm64()
+    tvosSimulatorArm64()
+    tvosX64()
+    tvosArm64()
+    iosArm64()
 
     //- tier 3
-//    androidNativeArm32()
-//    androidNativeArm64()
-//    androidNativeX86()
-//    androidNativeX64()
-//    mingwX64()
-//    androidNativeX64()
-//    watchosDeviceArm64()
+    androidNativeArm32()
+    androidNativeArm64()
+    androidNativeX86()
+    androidNativeX64()
+    mingwX64()
+    androidNativeX64()
+    watchosDeviceArm64()
     //end native targets
 
 
@@ -156,7 +156,7 @@ tasks.withType(KotlinCompile).configureEach {
 kotlin.sourceSets.configureEach {
     languageSettings {
         progressiveMode = true
-        languageVersion = "2.0"
+        languageVersion = "2.1"
         optIn("kotlin.contracts.ExperimentalContracts")
     }
 }
