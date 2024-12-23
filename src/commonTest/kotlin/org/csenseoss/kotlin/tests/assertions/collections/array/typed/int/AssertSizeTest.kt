@@ -1,4 +1,4 @@
-package org.csenseoss.kotlin.tests.assertions.collections.array.generic
+package org.csenseoss.kotlin.tests.assertions.collections.array.typed.int
 
 import org.csenseoss.kotlin.tests.assertions.exceptions.*
 import kotlin.test.*
@@ -6,22 +6,22 @@ import kotlin.test.*
 class AssertSizeTest {
     @Test
     fun empty() {
-        arrayOf<String>().assertSize(0)
+        intArrayOf().assertSize(0)
     }
 
     @Test
     fun throwsOnWrongSize() = assertThrows<Throwable> {
-        arrayOf<String>().assertSize(1)
+        intArrayOf().assertSize(1)
     }
 
 
     @Test
     fun single() {
-        arrayOf("test").assertSize(1)
+        intArrayOf(22).assertSize(1)
     }
 
     @Test
     fun multiple() {
-        arrayOf("first", "second").assertSize(2)
+        intArrayOf(22, 22).assertSize(2)
     }
 }

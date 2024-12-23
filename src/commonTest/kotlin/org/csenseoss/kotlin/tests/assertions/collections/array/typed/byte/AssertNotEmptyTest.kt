@@ -1,0 +1,4 @@
+package org.csenseoss.kotlin.tests.assertions.collections.array.typed.byte
+
+class AssertNotEmptyTest {
+}
