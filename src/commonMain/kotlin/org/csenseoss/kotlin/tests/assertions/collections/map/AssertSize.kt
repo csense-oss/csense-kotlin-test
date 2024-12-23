@@ -1,7 +1,7 @@
 package org.csenseoss.kotlin.tests.assertions.collections.map
 
 import org.csenseoss.kotlin.annotations.numbers.*
-import org.csenseoss.kotlin.tests.assertions.*
+import org.csenseoss.kotlin.tests.assertions.comparable.*
 
 
 /**

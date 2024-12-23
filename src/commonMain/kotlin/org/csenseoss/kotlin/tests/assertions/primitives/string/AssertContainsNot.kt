@@ -1,4 +1,4 @@
-package org.csenseoss.kotlin.tests.assertions.collections.map
+package org.csenseoss.kotlin.tests.assertions.primitives.string
 
 import kotlin.test.*
 
