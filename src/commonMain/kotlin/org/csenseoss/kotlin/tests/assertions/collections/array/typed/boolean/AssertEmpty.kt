@@ -7,6 +7,6 @@ package org.csenseoss.kotlin.tests.assertions.collections.array.typed.boolean
 public fun BooleanArray.assertEmpty(
     message: String = "should be empty"
 ): Unit = assertSize(
-    size = 0,
+    expected = 0,
     message = message
 )

@@ -1,6 +1,7 @@
 package org.csenseoss.kotlin.tests.assertions.collections.array
 
 import org.csenseoss.kotlin.tests.assertions.*
+import org.csenseoss.kotlin.tests.assertions.comparable.*
 
 
 public object ArrayAssertions {

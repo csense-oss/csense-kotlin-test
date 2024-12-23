@@ -1,9 +1,7 @@
 package org.csenseoss.kotlin.tests.assertions.collections.map
 
 import org.csenseoss.kotlin.tests.assertions.collections.map.entry.*
-import org.csenseoss.kotlin.tests.assertions.general.*
 import kotlin.contracts.*
-import kotlin.test.*
 
 
 /**
@@ -16,7 +14,7 @@ public fun <Key, Value> Map<Key, Value>.assertSingle(
     item: Map.Entry<Key, Value>,
     message: String = ""
 ) where Key : Comparable<Key>, Value : Comparable<Value> {
-    assertSize(expectedSize = 1, message = "should have single item. $message")
+    assertSize(expected = 1, message = "should have single item. $message")
     entries.first().assert(item)
 }
 
@@ -30,7 +28,7 @@ public inline fun <Key, reified Value> Map<Key, Value>.assertSingle(
     keyValue: Pair<Key, Value>,
     messageForSize: String = ""
 ) where Key : Comparable<Key>, Value : Comparable<Value> {
-    assertSize(expectedSize = 1, message = "should have single item. $messageForSize")
+    assertSize(expected = 1, message = "should have single item. $messageForSize")
     entries.first().assert(keyValue)
 }
 
@@ -44,6 +42,6 @@ public inline fun <Key, Value> Map<Key, Value>.assertSingle(callback: (Map.Entry
     contract {
         callsInPlace(callback, InvocationKind.AT_MOST_ONCE)
     }
-    assertSize(expectedSize = 1, message = "should have single item.")
+    assertSize(expected = 1, message = "should have single item.")
     callback(entries.first())
 }

@@ -9,7 +9,10 @@ import org.csenseoss.kotlin.tests.assertions.primitives.byte.*
  * @param expected Byte the item that this array should contain
  * @param message [String] the message to print if the equality assertion fails
  */
-public fun ByteArray?.assertSingle(expected: Byte, message: String = "") {
+public fun ByteArray?.assertSingle(
+    expected: Byte,
+    message: String = ""
+) {
     assertNotNull()
     assertSize(1, message = "Should have exactly 1 item, have: $size")
     first().assert(expected, message)

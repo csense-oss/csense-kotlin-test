@@ -1,7 +1,7 @@
 package org.csenseoss.kotlin.tests.assertions.collections.array.generic
 
 import org.csenseoss.kotlin.annotations.numbers.*
-import org.csenseoss.kotlin.tests.assertions.*
+import org.csenseoss.kotlin.tests.assertions.comparable.*
 
 /**
  * Asserts that the size of this array is the given size.
