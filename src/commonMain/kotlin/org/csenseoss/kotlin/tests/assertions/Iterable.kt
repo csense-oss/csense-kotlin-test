@@ -53,26 +53,3 @@ public fun <@kotlin.internal.OnlyInputTypes T> Iterable<T>.assertContainsInOrder
     }
     failTest("Could not find `$currentItem`, last successful found item was at index $lastFoundMessage, which is `$lastFoundElement`")
 }
-
-public inline fun <@kotlin.internal.OnlyInputTypes E> Iterable<E>.assertContains(
-    message: String = "",
-    predicate: (item: E) -> Boolean
-) {
-    val foundAny = any {
-        predicate(it)
-    }
-    foundAny.assertTrue("Wanted to find a item matching the given predicate, but found none.$message")
-}
-
-public inline fun <@kotlin.internal.OnlyInputTypes E> Iterable<E>.assertSingle(
-    message: String = "",
-    expected: E
-) where E : Comparable<E> {
-    single().assert(expected = expected, message = message)
-}
-
-public inline fun Iterable<*>.assertSize(expectedCount: Int): Unit =
-    count().assert(expectedCount)
-
-public inline fun Iterable<*>.assertEmpty(): Unit =
-    assertSize(expectedCount = 0)

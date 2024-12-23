@@ -6,55 +6,8 @@ import org.csenseoss.kotlin.annotations.numbers.*
 import kotlin.contracts.*
 import kotlin.test.*
 
-/**
- * As the name suggest, calling this means failure.
- */
-public fun shouldNotBeCalled(): Nothing {
-    fail(GeneralStrings.assertNotCalledMessage)
-}
 
-/**
- * fails the test with the given message
- * @param message String
- */
-public fun failTest(message: String = ""): Nothing {
-    fail(message)
-}
 
-/**
- * Assert this is the same as type as [otherValue] and that they are equal
- * @receiver [Any]
- * @param otherValue T the value this receiver should be (both type and equals)
- * @param message [String] if they are different this will be printed (nb if they are different type another message will be printed).
- */
-
-public inline fun <reified T> Any.assertAs(
-    otherValue: T,
-    message: String = "value of \"$this\" is not the expected \"$otherValue\""
-) {
-    contract {
-        returns() implies (this@assertAs is T)
-    }
-    @Suppress("UNCHECKED_CAST") //this is expected
-    this.assertIs<T>() //make sure that if the type is not the same then we get that error message.
-    // we are just making life easier for testing, if it throws, then its "all right" for a test.
-    assertEquals(this as? T, otherValue, message)
-}
-
-/**
- * Assert this is the given type
- * @receiver [Any] the receiver we are testing is the same type as [T]
- * @param message [String] the message to print if the receiver is a different type from [T]
- */
-
-public inline fun <reified T> Any?.assertIs(
-    message: String = "expected `$this` of type `${this.helpers.simpleClassNameOrDash()}`  to be of type `${T::class}`, but it is not",
-) {
-    contract {
-        returns() implies (this@assertIs is T)
-    }
-    assertTrue(this is T, message)
-}
 
 
 
@@ -74,44 +27,6 @@ public inline fun <reified T> Any.assertIsApply(
     andAction(this)
 }
 
-/**
- * Asserts this is not null (and if it is not, then kotlin smart casts it to a notnull variable)
- * @receiver [Any]? the value to assert is not null
- * @param message [String] the message that gets printed if this is null
- */
-public fun Any?.assertNotNull(message: String = "") {
-    contract {
-        returns() implies (this@assertNotNull != null)
-    }
-    assertNotNull(this, message)
-}
-
-@Suppress("UnusedReceiverParameter", "DeprecatedCallableAddReplaceWith")
-@Deprecated(
-    "Asserting compile time known notnull value to be not null is an error",
-    level = DeprecationLevel.ERROR
-)
-public fun Any.assertNotNull(message: String = ""): Nothing = failTest(message)
-
-/**
- * Asserts this is null (and if it is null, then kotlin smart casts it to a null variable)
- * @receiver [Any]?
- * @param message [String]
- */
-
-public fun Any?.assertNull(message: String = "") {
-    contract {
-        returns() implies (this@assertNull == null)
-    }
-    assertNull(this, message)
-}
-
-@Suppress("UnusedReceiverParameter", "DeprecatedCallableAddReplaceWith")
-@Deprecated(
-    "Asserting compile time known notnull value to be null is an error",
-    level = DeprecationLevel.ERROR
-)
-public fun Any.assertNull(message: String = ""): Nothing = failTest(message)
 
 /**
  * Asserts this is not null and if not then applies the given [action] on it
@@ -226,38 +141,4 @@ public inline fun <reified T> assertCallbackCalledWith(
         shouldBeCalled()
     }
     testCode(callback)
-}
-
-/**
- * Asserts that this is equal to expected
- */
-public fun <@kotlin.internal.OnlyInputTypes T> T.assertByEquals(
-    expected: T?,
-    message: String? = null
-) {
-    val isEqual = this?.equals(expected) == true
-    isEqual.assertTrue(
-        message = "Expected $this to be equal (via equals) to $expected. ${message ?: ""}"
-    )
-}
-
-public fun <@kotlin.internal.OnlyInputTypes T> T.assertNotByEquals(
-    unexpected: T?,
-    message: String? = null
-) {
-    val isNotEqual = this?.equals(unexpected) != true
-    isNotEqual.assertTrue(
-        message = "Expected $this to be different (via equals) to $unexpected. ${message ?: ""}"
-    )
-}
-
-@Suppress("RedundantNullableReturnType", "NOTHING_TO_INLINE")
-public inline fun <T> (T & Any).nullable(): T? {
-    return this
-}
-
-
-public object GeneralStrings {
-    public const val assertCalledMessage: String = "Should be called, but did not get called enough times"
-    public const val assertNotCalledMessage: String = "Should not be called but got called anyway"
 }

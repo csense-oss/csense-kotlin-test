@@ -1,10 +1,11 @@
 @file:OptIn(ExperimentalCoroutinesApi::class)
 
-package org.csenseoss.kotlin.tests.assertions
+package org.csenseoss.kotlin.tests.assertions.coroutines
 
 import kotlinx.coroutines.*
 import kotlinx.coroutines.test.*
 import kotlin.contracts.*
+
 
 @Suppress("UnusedReceiverParameter")
 public inline fun Dispatchers.withMain(

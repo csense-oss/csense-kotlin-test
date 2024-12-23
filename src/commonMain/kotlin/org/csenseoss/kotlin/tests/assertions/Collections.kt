@@ -7,14 +7,7 @@ import kotlin.contracts.*
 import kotlin.test.*
 
 
-/**
- * Asserts that the size of this collection is the given size
- * @receiver [Collection]<T>
- * @param size [Int]
- * @param message [String]
- */
-public fun <T> Collection<T>.assertSize(@IntLimit(from = 0) size: Int, message: String = ""): Unit =
-    this.size.assert(expected = size, message = message)
+
 
 /**
  * Asserts that the size of this collection is the given size, and if so, calls the given [action]
@@ -31,21 +24,6 @@ public inline fun <T> Collection<T>.assertSizeAnd(
     assertSize(size = size, message = message)
     action()
 }
-
-/**
- * Asserts that this collection is empty
- * @receiver [Collection]<T>
- * @param message [String]
- */
-public fun <T> Collection<T>.assertEmpty(message: String = "should be empty"): Unit = assertSize(0, message)
-
-/**
- * Asserts that this collection has content
- * @receiver [Collection]<T>
- * @param message [String]
- */
-public fun <T> Collection<T>.assertNotEmpty(message: String = "should have content"): Unit =
-    this.size.assertLargerOrEqualTo(expected = 1, message = message)
 
 /**
  * Asserts that the given list contains the given item
@@ -150,9 +128,6 @@ public fun <T> Collection<T>.assertContentAndOrder(expected: Collection<T>) wher
     }
 }
 
-public fun <T> Collection<T>.assertSize(expected: Collection<T>) {
-    this.size.assert(expected.size, message = "Should have item count, actual = $size expected size = ${expected.size}")
-}
 
 /**
  * Should only be used on classes that implements Equals and hashcode (e.g. data classes)

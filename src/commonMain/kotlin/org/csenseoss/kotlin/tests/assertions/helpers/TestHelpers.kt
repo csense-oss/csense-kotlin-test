@@ -1,4 +1,5 @@
-package org.csenseoss.kotlin.tests.assertions
+package org.csenseoss.kotlin.tests.assertions.helpers
+
 
 //contains extensions for this test module (stored away in a namespace called "helpers")
 
