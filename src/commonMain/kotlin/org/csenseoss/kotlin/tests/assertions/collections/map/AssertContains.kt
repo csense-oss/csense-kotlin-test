@@ -9,10 +9,11 @@ import org.csenseoss.kotlin.tests.assertions.primitives.boolean.*
  * Asserts that this [Map] contains the given [Map.Entry] (by key and then by value)
  * @receiver [Map]<Key, Value>
  * @param entry [Map.Entry]<Key, Value> the entry to assert exists
+ * @param message optional description of the expectancy
  */
 public inline fun <Key, reified Value> Map<Key, Value>.assertContains(
     entry: Map.Entry<Key, Value>,
-    message: String = ""
+    message: String = "Expected to find \"$entry\" but found none"
 ) where Key : Comparable<Key>, Value : Comparable<Value> {
     val value: Value? = get(entry.key)
     value.assertNotNull("key \"${entry.key}\" not found in ($keys)")
@@ -20,9 +21,10 @@ public inline fun <Key, reified Value> Map<Key, Value>.assertContains(
 }
 
 /**
- * Asserts that this [Map] contains the given [Map.Entry] (by key and then by value)
+ * Asserts that this [Map] contains the given [Pair] (by key and then by value)
  * @receiver [Map]<Key, Value>
  * @param entry [Map.Entry]<Key, Value> the entry to assert exists
+ * @param message optional description of the expectancy
  */
 public inline fun <Key, reified Value> Map<Key, Value>.assertContains(
     entry: Pair<Key, Value>,
@@ -34,9 +36,10 @@ public inline fun <Key, reified Value> Map<Key, Value>.assertContains(
 }
 
 /**
- * Asserts that this [Map] contains the given [Map.Entry] (by key and then by value)
+ * Asserts that this [Map] contains the given [predicate]
  * @receiver [Map]<Key, Value>
- * @param entry [Map.Entry]<Key, Value> the entry to assert exists
+ * @param predicate The entry to assert exists
+ * @param message optional description of the expectancy
  */
 public inline fun <Key, reified Value> Map<Key, Value>.assertContains(
     predicate: (key: Key, value: Value) -> Boolean,

@@ -1,7 +1,7 @@
-package org.csenseoss.kotlin.tests.assertions
+package org.csenseoss.kotlin.tests.assertions.coroutines.flow
 
 import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.*
+
 
 public fun CoroutineScope.testFlow(
     collectAction: suspend () -> Unit,
@@ -11,10 +11,4 @@ public fun CoroutineScope.testFlow(
         collectAction()
     }
     launch { sendAction() }.join()
-}
-
-public suspend fun <T> Flow<T>.awaitNextItem(): T {
-    return first { _: T ->
-        true
-    }
 }
