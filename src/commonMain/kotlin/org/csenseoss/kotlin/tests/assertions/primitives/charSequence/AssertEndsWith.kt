@@ -1,5 +1,6 @@
-package org.csenseoss.kotlin.tests.assertions.primitives.string
+package org.csenseoss.kotlin.tests.assertions.primitives.charSequence
 
+import org.csenseoss.kotlin.tests.assertions.general.*
 import org.csenseoss.kotlin.tests.assertions.helpers.*
 import org.csenseoss.kotlin.tests.assertions.primitives.boolean.*
 
@@ -11,11 +12,12 @@ import org.csenseoss.kotlin.tests.assertions.primitives.boolean.*
  * @param ignoreCase [Boolean] if true, will ignore casing, if false, all contains are case-sensitive.
  * @param message [String] the error message if the end differs from the given prefix
  */
-public fun String.assertEndsWith(
-    prefix: String,
+public fun CharSequence?.assertEndsWith(
+    prefix: CharSequence,
     ignoreCase: Boolean = false,
     message: String = ""
 ) {
+    this.assertNotNull()
     val messageWithNewline: String = message.helpers.useIfNotEmptyOrThis(message + "\n")
     val textOutput: String = """
         ${messageWithNewline}Could not find "$prefix", in  

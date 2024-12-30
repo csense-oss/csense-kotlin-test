@@ -1,6 +1,6 @@
 package org.csenseoss.kotlin.tests.assertions.collections.array.typed.int
 
-import org.csenseoss.kotlin.tests.assertions.*
+import org.csenseoss.kotlin.tests.assertions.comparable.*
 
 
 /**
@@ -8,4 +8,4 @@ import org.csenseoss.kotlin.tests.assertions.*
  * @param message String the assertion message if the array is empty
  */
 public fun IntArray.assertNotEmpty(message: String = "should have content"): Unit =
-    size.assertLargerOrEqualTo(1, message = message)
+    size.assertLargerOrEqualTo(expected = 1, message = message)

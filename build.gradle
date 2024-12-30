@@ -16,10 +16,10 @@ buildscript {
     //https://github.com/JetBrains/kotlin/releases
     ext.kotlin_version = "2.1.0"
     //https://github.com/csense-oss/csense-kotlin-annotations
-    ext.csenseAnnotationVersion = "0.0.2"
+    ext.csenseAnnotationVersion = "0.0.3"
 
     //versions & naming
-    ext.csenseVersionName = "0.0.1"
+    ext.csenseVersionName = "0.0.1-Local"
     ext.csenseGroupId = "org.csenseoss.kotlin"
     ext.csenseArtifactId = "csense-kotlin-tests"
 
@@ -95,12 +95,12 @@ kotlin {
     iosArm64()
 
     //- tier 3
-    androidNativeArm32()
-    androidNativeArm64()
-    androidNativeX86()
-    androidNativeX64()
+//    androidNativeArm32()
+//    androidNativeArm64()
+//    androidNativeX86()
+//    androidNativeX64()
     mingwX64()
-    androidNativeX64()
+//    androidNativeX64()
     watchosDeviceArm64()
     //end native targets
 

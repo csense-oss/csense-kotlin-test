@@ -1,5 +1,6 @@
 package org.csenseoss.kotlin.tests.assertions
 
+import org.csenseoss.kotlin.tests.assertions.exceptions.*
 import kotlin.test.Test
 
 class StringTest {

@@ -1,10 +1,10 @@
 package org.csenseoss.kotlin.tests
 
-import csense.kotlin.tests.assertions.*
-import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.*
 
 class JvmAssertionsTest {
-    class ClassAssert {
+    @Nested
+    inner class ClassAssert {
 
         @Test
         fun nullToNonNullShouldThrow() = assertThrows<Throwable> {

@@ -1,26 +1,25 @@
 package org.csenseoss.kotlin.tests.assertions.primitives.charSequence
 
-import org.csenseoss.kotlin.tests.assertions.*
+import org.csenseoss.kotlin.tests.assertions.general.*
 
+
+/**
+ * Asserts that this string differs from the given [expected]
+ * @receiver [String] the actual value
+ * @param expected [String] the expected value
+ * @param message [String] the error message if they are the same
+ */
 public fun CharSequence?.assertNot(
-    expected: CharSequence?,
+    expected: CharSequence,
     ignoreCase: Boolean = false,
-    message: String = "Expected \"$this\" to be different to \"$expected\" but they are the same",
-): Unit = Nullabillity.assertNullabillityNotEqualsOr(
-    actual = this,
-    expected = expected,
-    orByAssert = { actual: CharSequence, expected: CharSequence ->
-
-        if (actual.length != expected.length) {
-            return@assertNullabillityNotEqualsOr
-        }
-
-        actual.forEachIndexed { index: Int, char: Char ->
-            val areCharsEqual: Boolean = expected[index].equals(other = char, ignoreCase = ignoreCase)
-            if (!areCharsEqual) {
-                return@assertNot
-            }
-        }
-        failTest(message)
+    message: String = ""
+) {
+    this.assertNotNull()
+    val isEqual: Boolean = this.contentEquals(
+        other = expected,
+        ignoreCase
+    )
+    if (isEqual) {
+        failTest("Expected \"$this\" to be different from \"$expected\". $message")
     }
-)
+}

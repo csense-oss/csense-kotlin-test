@@ -1,7 +1,7 @@
 package org.csenseoss.kotlin.tests.assertions.collections.array.typed.long
 
-import org.csenseoss.kotlin.tests.assertions.*
-import kotlin.test.*
+import org.csenseoss.kotlin.tests.assertions.comparable.*
+import org.csenseoss.kotlin.tests.assertions.general.*
 
 
 /**
@@ -12,5 +12,5 @@ import kotlin.test.*
 public fun LongArray?.assertSingle(item: Long, message: String = "") {
     assertNotNull()
     assertSize(1, message = "Should have 1 item")
-    assertEquals(item, first(), message)
+    first().assert(expected = item, message = message)
 }

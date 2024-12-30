@@ -1,7 +1,5 @@
 package org.csenseoss.kotlin.tests.assertions.collections.array.typed.int
 
-import org.csenseoss.kotlin.tests.assertions.*
-
 /**
  * Asserts that this array is empty
  * @param message [String] the message to print if the assertion fails

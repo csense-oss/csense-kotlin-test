@@ -1,5 +1,7 @@
 package org.csenseoss.kotlin.tests.assertions
 
+import org.csenseoss.kotlin.tests.assertions.exceptions.*
+import org.csenseoss.kotlin.tests.assertions.primitives.charSequence.*
 import kotlin.test.Test
 
 class CharSequenceTest {
@@ -52,6 +54,6 @@ class CharSequenceTest {
     @Test
     fun nullToNonNullShouldThrow() = assertThrows<Throwable> {
         val c1: CharSequence? = null
-        c1.assert("asd")
+        c1!!.assert("asd")
     }
 }

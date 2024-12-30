@@ -1,6 +1,7 @@
 package org.csenseoss.kotlin.tests.assertions.collections.array.typed.double
 
 import org.csenseoss.kotlin.tests.assertions.*
+import org.csenseoss.kotlin.tests.assertions.exceptions.*
 import kotlin.test.*
 
 class AssertSizeTest {

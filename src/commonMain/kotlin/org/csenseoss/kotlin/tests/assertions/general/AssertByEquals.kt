@@ -1,4 +1,8 @@
+@file:Suppress("unused", "INVISIBLE_MEMBER", "INVISIBLE_REFERENCE")
+
 package org.csenseoss.kotlin.tests.assertions.general
+
+import org.csenseoss.kotlin.tests.assertions.primitives.boolean.*
 
 
 /**
@@ -8,7 +12,7 @@ public fun <@kotlin.internal.OnlyInputTypes T> T.assertByEquals(
     expected: T?,
     message: String? = null
 ) {
-    val isEqual = this?.equals(expected) == true
+    val isEqual: Boolean = this?.equals(expected) == true
     isEqual.assertTrue(
         message = "Expected $this to be equal (via equals) to $expected. ${message ?: ""}"
     )

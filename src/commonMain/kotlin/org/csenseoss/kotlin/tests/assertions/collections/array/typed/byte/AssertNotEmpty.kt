@@ -1,3 +1,4 @@
+@file:Suppress("NOTHING_TO_INLINE")
 package org.csenseoss.kotlin.tests.assertions.collections.array.typed.byte
 
 import org.csenseoss.kotlin.tests.assertions.comparable.*

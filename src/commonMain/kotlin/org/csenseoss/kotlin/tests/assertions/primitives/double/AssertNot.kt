@@ -1,5 +1,6 @@
 package org.csenseoss.kotlin.tests.assertions.primitives.double
 
+import org.csenseoss.kotlin.tests.assertions.general.*
 import kotlin.math.*
 import kotlin.test.*
 

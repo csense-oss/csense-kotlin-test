@@ -1,5 +1,9 @@
 package org.csenseoss.kotlin.tests.assertions
 
+import org.csenseoss.kotlin.tests.assertions.collections.iterable.*
+import org.csenseoss.kotlin.tests.assertions.comparable.*
+import org.csenseoss.kotlin.tests.assertions.exceptions.*
+import org.csenseoss.kotlin.tests.assertions.general.*
 import kotlin.test.Test
 
 class CollectionsTest {
@@ -109,43 +113,43 @@ class CollectionsTest {
         @Test
         fun emptyBoth() {
             val lst = listOf<String>()
-            lst.assertContainsAll()
+            lst.assertContainsAllByEquals()
         }
 
         @Test
         fun emptyList() = assertThrows<Throwable> {
             val lst = listOf<String>()
-            lst.assertContainsAll("test")
+            lst.assertContainsAllByEquals("test")
         }
 
         @Test
         fun emptyAssert() {
             val lst = listOf("test")
-            lst.assertContainsAll()
+            lst.assertContainsAllByEquals()
         }
 
         @Test
         fun singleNotFound() = assertThrows<Throwable> {
             val lst = listOf("test")
-            lst.assertContainsAll("abc")
+            lst.assertContainsAllByEquals("abc")
         }
 
         @Test
         fun singleFound() {
             val lst = listOf("test")
-            lst.assertContainsAll("test")
+            lst.assertContainsAllByEquals("test")
         }
 
         @Test
         fun multipleNoneFound() = assertThrows<Throwable> {
             val lst = listOf("test", "1234")
-            lst.assertContainsAll("abc")
+            lst.assertContainsAllByEquals("abc")
         }
 
         @Test
         fun multipleOneFound() {
             val lst = listOf("test", "1234")
-            lst.assertContainsAll("1234")
+            lst.assertContainsAllByEquals("1234")
         }
     }
 

@@ -1,7 +1,5 @@
 package org.csenseoss.kotlin.tests.assertions.primitives.boolean
 
-import org.csenseoss.kotlin.tests.assertions.*
-
 /**
  * Asserts this [Boolean] is true
  * @receiver [Boolean] the [Boolean] to test

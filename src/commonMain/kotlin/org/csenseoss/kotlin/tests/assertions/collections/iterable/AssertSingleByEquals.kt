@@ -1,6 +1,7 @@
-package org.csenseoss.kotlin.tests.assertions.collections.collection
+package org.csenseoss.kotlin.tests.assertions.collections.iterable
 
 import org.csenseoss.kotlin.tests.assertions.general.*
+import kotlin.contracts.*
 
 
 /**
@@ -8,10 +9,12 @@ import org.csenseoss.kotlin.tests.assertions.general.*
  * @receiver [Collection]<T>
  * @param expected T
  */
-public fun <T> Collection<T>.assertSingleByEquals(
+public fun <T> Iterable<T>?.assertSingleByEquals(
     expected: T,
     message: String = "Expected $this to be $expected (using equals) but is not"
 ) {
-    assertSize(size = 1)
+    contract { returns() implies (this@assertSingleByEquals != null) }
+    this.assertNotNull()
+    assertSize(expectedCount = 1)
     first().assertByEquals(expected = expected, message = message)
 }

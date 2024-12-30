@@ -1,5 +1,7 @@
 package org.csenseoss.kotlin.tests.assertions
 
+import org.csenseoss.kotlin.tests.assertions.collections.map.entry.*
+import org.csenseoss.kotlin.tests.assertions.exceptions.*
 import kotlin.test.*
 
 class MapEntryTest {

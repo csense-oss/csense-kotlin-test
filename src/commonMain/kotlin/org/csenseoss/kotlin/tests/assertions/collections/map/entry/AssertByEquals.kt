@@ -1,3 +1,5 @@
+@file:Suppress("NOTHING_TO_INLINE")
+
 package org.csenseoss.kotlin.tests.assertions.collections.map.entry
 
 import org.csenseoss.kotlin.tests.assertions.general.*

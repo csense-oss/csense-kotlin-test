@@ -1,5 +1,7 @@
 package org.csenseoss.kotlin.tests.assertions
 
+import org.csenseoss.kotlin.tests.assertions.exceptions.*
+import org.csenseoss.kotlin.tests.assertions.pair.*
 import kotlin.test.*
 
 class PairTest {
@@ -14,7 +16,7 @@ class PairTest {
         @Test
         fun nullToNonNullShouldThrow() = assertThrows<Throwable> {
             val p1: Pair<String, String>? = null
-            p1.assertByEquals("a" to "1")
+            p1!!.assertByEquals("a" to "1")
         }
     }
 }

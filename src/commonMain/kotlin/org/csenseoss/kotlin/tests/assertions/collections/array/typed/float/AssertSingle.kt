@@ -1,7 +1,7 @@
 package org.csenseoss.kotlin.tests.assertions.collections.array.typed.float
 
-import org.csenseoss.kotlin.tests.assertions.*
-import kotlin.test.*
+import org.csenseoss.kotlin.tests.assertions.comparable.*
+import org.csenseoss.kotlin.tests.assertions.general.*
 
 
 /**
@@ -11,6 +11,6 @@ import kotlin.test.*
  */
 public fun FloatArray?.assertSingle(item: Float, message: String = "") {
     assertNotNull()
-    assertSize(1, message = "Should have 1 item")
-    assertEquals(item, first(), message)
+    assertSize(size = 1, message = "Should have 1 item")
+    first().assert(expected = item, message = message)
 }

@@ -48,3 +48,11 @@ public inline fun <Key, reified Value> Map<Key, Value>.assertContains(
     val didFind: Boolean = entries.any { it: Map.Entry<Key, Value> -> predicate(it.key, it.value) }
     didFind.assertTrue(message = message)
 }
+
+public inline fun <Key, reified Value> Map<Key, Value>.assertContains(
+    expectedKey: Key,
+    expectedValue: Value,
+    message: String = ""
+) where Key : Comparable<Key>, Value : Comparable<Value> {
+    this.assertContains(entry = expectedKey to expectedValue, message = message)
+}

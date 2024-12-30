@@ -1,5 +1,7 @@
 package org.csenseoss.kotlin.tests.assertions.primitives.char
 
+import org.csenseoss.kotlin.tests.assertions.general.*
+
 /**
  *
  * @receiver Char

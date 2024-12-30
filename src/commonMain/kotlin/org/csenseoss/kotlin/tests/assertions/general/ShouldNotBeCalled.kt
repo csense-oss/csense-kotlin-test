@@ -1,6 +1,7 @@
 package org.csenseoss.kotlin.tests.assertions.general
 
 import org.csenseoss.kotlin.tests.assertions.*
+import org.csenseoss.kotlin.tests.assertions.texts.*
 
 
 /**

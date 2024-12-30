@@ -2,7 +2,7 @@
 
 package org.csenseoss.kotlin.tests
 
-import org.csenseoss.kotlin.tests.assertions.*
+import org.csenseoss.kotlin.tests.assertions.primitives.boolean.*
 
 
 /**

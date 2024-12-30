@@ -1,6 +1,7 @@
-package org.csenseoss.kotlin.tests.assertions.primitives.string
+package org.csenseoss.kotlin.tests.assertions.primitives.charSequence
 
-import kotlin.test.*
+import org.csenseoss.kotlin.tests.assertions.general.*
+import org.csenseoss.kotlin.tests.assertions.primitives.boolean.*
 
 
 /**
@@ -9,13 +10,11 @@ import kotlin.test.*
  * @param value [String] the value that should NOT be in this string
  * @param ignoreCase [Boolean] if true, will ignore the casing, false means case-sensitive.
  */
-public fun String.assertContainsNot(
-    value: String,
+public fun CharSequence?.assertContainsNot(
+    value: CharSequence,
     ignoreCase: Boolean = false,
     message: String = "Could find \"$value\", in \r\n\"$this\""
 ) {
-    assertFalse(
-        this.contains(value, ignoreCase = ignoreCase),
-        message
-    )
+    this.assertNotNull()
+    this.contains(value, ignoreCase = ignoreCase).assertFalse(message)
 }

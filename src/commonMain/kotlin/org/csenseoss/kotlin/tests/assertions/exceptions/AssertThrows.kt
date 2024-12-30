@@ -1,5 +1,7 @@
 package org.csenseoss.kotlin.tests.assertions.exceptions
 
+import org.csenseoss.kotlin.tests.assertions.general.*
+
 
 /**
  * Asserts that the given [testCode] throws an exception of the given type [T]

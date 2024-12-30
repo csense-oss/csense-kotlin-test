@@ -1,7 +1,7 @@
 package org.csenseoss.kotlin.tests.assertions.collections.array.typed.double
 
 import org.csenseoss.kotlin.annotations.numbers.*
-import org.csenseoss.kotlin.tests.assertions.*
+import org.csenseoss.kotlin.tests.assertions.comparable.*
 
 /**
  * Asserts the size of the given [DoubleArray]
@@ -12,4 +12,4 @@ import org.csenseoss.kotlin.tests.assertions.*
 public fun DoubleArray.assertSize(
     @IntLimit(from = 0) size: Int,
     message: String = ""
-): Unit = this.size.assert(size, message)
+): Unit = this.size.assert(expected = size, message = message)

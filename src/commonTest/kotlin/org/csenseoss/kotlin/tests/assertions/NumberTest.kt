@@ -1,5 +1,9 @@
 package org.csenseoss.kotlin.tests.assertions
 
+import org.csenseoss.kotlin.tests.assertions.exceptions.*
+import org.csenseoss.kotlin.tests.assertions.primitives.char.*
+import org.csenseoss.kotlin.tests.assertions.primitives.double.*
+import org.csenseoss.kotlin.tests.assertions.primitives.float.*
 import kotlin.test.Test
 
 class NumberTest {
@@ -9,44 +13,44 @@ class NumberTest {
         2.0.assert(2.5, delta = 1.0)
         2.0.assert(2.9, delta = 1.0)
         2.0.assert(1.2, delta = 1.0)
-        org.csenseoss.kotlin.tests.assertions.assertThrows<Throwable> {
+        assertThrows<Throwable> {
             2.0.assert(3.0)
         }
-        org.csenseoss.kotlin.tests.assertions.assertThrows<Throwable> {
+        assertThrows<Throwable> {
             2.0.assert(3.0)
         }
 
         Double.NaN.assert(Double.NaN)
 
-        org.csenseoss.kotlin.tests.assertions.assertThrows<Throwable> {
+        assertThrows<Throwable> {
             Double.NaN.assert(3.0)
         }
 
-        org.csenseoss.kotlin.tests.assertions.assertThrows<Throwable> {
+        assertThrows<Throwable> {
             3.0.assert(Double.NaN)
         }
 
         Double.POSITIVE_INFINITY.assert(Double.POSITIVE_INFINITY)
         Double.NEGATIVE_INFINITY.assert(Double.NEGATIVE_INFINITY)
 
-        org.csenseoss.kotlin.tests.assertions.assertThrows<Throwable> {
+        assertThrows<Throwable> {
             Double.POSITIVE_INFINITY.assert(Double.NEGATIVE_INFINITY)
         }
 
-        org.csenseoss.kotlin.tests.assertions.assertThrows<Throwable> {
+        assertThrows<Throwable> {
             3.0.assert(Double.NEGATIVE_INFINITY)
         }
 
-        org.csenseoss.kotlin.tests.assertions.assertThrows<Throwable> {
+        assertThrows<Throwable> {
             3.0.assert(Double.POSITIVE_INFINITY)
         }
 
 
-        org.csenseoss.kotlin.tests.assertions.assertThrows<Throwable> {
+        assertThrows<Throwable> {
             Double.NEGATIVE_INFINITY.assert(3.0)
         }
 
-        org.csenseoss.kotlin.tests.assertions.assertThrows<Throwable> {
+        assertThrows<Throwable> {
             Double.POSITIVE_INFINITY.assert(3.0)
         }
 
@@ -58,7 +62,7 @@ class NumberTest {
         2.0.assertNot(3.0, delta = 0.8)
         2.0.assertNot(4.0)
 
-        org.csenseoss.kotlin.tests.assertions.assertThrows<Throwable> {
+        assertThrows<Throwable> {
             Double.NaN.assertNot(Double.NaN)
         }
 
@@ -67,10 +71,10 @@ class NumberTest {
         3.0.assertNot(Double.NaN)
 
 
-        org.csenseoss.kotlin.tests.assertions.assertThrows<Throwable> {
+        assertThrows<Throwable> {
             Double.POSITIVE_INFINITY.assertNot(Double.POSITIVE_INFINITY)
         }
-        org.csenseoss.kotlin.tests.assertions.assertThrows<Throwable> {
+        assertThrows<Throwable> {
             Double.NEGATIVE_INFINITY.assertNot(Double.NEGATIVE_INFINITY)
         }
 
@@ -91,35 +95,35 @@ class NumberTest {
 
         Float.NaN.assert(Float.NaN)
 
-        org.csenseoss.kotlin.tests.assertions.assertThrows<Throwable> {
+        assertThrows<Throwable> {
             Float.NaN.assert(3f)
         }
 
-        org.csenseoss.kotlin.tests.assertions.assertThrows<Throwable> {
+        assertThrows<Throwable> {
             3f.assert(Float.NaN)
         }
 
         Float.POSITIVE_INFINITY.assert(Float.POSITIVE_INFINITY)
         Float.NEGATIVE_INFINITY.assert(Float.NEGATIVE_INFINITY)
 
-        org.csenseoss.kotlin.tests.assertions.assertThrows<Throwable> {
+        assertThrows<Throwable> {
             Float.POSITIVE_INFINITY.assert(Float.NEGATIVE_INFINITY)
         }
 
-        org.csenseoss.kotlin.tests.assertions.assertThrows<Throwable> {
+        assertThrows<Throwable> {
             3f.assert(Float.NEGATIVE_INFINITY)
         }
 
-        org.csenseoss.kotlin.tests.assertions.assertThrows<Throwable> {
+        assertThrows<Throwable> {
             3f.assert(Float.POSITIVE_INFINITY)
         }
 
 
-        org.csenseoss.kotlin.tests.assertions.assertThrows<Throwable> {
+        assertThrows<Throwable> {
             Float.NEGATIVE_INFINITY.assert(3f)
         }
 
-        org.csenseoss.kotlin.tests.assertions.assertThrows<Throwable> {
+        assertThrows<Throwable> {
             Float.POSITIVE_INFINITY.assert(3f)
         }
 
@@ -132,17 +136,17 @@ class NumberTest {
         2.0f.assertNot(3.0f, delta = 0.8f)
         2.0f.assertNot(4.0f)
 
-        org.csenseoss.kotlin.tests.assertions.assertThrows<Throwable> {
+        assertThrows<Throwable> {
             Float.NaN.assertNot(Float.NaN)
         }
         Float.NaN.assertNot(3f)
         3f.assertNot(Float.NaN)
 
 
-        org.csenseoss.kotlin.tests.assertions.assertThrows<Throwable> {
+        assertThrows<Throwable> {
             Float.POSITIVE_INFINITY.assertNot(Float.POSITIVE_INFINITY)
         }
-        org.csenseoss.kotlin.tests.assertions.assertThrows<Throwable> {
+        assertThrows<Throwable> {
             Float.NEGATIVE_INFINITY.assertNot(Float.NEGATIVE_INFINITY)
         }
 
@@ -156,13 +160,13 @@ class NumberTest {
     @Test
     fun charAssertValue() {
         'a'.assert('a')
-        org.csenseoss.kotlin.tests.assertions.assertThrows<Throwable> {
+        assertThrows<Throwable> {
             'a'.assert('b')
         }
-        org.csenseoss.kotlin.tests.assertions.assertThrows<Throwable> {
+        assertThrows<Throwable> {
             'b'.assert('a')
         }
-        org.csenseoss.kotlin.tests.assertions.assertThrows<Throwable> {
+        assertThrows<Throwable> {
             'a'.assert('A', ignoreCase = false)
         }
         'a'.assert('A', ignoreCase = true)
@@ -171,11 +175,11 @@ class NumberTest {
     @Test
     fun charAssertNotValue() {
         'a'.assertNot('b')
-        org.csenseoss.kotlin.tests.assertions.assertThrows<Throwable> {
+        assertThrows<Throwable> {
             'a'.assertNot('a')
         }
         'b'.assertNot('a')
-        org.csenseoss.kotlin.tests.assertions.assertThrows<Throwable> {
+        assertThrows<Throwable> {
             'a'.assertNot('A', ignoreCase = true)
         }
         'a'.assertNot('A', ignoreCase = false)

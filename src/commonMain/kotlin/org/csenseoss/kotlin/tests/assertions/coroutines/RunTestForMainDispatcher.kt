@@ -2,7 +2,6 @@ package org.csenseoss.kotlin.tests.assertions.coroutines
 
 import kotlinx.coroutines.*
 import kotlinx.coroutines.test.*
-import org.csenseoss.kotlin.tests.assertions.*
 import kotlin.time.*
 import kotlin.time.Duration.Companion.seconds
 

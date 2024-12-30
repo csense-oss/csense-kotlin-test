@@ -2,6 +2,7 @@ package org.csenseoss.kotlin.tests.assertions.coroutines
 
 import kotlinx.coroutines.*
 import org.csenseoss.kotlin.tests.assertions.*
+import org.csenseoss.kotlin.tests.assertions.general.*
 import kotlin.coroutines.*
 
 
@@ -18,7 +19,7 @@ public fun CoroutineScope.assertDispatcherUnconfined() {
 }
 
 public fun CoroutineScope.assertDispatcher(otherDispatcher: CoroutineDispatcher) {
-    getCurrentDispatcher().assertAs(otherDispatcher)
+    getCurrentDispatcher().assertByEquals(otherDispatcher)
 }
 
 private fun CoroutineScope.getCurrentDispatcher() = coroutineContext.getCurrentDispatcher()
