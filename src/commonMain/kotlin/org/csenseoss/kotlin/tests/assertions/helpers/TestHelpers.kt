@@ -1,16 +1,17 @@
 package org.csenseoss.kotlin.tests.assertions.helpers
 
-
 //contains extensions for this test module (stored away in a namespace called "helpers")
 
-public data class TestHelpers<T>(val value: T)
+public data class TestHelpers<T : Any>(
+    val value: T
+)
 
-public inline val <T> T.helpers: TestHelpers<T>
+public inline val <T : Any> T.helpers: TestHelpers<T>
     get() = TestHelpers(this)
 
-public fun <T> TestHelpers<T>?.simpleClassNameOrDash(): String {
+public fun <T : Any> TestHelpers<T>?.simpleClassNameOrDash(): String {
     this ?: return "-"
-    return this::class.simpleName ?: "-"
+    return value::class.simpleName ?: "-"
 }
 
 /**

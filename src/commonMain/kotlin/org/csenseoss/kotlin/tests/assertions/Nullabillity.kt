@@ -1,6 +1,9 @@
+@file:Suppress("NOTHING_TO_INLINE")
+
 package org.csenseoss.kotlin.tests.assertions
 
 import org.csenseoss.kotlin.tests.assertions.general.*
+import kotlin.contracts.*
 
 
 public object Nullabillity {
@@ -19,6 +22,17 @@ public object Nullabillity {
             failTest(message)
         }
     }
+
+    public inline fun <T, U> assertNullabillityEquals(
+        actual: T?,
+        expected: U?
+    ) {
+        if (actual == null && expected != null || actual != null && expected == null) {
+            failTest("Nullability difference between \"$actual\" and \"$expected\"")
+        }
+    }
+
+
     public inline fun <T, U> assertNullabillityNotEqualsOr(
         actual: T?,
         expected: U?,
@@ -32,6 +46,20 @@ public object Nullabillity {
         val isEqual: Boolean = actual == null && expected == null
         if (isEqual) {
             failTest(message)
+        }
+    }
+
+    public inline fun <reified T> assertNullabillityContinueOnNotNull(
+        first: T?,
+        second: T?,
+        returnFunction: () -> Nothing
+    ) {
+        contract { returns() implies (first != null && second != null) }
+        if (first == null && second == null) {
+            returnFunction()
+        }
+        if (first != null && second == null || first == null && second != null) {
+            failTest("")
         }
     }
 }

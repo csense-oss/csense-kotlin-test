@@ -13,7 +13,7 @@ import kotlin.test.*
  */
 
 public inline fun <reified T> Any?.assertIs(
-    message: String = "expected \"$this\" of type \"${this.helpers.simpleClassNameOrDash()}\" to be of type \"${T::class}\", but is not",
+    message: String = "expected \"$this\" of type \"${this?.helpers.simpleClassNameOrDash()}\" to be of type \"${T::class}\", but is not",
 ) {
     contract {
         returns() implies (this@assertIs is T)
