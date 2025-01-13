@@ -11,7 +11,7 @@ import kotlin.test.*
 public fun IntRange.assert(
     expected: IntRange,
     message: String = ""
-): Unit {
+) {
     val errorMessage = "Expected $expected but is instead $this."
     assertEquals(expected, this, errorMessage + message)
 }

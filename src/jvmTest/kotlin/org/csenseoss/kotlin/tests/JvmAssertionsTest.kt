@@ -7,21 +7,25 @@ class JvmAssertionsTest {
     inner class ClassAssert {
 
         @Test
-        fun nullToNonNullShouldThrow() = assertThrows<Throwable> {
-            val nullableString: Class<String>? = null
-            nullableString.assert(String::class.java)
+        fun nullToNonNullShouldThrow() {
+            assertThrows<Throwable> {
+                val nullableString: Class<String>? = null
+                nullableString.assert(String::class.java)
+            }
         }
 
         @Test
         fun sameShouldPass() {
-            val nullableString: Class<String>? = String::class.java
+            val nullableString: Class<String> = String::class.java
             nullableString.assert(String::class.java)
         }
 
         @Test
-        fun differentShouldThrow() = assertThrows<Throwable> {
-            val nullableString: Class<String>? = null
-            nullableString.assert(Int::class.java)
+        fun differentShouldThrow() {
+            assertThrows<Throwable> {
+                val nullableString: Class<String>? = null
+                nullableString.assert(Int::class.java)
+            }
         }
     }
 }

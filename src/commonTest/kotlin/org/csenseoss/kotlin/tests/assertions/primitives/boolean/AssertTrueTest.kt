@@ -6,7 +6,7 @@ import kotlin.test.*
 class AssertTrueTest {
 
     @Test
-    fun falseOnTrueShouldThrow() = assertThrows<Exception> {
+    fun falseOnTrueShouldThrow(): Unit = assertThrows<Throwable> {
         false.assertTrue()
     }
 

@@ -11,8 +11,6 @@ buildscript {
     ext.coroutinesVersion = "1.10.1"
     //https://github.com/junit-team/junit5/releases
     ext.junit5Version = "5.11.4"
-    //https://github.com/junit-team/junit4/releases
-    ext.junit4Version = "4.13.2"
     //https://github.com/JetBrains/kotlin/releases
     ext.kotlin_version = "2.1.0"
     //https://github.com/csense-oss/csense-kotlin-annotations
@@ -68,7 +66,14 @@ kotlin {
             kotlinOptions.jvmTarget = compileJavaVersion
         }
         withJava()
+        testRuns["test"].executionTask.configure {
+            useJUnitPlatform()
+        }
     }
+    jvmToolchain {
+        languageVersion.set(JavaLanguageVersion.of(compileJavaVersion))
+    }
+
     js(IR) {
         browser()
         nodejs()
@@ -139,24 +144,13 @@ project.version = csenseVersionName
 
 apply from: "$rootDir/gradle/publish.gradle"
 
-
-kotlin {
-    jvmToolchain {
-        languageVersion.set(JavaLanguageVersion.of(compileJavaVersion))
-    }
-}
-
-
-// warnings as errors
 tasks.withType(KotlinCompile).configureEach {
 //    kotlinOptions.allWarningsAsErrors = true
 }
 
-//progressive mode & api version + optIns
 kotlin.sourceSets.configureEach {
     languageSettings {
         progressiveMode = true
-        languageVersion = "2.1"
         optIn("kotlin.contracts.ExperimentalContracts")
     }
 }

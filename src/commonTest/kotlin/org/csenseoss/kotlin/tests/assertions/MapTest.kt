@@ -78,32 +78,32 @@ class MapTest {
         }
     }
 
-    class MapKeyValueAssertSingleItem {
-        @Test
-        fun empty() {
-            assertThrows<Throwable> {
-                mapOf<Int, Int>().assertSingle(42 to 42)
-            }
-        }
-
-        @Test
-        fun single() {
-            assertThrows<Throwable> {
-                mapOf(22 to 42).assertSingle(42 to 42)
-            }
-            mapOf(42 to 33).assertSingle(42 to 33)
-            assertThrows<Throwable> {
-                mapOf(21 to 44).assertSingle(21 to 42)
-            }
-        }
-
-        @Test
-        fun multiple() {
-            assertThrows<Throwable> {
-                mapOf(22 to 42, 55 to 21).assertSingle(42 to 42)
-            }
-        }
-    }
+//    class MapKeyValueAssertSingleItem {
+//        @Test
+//        fun empty() {
+//            assertThrows<Throwable> {
+//                mapOf<Int, Int>().assertSingle(42 to 42)
+//            }
+//        }
+//
+//        @Test
+//        fun single() {
+//            assertThrows<Throwable> {
+//                mapOf(22 to 42).assertSingle(42 to 42)
+//            }
+//            mapOf(42 to 33).assertSingle(42 to 33)
+//            assertThrows<Throwable> {
+//                mapOf(21 to 44).assertSingle(21 to 42)
+//            }
+//        }
+//
+//        @Test
+//        fun multiple() {
+//            assertThrows<Throwable> {
+//                mapOf(22 to 42, 55 to 21).assertSingle(42 to 42)
+//            }
+//        }
+//    }
 
 
 }

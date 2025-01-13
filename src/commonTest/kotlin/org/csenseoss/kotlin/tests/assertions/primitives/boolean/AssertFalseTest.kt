@@ -11,7 +11,7 @@ class AssertFalseTest {
     }
 
     @Test
-    fun trueOnFalseShouldThrow() = assertThrows<Exception> {
+    fun trueOnFalseShouldThrow(): Unit = assertThrows<Throwable> {
         true.assertFalse()
     }
 

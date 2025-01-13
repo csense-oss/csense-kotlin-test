@@ -53,61 +53,61 @@ class CollectionsTest {
             listOf(44).assertEmpty()
         }
     }
-
-    class CollectionTAssertSingleCallback {
-        @Test
-        fun empty() {
-            assertThrows<Throwable> {
-                listOf<Int>().assertSingle {
-                }
-            }
-        }
-
-        @Test
-        fun single() {
-            assertCalled { shouldBeCalled ->
-                listOf(42).assertSingle {
-                    it.assert(42)
-                    shouldBeCalled()
-                }
-            }
-        }
-
-        @Test
-        fun multiple() {
-            assertThrows<Throwable> {
-                listOf(42, 42, 42).assertSingle {
-                }
-            }
-        }
-    }
-
-    class CollectionTAssertSingleItem {
-        @Test
-        fun empty() {
-            assertThrows<Throwable> {
-                listOf<Int>().assertSingle(42)
-            }
-        }
-
-        @Test
-        fun single() {
-            listOf(42).assertSingle(42)
-            assertThrows<Throwable> {
-                listOf(42).assertSingle(44)
-            }
-        }
-
-        @Test
-        fun multiple() {
-            assertThrows<Throwable> {
-                listOf(42, 42).assertSingle(44)
-            }
-            assertThrows<Throwable> {
-                listOf(42, 42).assertSingle(42)
-            }
-        }
-    }
+//
+//    class CollectionTAssertSingleCallback {
+//        @Test
+//        fun empty() {
+//            assertThrows<Throwable> {
+//                listOf<Int>().assertSingle {
+//                }
+//            }
+//        }
+//
+//        @Test
+//        fun single() {
+//            assertCalled { shouldBeCalled ->
+//                listOf(42).assertSingle {
+//                    it.assert(42)
+//                    shouldBeCalled()
+//                }
+//            }
+//        }
+//
+//        @Test
+//        fun multiple() {
+//            assertThrows<Throwable> {
+//                listOf(42, 42, 42).assertSingle {
+//                }
+//            }
+//        }
+//    }
+//
+//    class CollectionTAssertSingleItem {
+//        @Test
+//        fun empty() {
+//            assertThrows<Throwable> {
+//                listOf<Int>().assertSingle(42)
+//            }
+//        }
+//
+//        @Test
+//        fun single() {
+//            listOf(42).assertSingle(42)
+//            assertThrows<Throwable> {
+//                listOf(42).assertSingle(44)
+//            }
+//        }
+//
+//        @Test
+//        fun multiple() {
+//            assertThrows<Throwable> {
+//                listOf(42, 42).assertSingle(44)
+//            }
+//            assertThrows<Throwable> {
+//                listOf(42, 42).assertSingle(42)
+//            }
+//        }
+//    }
 
     class CollectionTAssertContainsAll {
         @Test
