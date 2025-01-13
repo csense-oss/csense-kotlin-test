@@ -8,19 +8,23 @@ import kotlin.test.*
 /**
  *
  * @receiver Float
- * @param value Double
+ * @param expected Double
  * @param delta Double
  * @param message String
  */
 public fun Float.assertNot(
-    value: Float,
+    expected: Float,
     delta: Float = 0.1F,
     message: String = ""
 ) {
-    if (this.isNaN() && value.isNaN()) {
-        failTest("Both $this and $value are NaN's, but expected them to be different")
+    if (this.isNaN() && expected.isNaN()) {
+        failTest("Both $this and $expected are NaN's, but expected them to be different")
     }
-    val errorMessage = "expected $value to be different from $this within $delta margins, but they are equal."
-    val safeDelta = abs(delta)
-    assertFalse(this >= value - safeDelta && this <= value + safeDelta, errorMessage + message)
+    val errorMessage = "expected $expected to be different from $this within $delta margins, but they are equal."
+    assertNotEquals(
+        illegal = expected,
+        actual = this,
+        message = errorMessage + message,
+        absoluteTolerance = delta.absoluteValue
+    )
 }
