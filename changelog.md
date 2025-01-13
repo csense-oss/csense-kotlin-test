@@ -1,6 +1,12 @@
 # 0.1.0
 - Kotlin 2.0.0
-
+- changed namespace
+- aligned namespaces
+- aligned code structure
+  - all assert should take a message, as documenting practice
+  - minimize number of "assert" types (ie, assert, asserByEquals) = as small a cognitive load
+  - increase ease of use (by extending more types,combinations and handling null better etc.)
+  - 
 
 # 0.0.61
 - bumped dependencies

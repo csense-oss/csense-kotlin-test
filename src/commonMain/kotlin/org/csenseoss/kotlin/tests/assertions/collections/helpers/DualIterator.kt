@@ -1,8 +1,8 @@
 @file:Suppress("NOTHING_TO_INLINE")
 package org.csenseoss.kotlin.tests.assertions.collections.helpers
 
-import org.csenseoss.kotlin.tests.assertions.*
 import org.csenseoss.kotlin.tests.assertions.comparable.*
+import org.csenseoss.kotlin.tests.assertions.helpers.*
 
 //TODO better name
 public object DualIterator {

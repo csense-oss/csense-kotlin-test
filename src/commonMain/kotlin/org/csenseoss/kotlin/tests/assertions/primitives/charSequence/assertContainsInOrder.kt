@@ -1,11 +1,4 @@
-//@file:Suppress("unused")
-//
-//package org.csenseoss.kotlin.tests.assertions
-//
-//import org.csenseoss.kotlin.tests.assertions.general.*
-//import org.csenseoss.kotlin.tests.assertions.helpers.*
-//
-//
+package org.csenseoss.kotlin.tests.assertions.primitives.charSequence
 ///**
 // * Asserts that this string contains some substrings in order (increasing), such that you may say "there is some x, followed by y"
 // * @receiver [String] the string to assert contains the values in order

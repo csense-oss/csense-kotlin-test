@@ -2,22 +2,11 @@
 
 ## Installation
 
-add this maven repo (into your repositories, either in the root build.gradle og the application's build.gradle)
-
-```groovy
-repositories {
-    maven {
-        url 'https://pkgs.dev.azure.com/csense-oss/csense-oss/_packaging/csense-oss/maven/v1'
-        name 'csense-oss'
-    }
-}
-```
-
 Then add the dependency
 
 ```groovy
 dependencies {
-    implementation 'csense.kotlin:csense-kotlin-tests:0.0.59'
+    implementation 'csense.kotlin:csense-kotlin-tests:0.1.0'
 }
 ```
 
@@ -106,5 +95,5 @@ assertTrue(collectionToTest.contains("test2"))
 
 ```kotlin
 val collectionToTest = listOf<String>()
-collectionToTest.assertContainsAll("test", "test2")
+collectionToTest.assert("test", "test2")
 ```

@@ -1,6 +1,6 @@
 @file:Suppress("NOTHING_TO_INLINE")
 
-package org.csenseoss.kotlin.tests.assertions
+package org.csenseoss.kotlin.tests.assertions.helpers
 
 import org.csenseoss.kotlin.tests.assertions.general.*
 import kotlin.contracts.*
