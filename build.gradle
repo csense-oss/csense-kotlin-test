@@ -144,10 +144,6 @@ project.version = csenseVersionName
 
 apply from: "$rootDir/gradle/publish.gradle"
 
-tasks.withType(KotlinCompile).configureEach {
-//    kotlinOptions.allWarningsAsErrors = true
-}
-
 kotlin.sourceSets.configureEach {
     languageSettings {
         progressiveMode = true
