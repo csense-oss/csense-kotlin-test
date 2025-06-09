@@ -1,6 +1,6 @@
 package org.csenseoss.kotlin.tests.assertions.collections.array.typed.char
 
-import org.csenseoss.kotlin.annotations.numbers.*
+import org.csenseoss.kotlin.annotations.numbers.limit.*
 import org.csenseoss.kotlin.tests.assertions.comparable.*
 
 /**
