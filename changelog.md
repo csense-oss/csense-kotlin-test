@@ -1,5 +1,5 @@
 # 0.1.0
-- Kotlin 2.0.0
+- Kotlin 2.2.0
 - changed namespace
 - aligned namespaces
 - aligned code structure

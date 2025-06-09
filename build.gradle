@@ -8,16 +8,16 @@ buildscript {
 
     //dependencies
     //https://github.com/Kotlin/kotlinx.coroutines
-    ext.coroutinesVersion = "1.10.1"
+    ext.coroutinesVersion = "1.10.2"
     //https://github.com/junit-team/junit5/releases
-    ext.junit5Version = "5.11.4"
+    ext.junit5Version = "5.13.1"
     //https://github.com/JetBrains/kotlin/releases
-    ext.kotlin_version = "2.1.0"
+    ext.kotlin_version = "2.2.0-RC2"
     //https://github.com/csense-oss/csense-kotlin-annotations
-    ext.csenseAnnotationVersion = "0.0.3"
+    ext.csenseAnnotationVersion = "0.1.0"
 
     //versions & naming
-    ext.csenseVersionName = "0.0.1-Local"
+    ext.csenseVersionName = "0.1.0-Local"
     ext.csenseGroupId = "org.csenseoss.kotlin"
     ext.csenseArtifactId = "csense-kotlin-tests"
 
@@ -44,7 +44,7 @@ plugins {
     id 'org.jetbrains.kotlin.multiplatform' version "$kotlin_version"
     id "maven-publish"
     //https://github.com/vanniktech/gradle-maven-publish-plugin
-    id "com.vanniktech.maven.publish" version "0.30.0"
+    id "com.vanniktech.maven.publish" version "0.32.0"
 }
 
 repositories {
