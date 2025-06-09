@@ -41,8 +41,17 @@ buildscript {
 }
 
 plugins {
-    id 'org.jetbrains.kotlin.multiplatform' version "$kotlin_version"
     id "maven-publish"
+
+    //https://github.com/JetBrains/kotlin
+    id 'org.jetbrains.kotlin.multiplatform' version "$kotlin_version"
+
+    //https://github.com/Kotlin/kotlinx-kover
+    id("org.jetbrains.kotlinx.kover") version "0.9.1"
+
+    //https://github.com/dependency-check/DependencyCheck https://plugins.gradle.org/plugin/org.owasp.dependencycheck
+    id "org.owasp.dependencycheck" version "12.1.1"
+
     //https://github.com/vanniktech/gradle-maven-publish-plugin
     id "com.vanniktech.maven.publish" version "0.32.0"
 }
@@ -50,32 +59,35 @@ plugins {
 repositories {
     mavenCentral()
     mavenLocal()
-    maven {
-        url 'https://pkgs.dev.azure.com/csense-oss/csense-oss/_packaging/csense-oss/maven/v1'
-        name 'csense-oss'
-    }
 }
 
 group project.csenseGroupId
 version project.csenseVersionName
 
 kotlin {
+    withSourcesJar(true)
     explicitApi = ExplicitApiMode.Strict
     jvm {
         compilations.configureEach {
             kotlinOptions.jvmTarget = compileJavaVersion
         }
-        withJava()
         testRuns["test"].executionTask.configure {
             useJUnitPlatform()
         }
     }
+
     jvmToolchain {
         languageVersion.set(JavaLanguageVersion.of(compileJavaVersion))
     }
 
     js(IR) {
-        browser()
+        browser {
+            testTask {
+                useKarma {
+                    useChrome()
+                }
+            }
+        }
         nodejs()
     }
 
