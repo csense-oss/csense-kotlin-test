@@ -2,6 +2,7 @@ package org.csenseoss.kotlin.tests.assertions
 
 import org.csenseoss.kotlin.tests.assertions.collections.map.entry.*
 import org.csenseoss.kotlin.tests.assertions.exceptions.*
+import org.csenseoss.kotlin.tests.assertions.mocks.MapEntry
 import kotlin.test.*
 
 class MapEntryTest {
@@ -33,5 +34,3 @@ class MapEntryTest {
 
     }
 }
-
-private class MapEntry(override val key: String, override val value: String) : Map.Entry<String, String>
