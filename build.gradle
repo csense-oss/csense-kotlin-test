@@ -136,7 +136,6 @@ kotlin {
             dependencies {
                 api "org.junit.jupiter:junit-jupiter-api:$junit5Version"
                 api "org.junit.jupiter:junit-jupiter-engine:$junit5Version"
-                api "org.junit.vintage:junit-vintage-engine:$junit5Version"
                 api "org.jetbrains.kotlin:kotlin-test-junit5:$kotlin_version"
             }
         }
