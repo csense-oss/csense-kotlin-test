@@ -12,9 +12,9 @@ public inline fun <reified T : Throwable, reified Inner : Throwable> assertThrow
     messageIfNoException: String = "should throw exception",
     messageWrongException: String = "wrong exception type",
     crossinline testCode: () -> Unit
-): Unit = assertThrows<T>(messageIfNoException, messageWrongException, testCode) {
-    val cause = it.cause
-    val isInner = cause is Inner
+): Unit = assertThrows<T>(messageIfNoException, messageWrongException, testCode) { it: T ->
+    val cause: Throwable? = it.cause
+    val isInner: Boolean = cause is Inner
     if (!isInner && cause != null) {
         failTest(message = "Cause is not the right type; expected \"${Inner::class}\" but got \"${cause::class}\" instead")
     }

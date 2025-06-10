@@ -9,7 +9,7 @@ public object DualIterator {
     public inline fun <Actual, Expected> onDualIterator(
         actualIterator: Iterator<Actual>,
         expectedIterator: Iterator<Expected>,
-        action: (actualItem: Actual, expectedItem: Expected) -> Unit,
+        action: (actual: Actual, expected: Expected) -> Unit,
         messageIfDifferentSizes: String
     ) {
 
@@ -25,19 +25,7 @@ public object DualIterator {
         )
     }
 
-    public inline fun <Type : Comparable<Type>> onDualNullableIterator(
-        actualIterator: Iterator<Type?>,
-        expectedIterator: Iterator<Type?>,
-        messageIfDifferentSizes: String = "",
-        message: String
-    ): Unit = onDualNullableIterator(
-        actualIterator = actualIterator,
-        expectedIterator = expectedIterator,
-        action = { lhs: Type, rhs: Type ->
-            lhs.assert(rhs, message)
-        },
-        messageIfDifferentSizes = messageIfDifferentSizes
-    )
+
 
     public inline fun <Actual, Expected> onDualNullableIterator(
         actualIterator: Iterator<Actual?>,
@@ -57,4 +45,17 @@ public object DualIterator {
         messageIfDifferentSizes = messageIfDifferentSizes
     )
 
+    public inline fun <Type : Comparable<Type>> onDualNullableIterator(
+        actualIterator: Iterator<Type?>,
+        expectedIterator: Iterator<Type?>,
+        messageIfDifferentSizes: String = "",
+        message: String
+    ): Unit = onDualNullableIterator(
+        actualIterator = actualIterator,
+        expectedIterator = expectedIterator,
+        action = { actual: Type, expected: Type ->
+            actual.assert(expected = expected, message = message)
+        },
+        messageIfDifferentSizes = messageIfDifferentSizes
+    )
 }
